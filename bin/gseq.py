@@ -120,7 +120,10 @@ def parse_vcf_line(line):
     INFO = 7
     FORMAT = 8
     calls = 9
-    fields = line.rstrip().split()
+    if isinstance(line, list) is True:
+        fields = line
+    else:
+        fields = line.rstrip().split()
 
     class VCFfields(object):
         def __init__(self):
@@ -705,3 +708,13 @@ def is_deletion(ref, alt):
     if len(alt) < len(ref):
         return True
     return False
+
+def split_genotype(gt):
+    if "/" in gt:
+        alleles = gt.split("/")
+        return alleles
+    elif "|" in gt:
+        alleles = gt.split("|")
+        return alleles
+    print("Unrecognized delimiter! %s" % gt)
+    return gt

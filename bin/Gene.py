@@ -1,5 +1,4 @@
 import json
-import requests
 from Variant import Variant
 from NamedAllele import NamedAllele
 import numpy as np
