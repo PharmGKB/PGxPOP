@@ -39,7 +39,6 @@ class GenotypeParser(object):
         # Extract the variant with tabix
         for v in range(len(variants)):
             variant = variants[v]
-            variant.print_variant()
             genotypes = self.fetch_genotypes(variant)
 
             # if nothing found, make a row of all zeroes
@@ -68,28 +67,16 @@ class GenotypeParser(object):
                 else:
                     alt_indices[a] = None
 
-            print(alt_alleles)
-            print(alt_indices)
-
-            # for each subject, get the genotype
-
-
-
             # Loop over every genotype in the row, 1 for each subject
             for s in range(len(subjects)):
-                #subject = subjects[s]
-                #print(subject)
                 # Get the genotype and split it into an array
                 gt = split_genotype(genotypes.calls[s])
-
 
                 # For each allele in the genotype (2) figure out if it is a ref call, or if it's an alt, which one.
                 for g in range(len(gt)):
                     allele = gt[g]
                     if allele == '0':
                         for a in alt_alleles.keys():
-                            #if self.debug:
-                            #    print("Adding ref call")
                             alt_alleles[a][g].append(0)
                     else:
                         # Determine which alterate allele
@@ -99,8 +86,7 @@ class GenotypeParser(object):
                                 if self.debug:
                                     print("Found alt call")
                                     print(gt)
-                                print(alt)
-                                print(g)
+
                                 alt_alleles[alt][g].append(1)
 
                                 # Update the other alleles
@@ -108,7 +94,6 @@ class GenotypeParser(object):
                                     if other_alt != alt:
                                         alt_alleles[other_alt][g].append(0)
 
-                                #print(alt_alleles[alt][g])
                                 found = True
                         if found is not True:
                             if self.debug:
@@ -119,12 +104,7 @@ class GenotypeParser(object):
                             for a in alt_alleles.keys():
                                 alt_alleles[a][g].append(0)
 
-
-
-
-            #
             for a in variant.alt:
-                print(a)
 
                 if len(alt_alleles[a][0]) != len(subjects) or len(alt_alleles[a][1]) != len(subjects):
                     print("Incorrect number of alleles!")
@@ -135,56 +115,13 @@ class GenotypeParser(object):
                     variant.print_variant()
                     exit()
 
-                #print(alt_alleles[a])
                 all_alleles[0].append(alt_alleles[a][0])
                 all_alleles[1].append(alt_alleles[a][1])
-            #print(all_alleles)
-            #exit()
-
-
-        #print(all_alleles[0])
-        #for i in range(len(all_alleles[0])):
-
-        #    print(len(all_alleles[0][i]))
-
-        #for i in all_alleles[1]:
-        #    print(len(all_alleles[1][i]))
-        #exit()
-
 
         left_hap = np.array(all_alleles[0])
         right_hap = np.array(all_alleles[1])
 
-        #print(left_hap.shape)
-        #print(right_hap.shape)
-
-        #print(left_hap)
-
         return((left_hap, right_hap))
-
-
-
-
-
-
-
-
-
-
-
-            # update the alt_alleles lists
-            # if the alt hhas an index of None, just add zeroes
-            # otherwise, check if the genotype matches index+1
-            # if it does add a 1 to the corresponding allele list
-            # if not add a zero
-
-
-        #print(subject_hap_lists)
-
-
-
-
-
 
 
         # construct a list of allele matches for each alternate allele.  Do this in a single pass
@@ -202,7 +139,6 @@ class GenotypeParser(object):
             # Otherwise check if there is an rsid, if there is check that it matches the variant file
             # If not just check the position and the alternate alleles
             # If it is an indel, try to match but it might not
-            print(r[1:5])
             if r[1] == str(variant.position):
                 if self.debug:
                     print("Matching variant found in VCF")

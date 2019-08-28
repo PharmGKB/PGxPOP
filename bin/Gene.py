@@ -80,7 +80,7 @@ class Gene(object):
             new_haplotype = NamedAllele(h, variants=self.variants, index=index, debug=self.debug)
             if self.debug:
                 new_haplotype.print_haplotype()
-                formatted_haplotypes[new_haplotype.id] = new_haplotype
+            formatted_haplotypes[new_haplotype.id] = new_haplotype
             index += 1
 
         return formatted_haplotypes
