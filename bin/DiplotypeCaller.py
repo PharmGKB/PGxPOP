@@ -1,3 +1,5 @@
+import numpy as np
+
 class DiplotypeCaller(object):
     def __init__(self, gene):
         self.hap_matrix, self.stars = gene.haplotype_matrix()
@@ -52,11 +54,11 @@ class DiplotypeCaller(object):
         return(hap_sets)
         
     def get_max_star_alleles(self,hap):
-        hap_hit_nums = np.sum(np.multiply(hap_matrix,hap), axis=1)
+        hap_hit_nums = np.sum(np.multiply(self.hap_matrix,hap), axis=1)
         hap_scores = np.multiply((hap_hit_nums/self.hap_alleles_nums),hap_hit_nums)
         top_score = np.nanmax(hap_scores)
         if top_score == 0.0:
             alleles = [self.ref_allele]
         else:
-            alleles = [stars[x] for x in np.where(hap_scores == top_score)[0]]
+            alleles = [self.stars[x] for x in np.where(hap_scores == top_score)[0]]
         return([top_score, alleles])
