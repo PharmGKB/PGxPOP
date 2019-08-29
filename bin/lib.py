@@ -6,9 +6,17 @@ class GenotypeParser(object):
     def __init__(self, vcf, gene, debug=False):
         # Given a VCF and a Gene definition extract all the necessary genotypes and construct haplotype matrices
         self.vcf = vcf
+        self.vcf_header = get_vcf_subject_ids(vcf)
         self.gene = gene
         self.debug = debug
-
+        
+        # Placeholder for needed property
+        self.is_phased = None
+        
+    def get_sample_index(self, sample_id):
+        sample_index = [x for x,i in enumerate(self.vcf_header) if i == sample_id][0]
+        return(sample_index)
+        
     def haplotype_matrices(self):
 
         subjects = get_vcf_subject_ids(self.vcf)
