@@ -1,4 +1,3 @@
-pyliftover
-pytabix
-requests
-numpy
+numpy==1.15.2
+pyliftover==0.4
+pytabix==0.1
