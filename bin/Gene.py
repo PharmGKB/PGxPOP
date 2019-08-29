@@ -22,8 +22,6 @@ class Gene(object):
         self.variants = self.get_variants()
         self.haplotypes = self.get_haplotypes()
 
-
-
         # functions needed
         # haplotype definition matrix
         #   This will return a binary matrix of all the alleles for each haplotype
