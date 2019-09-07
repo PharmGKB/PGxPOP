@@ -1,7 +1,5 @@
 import json
-import requests
-from pyliftover import LiftOver
-from gseq import clean_chr
+from DawgToys import clean_chr
 
 '''
 Define the Variant object
@@ -100,6 +98,7 @@ class Variant(object):
         # Changing the chromosome and position messes up the key as well.  Could probably fix that.  But i don't have
         # the ref and alt alleles on hand and I don't want to parse them out of chromosomeHgvsName.
 
+        from pyliftover import LiftOver
         lo = LiftOver('hg38', self.build)
         lifted = lo.convert_coordinate(self.chromosome, self.position)
 

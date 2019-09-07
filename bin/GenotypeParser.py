@@ -1,6 +1,6 @@
 import tabix
 import numpy as np
-from gseq import parse_vcf_line, get_vcf_subject_ids, split_genotype
+from DawgToys import parse_vcf_line, get_vcf_subject_ids, split_genotype, vcf_is_phased, fetch_genotypes
 
 class GenotypeParser(object):
     def __init__(self, vcf, gene, debug=False):
@@ -9,9 +9,7 @@ class GenotypeParser(object):
         self.vcf_header = get_vcf_subject_ids(vcf)
         self.gene = gene
         self.debug = debug
-        
-        # Placeholder for needed property
-        self.is_phased = None
+        self.is_phased = vcf_is_phased(vcf)
         
     def get_sample_index(self, sample_id):
         sample_index = [x for x,i in enumerate(self.vcf_header) if i == sample_id][0]
@@ -47,7 +45,7 @@ class GenotypeParser(object):
         # Extract the variant with tabix
         for v in range(len(variants)):
             variant = variants[v]
-            genotypes = self.fetch_genotypes(variant)
+            genotypes = fetch_genotypes(self.vcf, variant)
 
             # if nothing found, make a row of all zeroes
             # also save all the variants that were not callable
@@ -138,19 +136,3 @@ class GenotypeParser(object):
 
         pass
 
-    def fetch_genotypes(self, variant):
-        tb = tabix.open(self.vcf)
-        records = tb.query("%s" % variant.clean_chromosome, variant.position-1, variant.position+1)
-
-        for r in records:
-            # todo add some additional checks here
-            # Otherwise check if there is an rsid, if there is check that it matches the variant file
-            # If not just check the position and the alternate alleles
-            # If it is an indel, try to match but it might not
-            if r[1] == str(variant.position):
-                if self.debug:
-                    print("Matching variant found in VCF")
-                data = parse_vcf_line(r)
-                return data
-
-        return None
