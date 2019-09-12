@@ -1,5 +1,6 @@
 import numpy as np
 import tabix
+import difflib
 
 def get_competitive_haplotype_indices(haplotype_matrix):
     dual_sites = np.where(np.sum(haplotype_matrix, axis=0) > 1)[0]
@@ -153,6 +154,11 @@ def parse_vcf_line(line):
                     max_insert = len(a)
             return max_insert
 
+        def is_indel(self):
+            if len(self.ref) > 1 or len(self.alt) > 1:
+                return True
+            return False
+
     row = VCFfields()
     row.chrom = fields[CHROM]
     row.pos = int(fields[POS])
@@ -234,8 +240,10 @@ def vcf_is_phased(vcf):
             while not complete:
                 gt = vcfline.calls[0].split(':')[index]
                 if "|" in gt:
+                    f.close()
                     return True
                 elif "/" in gt:
+                    f.close()
                     return False
                 elif index > len(vcfline.calls):
                     complete = True
@@ -246,20 +254,102 @@ def vcf_is_phased(vcf):
         print("Phasing status could not be determined.  VCF may be corrupted.")
         exit(1)
 
+def chr_string(vcf):
+    with smart_open(vcf) as f:
+        for line in f:
+            try:
+                line = byte_decoder(line)
+            except:
+                line = line
+            if line.startswith("#"):
+                continue
+            if line.startswith("chr"):
+                f.close()
+                return True
+            else:
+                f.close()
+                return False
+
+
 def fetch_genotypes(vcf, variant):
     tb = tabix.open(vcf)
-    records = tb.query("%s" % variant.chromosome, variant.position - 1, variant.position + 1)
+
+    # Check whether the chromosomes start with 'chr' or not
+    chr_represenation = chr_string(vcf)
+    if chr_represenation:
+        chr = variant.chromosome
+    else:
+        chr = variant.clean_chromosome
+
+    records = tb.query("%s" % chr, variant.position - 1, variant.position + 1)
     for r in records:
         # todo add some additional checks here
         # Otherwise check if there is an rsid, if there is check that it matches the variant file
         # If not just check the position and the alternate alleles
         # If it is an indel, try to match but it might not
-        if r[1] == str(variant.position):
+
+
+
+
+        # Check that we fetched the right thing
+        valid = True
+
+
+        if clean_chr(r[0]) != variant.clean_chromosome:
+            #print("Chromosome didn't match")
+            valid = False
+
+        if str(r[1]) != str(variant.position):
+            #print("Position didn't match")
+            valid = False
+
+        if r[3] != variant.ref:
+            #print("Ref didnt' match")
+            valid = False
+
+        if r[4] not in variant.alt:
+            #print("Alt didn't match")
+            valid = False
+
+        if variant.rsid == r[2]:
+            # if the IDs match then nothing else matters
+            # This will especially catch INDELs with different conventions for ref and alt representation
+            #if valid == False:
+            #    print("RSIDs matched.  Overriding.")
+            valid = True
+
+        if valid is False:
+            # Check if it's an INDEL
+            # todo put this in it's own function
+            for a in variant.alt:
+                if a.startswith("del"):
+
+                    deleted_nts = a.strip("del")
+                    #print(deleted_nts)
+
+                    i,s, = difflib.ndiff(r[3], r[4])
+                    #print(i, s)
+
+                    if s == "- %s" % deleted_nts:
+                        # Deletion resolved
+                        valid = True
+
+                # todo add other exceptions where necessary
+
+
+            #print(r[0:4])
+            #variant.print_variant()
+
+        if valid is True:
+        #if r[1] == str(variant.position):
             data = parse_vcf_line(r)
             return data
     return None
 
 def fetch_genotype_records(vcf, chromosome, position):
+
+
+
     tb = tabix.open(vcf)
     records = tb.query("%s" % chromosome, position - 1, position + 1)
     for r in records:
@@ -272,3 +362,22 @@ def fetch_genotype_records(vcf, chromosome, position):
             return data
     return None
 
+
+
+
+def welcome_message():
+    message = '''
+     ________________________________________________________________________________
+    |                      ___ _ _        ___                                        |
+    |        _       _    / __(_) |_ _  _|   \ __ ___ __ ____ _    _       _         | 
+    |       (_'-----'_)  | (__| |  _| || | |) / _` \ V  V / _` |  (_'-----'_)        |
+    |       (_.'""""._)   \___|_|\__|\_, |___/\__,_|\_/\_/\__, |  (_.'""""._)        |
+    |                                |__/                 |___/                      |
+    |                                                                                |
+    | v0.0 (pre-pre Alpha) (seriously don't use this)                                |
+    | Written by Adam Lavertu and Greg McInnes with help from PharmGKB.              |
+    | We do not certify that the output from this program are correct in any way.    |
+    |________________________________________________________________________________|
+    '''
+
+    print(message)

@@ -45,12 +45,17 @@ class GenotypeParser(object):
         # Extract the variant with tabix
         for v in range(len(variants)):
             variant = variants[v]
+            if self.debug:
+
+                variant.print_variant()
             genotypes = fetch_genotypes(self.vcf, variant)
 
             # if nothing found, make a row of all zeroes
             # also save all the variants that were not callable
             if genotypes is None:
                 uncalled.append(variant)
+                if self.debug:
+                    print("Variant not found")
                 # add the same number of null rows as there are genotypes
                 for i in range(len(variant.alt)):
                     all_alleles[0].append(null_row)
@@ -89,9 +94,9 @@ class GenotypeParser(object):
                         found = False
                         for alt in alt_indices:
                             if str(alt_indices[alt]) == allele:
-                                if self.debug:
-                                    print("Found alt call")
-                                    print(gt)
+                                #if self.debug:
+                                #    print("Found alt call")
+                                #    print(gt)
 
                                 alt_alleles[alt][g].append(1)
 
@@ -102,13 +107,23 @@ class GenotypeParser(object):
 
                                 found = True
                         if found is not True:
-                            if self.debug:
-                                print("Didn't find alt call")
-                                print(gt)
-                                print(genotypes.ref, genotypes.alts())
-                            # Allele does not exist in definitions.  Mark as 0.
-                            for a in alt_alleles.keys():
-                                alt_alleles[a][g].append(0)
+                            # if there is only one alternate allele, we can assume it is right because of the extra
+                            # checks when pulling the genotype.  Otherwise, we'll need to add more exceptions to catch it.
+                            # This is only true for INDELs.
+
+                            if len(alt_alleles.keys()) == 1:
+                                alt_alleles[list(alt_alleles.keys())[0]][g].append(1)
+
+                            else:
+                                if self.debug:
+                                    print("Didn't find alt call")
+                                    print(alt_alleles.keys())
+                                    print(gt)
+                                    print(genotypes.ref, genotypes.alts())
+                                    exit()
+                                # Allele does not exist in definitions.  Mark as 0.
+                                for a in alt_alleles.keys():
+                                    alt_alleles[a][g].append(0)
 
             for a in variant.alt:
 
@@ -120,6 +135,12 @@ class GenotypeParser(object):
                     print("Should be %s" % len(subjects))
                     variant.print_variant()
                     exit()
+
+
+                if self.debug:
+                    print("%s calls found in A: %s" % (a, np.sum(alt_alleles[a][0])))
+                    print("%s calls found in B: %s" % (a, np.sum(alt_alleles[a][1])))
+
 
                 all_alleles[0].append(alt_alleles[a][0])
                 all_alleles[1].append(alt_alleles[a][1])
