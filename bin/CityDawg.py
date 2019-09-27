@@ -4,29 +4,29 @@ Altman Lab
 gmcinnes@stanford.edu
 """
 
-
+import os
 import argparse
+
+# import multiprocessing as mp
+import numpy as np
+
+from timeit import default_timer as timer
+from datetime import timedelta
+
 import Gene
 from DawgToys import welcome_message, get_vcf_subject_ids
 from GenotypeParser import GenotypeParser
 from DiplotypeCaller import *
 
-from timeit import default_timer as timer
-from datetime import timedelta
-
-import os
-
-import numpy as np
-
 
 class CityDawg(object):
-    def __init__(self, vcf, gene, phased=False, build='grch38', debug=False):
+    def __init__(self, vcf, gene, phased=False, build='grch38', debug=False, batch_mode=False):
         self.vcf = vcf
         self.gene = gene
         self.phased = phased
         self.build = build
         self.debug = debug
-
+        self.batch_mode = batch_mode
         # Run CityDawg
         self.run()
 
@@ -89,40 +89,41 @@ class CityDawg(object):
 
         extraction_start_time = timer()
         gp = GenotypeParser(self.vcf, gene, debug=self.debug)
-        gt_matrics = gp.haplotype_matrices()
+        gt_matrices = gp.haplotype_matrices(batch_mode=self.batch_mode)
         extraction_end_time = timer()
 
         if self.debug:
             print("Genotype extraction finished")
-            print(gt_matrics[0].shape)
-            print(gt_matrics[1].shape)
+            print(gt_matrices[0].shape)
+            print(gt_matrices[1].shape)
             print("Execution time: %s" % timedelta(seconds=extraction_end_time - extraction_start_time))
 
-            print("Number of alterate alleles in matrix A: %s" % np.sum(gt_matrics[0]))
-            print("Number of alterate alleles in matrix B: %s" % np.sum(gt_matrics[1]))
+            print("Number of alterate alleles in matrix A: %s" % np.sum(gt_matrices[0]))
+            print("Number of alterate alleles in matrix B: %s" % np.sum(gt_matrices[1]))
 
         if self.debug:
             print("Calling diplotypes")
 
         diplotype_caller_start_time = timer()
+
         dipCal = DiplotypeCaller(gene)
 
-        oneKg_calls = []
         sample_ids = get_vcf_subject_ids(self.vcf)
-        for samp in sample_ids:
-            ind = gp.get_sample_index(samp)
-            calls = dipCal.call_diplotype([gt_matrics[0][:, ind], gt_matrics[1][:, ind]])
-            cd_call = list(calls)[0]
-            oneKg_calls.append(cd_call)
+        sample_calls = []
+        for gt_mat in gt_matrices:
+            for samp in range(gt_mat[0].shape[1]):
+                calls = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]])
+                cd_call = list(calls)[0]
+                sample_calls.append(cd_call)
 
-        diplotype_caller_end_time = timer()
+            diplotype_caller_end_time = timer()
 
         if self.debug:
             print("Diplotype calling finished")
             print("Execution time: %s" % timedelta(seconds=diplotype_caller_end_time - diplotype_caller_start_time))
 
-            for i in range(len(oneKg_calls)):
-                print("%s: %s" % (sample_ids[i], oneKg_calls[i]))
+            for i in range(len(sample_calls)):
+                print("%s: %s" % (sample_ids[i], sample_calls[i]))
 
 
 
@@ -142,6 +143,8 @@ def parse_command_line():
                                                             "GRCh38.")
     parser.add_argument("-d", "--debug", action='store_true', default=False,
                                 help="Output debugging messages.  May be very verbose.")
+    parser.add_argument("-b", "--batch", action='store_true', default=False,
+                        help="Fragment into batched sample runs. Suggested for runs with more than 10k samples.")
     options = parser.parse_args()
     return options
 
@@ -151,7 +154,7 @@ Main
 """
 if __name__ == "__main__":
     options = parse_command_line()
-    CityDawg(vcf=options.vcf, gene=options.gene, phased=options.phased, build=options.build, debug=options.debug)
+    CityDawg(vcf=options.vcf, gene=options.gene, phased=options.phased, build=options.build, debug=options.debug, batch_mode=options.batch)
 
 
 
