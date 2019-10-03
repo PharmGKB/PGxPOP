@@ -94,12 +94,12 @@ class CityDawg(object):
 
         if self.debug:
             print("Genotype extraction finished")
-            print(gt_matrices[0].shape)
-            print(gt_matrices[1].shape)
+#             print(gt_matrices[0].shape)
+#             print(gt_matrices[1].shape)
             print("Execution time: %s" % timedelta(seconds=extraction_end_time - extraction_start_time))
 
-            print("Number of alterate alleles in matrix A: %s" % np.sum(gt_matrices[0]))
-            print("Number of alterate alleles in matrix B: %s" % np.sum(gt_matrices[1]))
+#             print("Number of alterate alleles in matrix A: %s" % np.sum(gt_matrices[0]))
+#             print("Number of alterate alleles in matrix B: %s" % np.sum(gt_matrices[1]))
 
         if self.debug:
             print("Calling diplotypes")
@@ -136,7 +136,7 @@ def parse_command_line():
                       'pharmacogenetic phenotypes.')
     parser.add_argument("--vcf", help="Input VCF")
     parser.add_argument("-g", "--gene", default='all', help="Gene to run.  Select from [].  Run all by default.")
-    parser.add_argument("--phased", action='store_true', help="Data is phased.  Will try to determine phasing status "
+    parser.add_argument("--phased", action='store_true', default=False, help="Data is phased.  Will try to determine phasing status "
                                                               "from VCF by default.")
     parser.add_argument("--build", default='grch38', help="Select build genome reference.  By default CityDawg assumes "
                                                             "GRCh38.")

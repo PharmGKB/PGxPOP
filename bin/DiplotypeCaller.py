@@ -9,19 +9,22 @@ class DiplotypeCaller(object):
         
     def call_diplotype(self, diplotype):
         if self.is_phased:
-            possib_haplotypes = diplotype
+            possib_haplotypes = [diplotype]
         else:
             possib_haplotypes = self.get_possible_haplotypes(*diplotype)
-        
+            
         dips, dip_scores = self.score_diplotypes(possib_haplotypes)
         top_dip_score = np.max(dip_scores)
         out_dips = list()
         for combs in [dips[x] for x in np.where(dip_scores == top_dip_score)[0]]:
             for x in combs[0]:
                 for y in combs[1]:
-                    star_dip = "/".join(sorted([x,y]))
+                    if self.is_phased:
+                        star_dip = "|".join(sorted([x,y]))
+                    else:
+                        star_dip = "/".join(sorted([x,y]))
                     out_dips.append(star_dip)
-        
+                        
         return(out_dips[0])
     
     def score_diplotypes(self,hap_sets):
