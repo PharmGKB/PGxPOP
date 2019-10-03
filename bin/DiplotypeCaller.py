@@ -6,17 +6,22 @@ class DiplotypeCaller(object):
         self.hap_alleles_nums = np.sum(self.hap_matrix, axis =1)
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
         
-    def call_diplotype(self, diplotype):
-        possib_haplotypes = self.get_possible_haplotypes(*diplotype)
+    def call_diplotype(self, diplotype, is_phased = False):
+        if is_phased:
+            possib_haplotypes = diplotype
+        else:
+            possib_haplotypes = self.get_possible_haplotypes(*diplotype)
+        
         dips, dip_scores = self.score_diplotypes(possib_haplotypes)
         top_dip_score = np.max(dip_scores)
-        out_dips = set()
+        out_dips = list()
         for combs in [dips[x] for x in np.where(dip_scores == top_dip_score)[0]]:
             for x in combs[0]:
                 for y in combs[1]:
                     star_dip = "/".join(sorted([x,y]))
-                    out_dips.add(star_dip)
-        return(out_dips)
+                    out_dips.append(star_dip)
+        
+        return(out_dips[0])
     
     def score_diplotypes(self,hap_sets):
         dips = []

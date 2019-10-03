@@ -106,7 +106,7 @@ class CityDawg(object):
 
         diplotype_caller_start_time = timer()
 
-        dipCal = DiplotypeCaller(gene)
+        dipCal = DiplotypeCaller(gene, is_phased = self.phased)
 
         sample_ids = get_vcf_subject_ids(self.vcf)
         sample_calls = []
