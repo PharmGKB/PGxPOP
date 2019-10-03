@@ -1,13 +1,14 @@
 import numpy as np
 
 class DiplotypeCaller(object):
-    def __init__(self, gene):
+    def __init__(self, gene, is_phased = False):
         self.hap_matrix, self.stars = gene.haplotype_matrix()
         self.hap_alleles_nums = np.sum(self.hap_matrix, axis =1)
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
+        self.is_phased = is_phased
         
-    def call_diplotype(self, diplotype, is_phased = False):
-        if is_phased:
+    def call_diplotype(self, diplotype):
+        if self.is_phased:
             possib_haplotypes = diplotype
         else:
             possib_haplotypes = self.get_possible_haplotypes(*diplotype)
