@@ -17,7 +17,7 @@ import Gene
 from DawgToys import welcome_message, get_vcf_subject_ids
 from GenotypeParser import GenotypeParser
 from DiplotypeCaller import *
-
+from ExceptionCaller import ExceptionCaller
 
 class CityDawg(object):
     def __init__(self, vcf, gene, phased=False, build='grch38', debug=False, batch_mode=False):
@@ -49,6 +49,16 @@ class CityDawg(object):
         filename = "%s_translation.json" % g
         definition_file = os.path.join(definition_dir, filename)
         return definition_file
+    
+    def get_exception_file(self, g):
+        definition_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../definition/alleles/")
+        filename = "%s_exceptions.json" % g
+        if os.path.exists(os.path.join(definition_dir, filename)):
+            exception_file = os.path.join(definition_dir, filename)
+            return(exception_file)
+        else:
+            return(False)
+        
 
     def get_genes(self):
         genes = ['CYP2C9', 'CYP2C19']
@@ -83,10 +93,26 @@ class CityDawg(object):
             print(hap_matrix.shape)
             print("Execution time: %s" % timedelta(seconds = preparation_end_time - preparation_start_time))
 
+        if self.debug:
+            print("Checking for exception file")
+            
+        gene_exceptions = self.get_exception_file(g)
+        
+        if gene_exceptions:
+            ec = ExceptionCaller(gene_exceptions, gene, is_phased = self.phased)
+            ec_override = ec.override
+            if self.debug:
+                print("Exception file found")
+        else:
+            ec_override = False
+            if self.debug:
+                print("No exception file found")
+            
 
         if self.debug:
             print("Extracting genotype matrices")
 
+        
         extraction_start_time = timer()
         gp = GenotypeParser(self.vcf, gene, debug=self.debug)
         gt_matrices = gp.haplotype_matrices(batch_mode=self.batch_mode)
@@ -105,15 +131,23 @@ class CityDawg(object):
             print("Calling diplotypes")
 
         diplotype_caller_start_time = timer()
+        
+        if ec_override:
+            if self.debug:
+                print("Exception override, calling with ExceptionCaller")
+            sample_ids = get_vcf_subject_ids(self.vcf)
+            sample_calls = ec.call_samples(sample_ids, gt_matrices)
+            diplotype_caller_end_time = timer()
+        else:
 
-        dipCal = DiplotypeCaller(gene, is_phased = self.phased)
+            dipCal = DiplotypeCaller(gene, is_phased = self.phased)
 
-        sample_ids = get_vcf_subject_ids(self.vcf)
-        sample_calls = []
-        for gt_mat in gt_matrices:
-            for samp in range(gt_mat[0].shape[1]):
-                cd_call = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]]) 
-                sample_calls.append(cd_call)
+            sample_ids = get_vcf_subject_ids(self.vcf)
+            sample_calls = {}
+            for gt_mat in gt_matrices:
+                for samp in range(gt_mat[0].shape[1]):
+                    cd_call = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]]) 
+                    sample_calls[sample_ids[samp]] = cd_call
 
             diplotype_caller_end_time = timer()
 
@@ -121,8 +155,8 @@ class CityDawg(object):
             print("Diplotype calling finished")
             print("Execution time: %s" % timedelta(seconds=diplotype_caller_end_time - diplotype_caller_start_time))
 
-            for i in range(len(sample_calls)):
-                print("%s: %s" % (sample_ids[i], sample_calls[i]))
+            for k,v in sample_calls.items():
+                print("%s: %s" % (k,v))
 
 
 
