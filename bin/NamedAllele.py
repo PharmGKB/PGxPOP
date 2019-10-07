@@ -39,6 +39,9 @@ class NamedAllele(object):
             ref = variant.ref
             alts = variant.alt
 
+            variant.print_variant()
+
+
             # If there are multiple alts iterate over them and check if the listed allele matches the alt
             for a in alts:
                 # If it matches the ref, just add a 0
@@ -51,8 +54,30 @@ class NamedAllele(object):
                 elif self.alleles[v] == a:
                     # Matches the listed alternate
                     self.binary_alleles.append(1)
+
+                # If it is an INDEL we have to do this differently
+                # I am going to set all reference INDELs to "null" in the definition files
+                # That way, if it is an indel and not null, then it must be a 1
+                elif variant.type in ["INS", "DEL"]:
+                    if not self.alleles[v]:
+                        # it's an indel loci but a null value was listed
+                        self.binary_alleles.append(0)
+                    else:
+                        # Something was there, assuming alt allele
+                        self.binary_alleles.append(1)
+
+                # Null values indicate a ref call
+                elif not self.alleles[v]:
+                    self.binary_alleles.append(0)
+
                 else:
                     # No match, just make it a zero
+                    print("NO MATCH FOUND!")
+                    variant.print_variant()
+                    print(variant.alleles)
+                    print(alts)
+                    print(self.alleles[v])
+                    #exit()
                     self.binary_alleles.append(0)
 
                 # Add a variant key of the alt for every column added

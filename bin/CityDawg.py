@@ -85,6 +85,11 @@ class CityDawg(object):
         # Get the definition file
         gene_definition = self.get_definition_file(g)
         gene = Gene.Gene(gene_definition, build=self.build, debug=self.debug)
+
+        #for hap in gene.haplotypes.keys():
+        #    print(gene.haplotypes[hap].print_haplotype())
+        #    print(gene.haplotypes[hap].binary_alleles)
+
         hap_matrix, stars = gene.haplotype_matrix()
         preparation_end_time = timer()
 
@@ -124,8 +129,8 @@ class CityDawg(object):
 #             print(gt_matrices[1].shape)
             print("Execution time: %s" % timedelta(seconds=extraction_end_time - extraction_start_time))
 
-#             print("Number of alterate alleles in matrix A: %s" % np.sum(gt_matrices[0]))
-#             print("Number of alterate alleles in matrix B: %s" % np.sum(gt_matrices[1]))
+            #print("Number of alterate alleles in matrix A: %s" % np.sum(gt_matrices[0]))
+            #print("Number of alterate alleles in matrix B: %s" % np.sum(gt_matrices[1]))
 
         if self.debug:
             print("Calling diplotypes")

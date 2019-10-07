@@ -73,19 +73,27 @@ class GenotypeParser(object):
                 for a in variant.alt:
                     alt_alleles[a] = [[], []]
 
-                # Dictionary of allele indices in the VCF
+                # Dictionary of allele indices in the VCF.  This will be the genotype (e.g. 0/1) that we look for
+                # For example most alternate alleles will get a value of 1 if they are the only alt.
                 alt_indices = {}
                 for a in variant.alt:
+                    #print("Variant alt: %s" % a)
                     # Get the index of the alt in the listed genotypes.
-                    if a in genotypes.alts():
+
+                    if genotypes.gt_index is not None:
+                        alt_indices[a] = genotypes.gt_index + 1
+
+                    elif a in genotypes.alts():
+                        #print("ALT: %s:" % a)
                         index = genotypes.alts().index(a)
                         alt_indices[a] = index + 1
 
                     else:
                         alt_indices[a] = None
+                    #print(alt_indices[a])
 
                 # Loop over every genotype in the row, 1 for each subject
-                for i,s in enumerate(batch):
+                for i, s in enumerate(batch):
                     # Get the genotype and split it into an array
                     gt = split_genotype(genotypes.calls[i])
 
@@ -99,10 +107,11 @@ class GenotypeParser(object):
                             # Determine which alterate allele
                             found = False
                             for alt in alt_indices:
+                                print(alt)
                                 if str(alt_indices[alt]) == allele:
-                                    #if self.debug:
-                                    #    print("Found alt call")
-                                    #    print(gt)
+                                    if self.debug:
+                                        print("Found alt call")
+                                        print(gt)
 
                                     alt_alleles[alt][g].append(1)
 
@@ -117,19 +126,21 @@ class GenotypeParser(object):
                                 # checks when pulling the genotype.  Otherwise, we'll need to add more exceptions to catch it.
                                 # This is only true for INDELs.
 
-                                if len(alt_alleles.keys()) == 1:
-                                    alt_alleles[list(alt_alleles.keys())[0]][g].append(1)
+                                # This is resolved by including gt_index in the parser
+                                #if len(alt_alleles.keys()) == 1:
+                                #    pass
+                                    #alt_alleles[list(alt_alleles.keys())[0]][g].append(1)
 
-                                else:
-                                    if self.debug:
-                                        print("Didn't find alt call")
-                                        print(alt_alleles.keys())
-                                        print(gt)
-                                        print(genotypes.ref, genotypes.alts())
-                                        exit()
-                                    # Allele does not exist in definitions.  Mark as 0.
-                                    for a in alt_alleles.keys():
-                                        alt_alleles[a][g].append(0)
+                                #else:
+                                #if self.debug:
+                                #    print("Didn't find alt call")
+                                #    print(alt_alleles.keys())
+                                #    print(gt)
+                                #    print(genotypes.ref, genotypes.alts())
+                                #    exit()
+                                # Allele does not exist in definitions.  Mark as 0.
+                                for a in alt_alleles.keys():
+                                    alt_alleles[a][g].append(0)
 
                 for a in variant.alt:
 

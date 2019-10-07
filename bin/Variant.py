@@ -62,6 +62,7 @@ class Variant(object):
             hgvs = self.chromosomeHgvsName.split(";")
             for i in hgvs:
                 i = i.strip()
+                #print(i)
                 ref, alt = i[-3:].split('>')
                 if self.ref != ref:
                     self.ref = ref
@@ -83,7 +84,7 @@ class Variant(object):
                 i = i.strip()
                 alt = i.split('ins')[1]
                 self.alt.append(alt)
-            self.ref = "del"
+            self.ref = "ins"
 
             return
 

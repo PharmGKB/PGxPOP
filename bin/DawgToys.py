@@ -68,6 +68,7 @@ def parse_vcf_line(line):
             self.info = {}
             self.format = None
             self.calls = []
+            self.gt_index = None
 
         def print_row(self, chr=True, minimal=False):
             info_print_format = self.format_info()
@@ -281,7 +282,10 @@ def fetch_genotypes(vcf, variant):
     else:
         chr = variant.clean_chromosome
 
+    #print(chr, variant.position)
+
     records = tb.query("%s" % chr, variant.position - 1, variant.position + 1)
+
     for r in records:
         # todo add some additional checks here
         # Otherwise check if there is an rsid, if there is check that it matches the variant file
@@ -294,8 +298,10 @@ def fetch_genotypes(vcf, variant):
         # Check that we fetched the right thing
         valid = True
 
+        # gt_index will store the index of the matched alternate allele
+        gt_index = None
 
-        if clean_chr(r[0]) != variant.clean_chromosome:
+        if r[0] != chr:
             #print("Chromosome didn't match")
             valid = False
 
@@ -307,9 +313,14 @@ def fetch_genotypes(vcf, variant):
             #print("Ref didnt' match")
             valid = False
 
-        if r[4] not in variant.alt:
-            #print("Alt didn't match")
-            valid = False
+        any_alt = False
+        for alt in r[4].split(","):
+            if alt in variant.alt:
+                gt_index = variant.alt.index(alt)
+                any_alt = True
+                valid = True
+        #if any_alt is False:
+        #    print("Alt didn't match")
 
         if variant.rsid == r[2]:
             # if the IDs match then nothing else matters
@@ -322,29 +333,77 @@ def fetch_genotypes(vcf, variant):
             # Check if it's an INDEL
             # todo put this in it's own function
             for a in variant.alt:
+                # Check the case where the alt is a deletion
                 if a.startswith("del"):
-
-                    deleted_nts = a.strip("del")
-                    #print(deleted_nts)
-
-                    i,s, = difflib.ndiff(r[3], r[4])
-                    #print(i, s)
-
-                    if s == "- %s" % deleted_nts:
-                        # Deletion resolved
+                    # Check if any alt listed satisfies the deletion
+                    satisfied, index = del_checker(a, r)
+                    if satisfied is True:
+                        #print("found deletion")
                         valid = True
+                        gt_index = index
+                #if a.startswith
+
+                # Check the case where it is an insertion
+                elif len(a) > 1:
+                    print(a)
+                    variant.print_variant()
+                    satisfied, index = ins_checker(a, r)
+                    if satisfied is True:
+                        valid = True
+                        gt_index = index
+
 
                 # todo add other exceptions where necessary
 
 
-            #print(r[0:4])
-            #variant.print_variant()
 
         if valid is True:
-        #if r[1] == str(variant.position):
             data = parse_vcf_line(r)
+
+            # If there is only one alternate allele in the definition, set the index
+            if len(variant.alt) == 1:
+                data.gt_index = gt_index
             return data
     return None
+
+def ins_checker(original, query):
+    # I'm not sure this will work for all insertion representations
+    # Basically what I'm doing is adding the added nucleotides from the definition to the ref allele and checking
+    # If that matches the listed alternate.
+    # I'm sure there will be exceptions to take care of at some point.
+    index = 0
+    for alt in query[4].split(","):
+        if alt == query[3] + original:
+            return True, index
+        index += 1
+    return False
+
+def del_checker(original, query):
+    # This checks the difference between the ref and the alt and checks if that matches the deletion stated in the
+    # definition file.
+    deleted_nts = original.strip("del")
+    ref = query[3]
+    index = 0
+    for alt in query[4].split(","):
+        if alt in ref:
+            diff_nts = ref.replace(alt, '')
+            if diff_nts == deleted_nts:
+                return True, index
+        index += 1
+
+        #r = difflib.ndiff(query[3], alt)
+        #for i in r:
+        #    print(i)
+        #try:
+        #    i, s, = difflib.ndiff(query[3], alt)
+        #    print(i, s)
+        #    if s == "- %s" % deleted_nts:
+        #        # Deletion resolved
+        #        return True
+        #except:
+        #    print("Failed")
+        #    continue
+    return False
 
 def fetch_genotype_records(vcf, chromosome, position):
 
