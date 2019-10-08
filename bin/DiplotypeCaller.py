@@ -1,5 +1,7 @@
 import numpy as np
 
+np.seterr(divide='ignore', invalid='ignore')
+
 class DiplotypeCaller(object):
     def __init__(self, gene, is_phased = False):
         self.hap_matrix, self.stars = gene.haplotype_matrix()

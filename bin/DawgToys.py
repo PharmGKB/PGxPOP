@@ -424,6 +424,9 @@ def fetch_genotype_records(vcf, chromosome, position):
             return data
     return None
 
+def phenotype_lookup(gene_name, phenotypes, diplotype):
+    gene_phenotypes = phenotypes.get_gene(gene_name)
+
 
 
 

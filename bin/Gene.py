@@ -19,6 +19,7 @@ class Gene(object):
         # Load gene information from JSON file
         self._load_json(json_file)
 
+        self.name = self.data['gene']
         self.variants = self.get_variants()
         self.haplotypes = self.get_haplotypes()
 
