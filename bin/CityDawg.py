@@ -129,7 +129,6 @@ class CityDawg(object):
                 print("Exception override, calling with ExceptionCaller")
             sample_ids = get_vcf_subject_ids(self.vcf)
             sample_calls = ec.call_samples(sample_ids, gt_matrices)
-            diplotype_caller_end_time = timer()
 
         else:
             dipCal = DiplotypeCaller(gene, is_phased=self.phased)
@@ -140,7 +139,7 @@ class CityDawg(object):
                     cd_call = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]])
                     sample_calls[sample_ids[samp]] = cd_call
 
-            diplotype_caller_end_time = timer()
+        diplotype_caller_end_time = timer()
 
         if self.debug:
             print("Diplotype calling finished")
