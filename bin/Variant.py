@@ -56,10 +56,13 @@ class Variant(object):
         if self.build != 'grch38':
             if self.debug:
                 print("Alternate genome build found.  Converting positions.")
-            if self.build not in ['hg17', 'hg18', 'hg19']:
-                print("Build not supported: %s" % self.build)
-                exit(1)
-            self.liftover()
+            if self.build not in ['hg19']:
+                print("Build not stored.  Coordinate conversion may take a while: %s" % self.build)
+                self.liftover()
+            else:
+                self.chromosome = data[self.build]['chromosome']
+                self.position = data[self.build]['position']
+                self.synonyms = data[self.build]['synonyms']
 
     def _parse_alleles(self):
         if self.type == "SNP":

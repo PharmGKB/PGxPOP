@@ -9,9 +9,11 @@ gmcinnes@stanford.edu
 # Convert all INDELs to null in the reference sequence
 # Split apart the TA repeat in UGT1A1
 # Add known synonyms
+# Add hg19 position
 
 import json
 import argparse
+from pyliftover import LiftOver
 from Gene import Gene
 
 # todo put this in a file
@@ -41,14 +43,18 @@ class DefinitionCleaner(object):
         # Fix all the INDELs
         self.update_indels()
 
+        # Add hg19 position
+        self.add_alternate_build()
+
         # print the output
         print(json.dumps(self.data, indent=2))
 
     def special_cases(self):
 
         # todo
-        # This should be an expansion of the INDEL in UGT1A1
-        # Leaving blank for now
+        # Expand the INDEL in UGT1A1 into 3 different variants
+
+        # For CYP3A5, *3 needs to have the R and Y changed to G and T
 
         pass
 
@@ -80,6 +86,46 @@ class DefinitionCleaner(object):
             data = json.load(json_file)
         return data
 
+    def add_alternate_build(self):
+        # Don't forget to update the synonyms too
+        for i in self.gene.variants:
+            # lift the chromosome and position
+            chr = self.gene.variants[i].chromosome
+            pos = self.gene.variants[i].position
+            new_chr, new_pos = self.liftover(chr, pos)
+
+            new_synonyms = []
+            if "synonyms" in self.data["variants"][i].keys():
+                for s in self.data["variants"][i]["synonyms"]:
+                    new_chr, s_pos = self.liftover(chr, pos)
+                    new_synonyms.append(s_pos)
+
+            alt_build_info = {
+                'build':'hg19',
+                'chromosome': new_chr,
+                'position': new_pos,
+                'synonyms': new_synonyms
+            }
+
+            self.data["variants"][i]["hg19"] = alt_build_info
+
+    def liftover(self, chromosome, position, build='hg19'):
+
+        # todo
+        # Not sure what the failure mode of this tool is.  Will probably need to write a try catch eventually
+        # Changing the chromosome and position messes up the key as well.  Could probably fix that.  But i don't have
+        # the ref and alt alleles on hand and I don't want to parse them out of chromosomeHgvsName.
+
+        lo = LiftOver('hg38', build)
+        lifted = lo.convert_coordinate(chromosome, position)
+
+        new_chromosome = lifted[0][0]
+        new_position = lifted[0][1]
+
+        if self.debug:
+            print("%s %s -> %s %s" % (chromosome, position, new_chromosome, new_position))
+
+        return new_chromosome, new_position
 
 
 

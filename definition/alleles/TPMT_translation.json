@@ -36,7 +36,13 @@
       "proteinNote": "M1V",
       "resourceNote": "1A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18149358,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -47,7 +53,13 @@
       "proteinNote": "M1T",
       "resourceNote": "2T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18149357,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -58,7 +70,13 @@
       "proteinNote": "E28V",
       "resourceNote": "83A>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18149276,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -69,7 +87,13 @@
       "proteinNote": "G36S",
       "resourceNote": "106G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18149253,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -80,7 +104,13 @@
       "proteinNote": "Q42E",
       "resourceNote": "124C>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18149235,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -91,7 +121,13 @@
       "proteinNote": "L49S",
       "resourceNote": "146T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18148141,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -102,7 +138,13 @@
       "proteinNote": "L69V",
       "resourceNote": "205C>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18148082,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -113,7 +155,13 @@
       "proteinNote": "G71R",
       "resourceNote": "211G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18148076,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -124,7 +172,13 @@
       "proteinNote": "A80P",
       "resourceNote": "238G>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18143955,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -135,7 +189,13 @@
       "proteinNote": "Y107D",
       "resourceNote": "319T>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18143874,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -146,7 +206,13 @@
       "proteinNote": "G117R",
       "resourceNote": "349G>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18143844,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -157,7 +223,13 @@
       "proteinNote": "K119T",
       "resourceNote": "356A>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18143837,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -168,7 +240,13 @@
       "proteinNote": "K122T",
       "resourceNote": "365A>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18143828,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -179,7 +257,13 @@
       "proteinNote": "S125L",
       "resourceNote": "374C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18139941,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -190,7 +274,13 @@
       "proteinNote": "C132Y",
       "resourceNote": "395G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18139920,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -201,7 +291,13 @@
       "proteinNote": "G144R",
       "resourceNote": "430G>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18139258,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -212,7 +308,13 @@
       "proteinNote": "A154T",
       "resourceNote": "460G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18139228,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -223,7 +325,13 @@
       "proteinNote": "I158=",
       "resourceNote": "474T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18139214,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -234,7 +342,13 @@
       "proteinNote": "R163H; R163P",
       "resourceNote": "488G>A; 488G>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18139200,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -245,7 +359,13 @@
       "proteinNote": null,
       "resourceNote": "495-1G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18134121,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -256,7 +376,13 @@
       "proteinNote": "A167G",
       "resourceNote": "500C>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18134115,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -267,7 +393,13 @@
       "proteinNote": "Q179H",
       "resourceNote": "537G>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18134078,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -278,7 +410,13 @@
       "proteinNote": "Y180F",
       "resourceNote": "539A>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18134076,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -289,7 +427,13 @@
       "proteinNote": "I204T",
       "resourceNote": "611T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18132378,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -300,7 +444,13 @@
       "proteinNote": "F208L",
       "resourceNote": "622T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18132367,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -311,7 +461,13 @@
       "proteinNote": null,
       "resourceNote": "626-1G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18131012,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -322,7 +478,13 @@
       "proteinNote": "C212R",
       "resourceNote": "634T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18131003,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -333,7 +495,13 @@
       "proteinNote": "R215H",
       "resourceNote": "644G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18130993,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -344,7 +512,13 @@
       "proteinNote": "H227Q",
       "resourceNote": "681T>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18130956,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -355,7 +529,13 @@
       "proteinNote": "K238E",
       "resourceNote": "712A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18130925,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr6",
@@ -366,7 +546,13 @@
       "proteinNote": "Y240C",
       "resourceNote": "719A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr6",
+        "position": 18130918,
+        "synonyms": []
+      }
     }
   ],
   "variantAlleles": [

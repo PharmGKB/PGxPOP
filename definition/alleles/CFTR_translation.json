@@ -26,7 +26,13 @@
       "proteinNote": "F508del",
       "resourceNote": "F508del/Class: II, VI",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117199645,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -37,7 +43,13 @@
       "proteinNote": "F508del",
       "resourceNote": "F508del/Class: II, VI",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117199646,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -48,7 +60,13 @@
       "proteinNote": "G551D",
       "resourceNote": "G551D/Class: III",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227860,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -59,7 +77,13 @@
       "proteinNote": "G1244E",
       "resourceNote": "G1244E",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117282505,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -70,7 +94,13 @@
       "proteinNote": "G1349D",
       "resourceNote": "G1349D",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117304824,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -81,7 +111,13 @@
       "proteinNote": "G178R",
       "resourceNote": "G178R",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117174372,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -92,7 +128,13 @@
       "proteinNote": "G551S",
       "resourceNote": "G551S",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227859,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -103,7 +145,13 @@
       "proteinNote": "S1251N",
       "resourceNote": "S1251N",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117282526,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -114,7 +162,13 @@
       "proteinNote": "S1255P",
       "resourceNote": "S1255P",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117282537,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -125,7 +179,13 @@
       "proteinNote": "S549N",
       "resourceNote": "S549N",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227854,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -136,7 +196,13 @@
       "proteinNote": "S549R",
       "resourceNote": "S549R",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227853,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -147,7 +213,13 @@
       "proteinNote": "S549R",
       "resourceNote": "S549R",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227855,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -158,7 +230,13 @@
       "proteinNote": "G542X",
       "resourceNote": "G542X/Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227832,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -169,7 +247,13 @@
       "proteinNote": "N1303K",
       "resourceNote": "N1303K/Class: II",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117292931,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -180,7 +264,13 @@
       "proteinNote": "W1282X",
       "resourceNote": "W1282X/ Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117282620,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -191,7 +281,13 @@
       "proteinNote": "R117H",
       "resourceNote": "R117H/ Class: IV",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117171029,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -202,7 +298,13 @@
       "proteinNote": "R553X",
       "resourceNote": "R553X/ Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227865,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -213,7 +315,13 @@
       "proteinNote": "intron",
       "resourceNote": "1717-1G->A/ Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227792,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -224,7 +332,13 @@
       "proteinNote": "splice-5",
       "resourceNote": "621+1G->T/ Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117171169,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -235,7 +349,13 @@
       "proteinNote": "intron",
       "resourceNote": "2789+5G->A/ Class: V",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117242922,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -246,7 +366,13 @@
       "proteinNote": "intron",
       "resourceNote": "3849+10kbC- >T/ Class: V",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117280015,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -257,7 +383,13 @@
       "proteinNote": "R1162X",
       "resourceNote": "R1162X/ Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117267591,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -268,7 +400,13 @@
       "proteinNote": "G85E",
       "resourceNote": "G85E/ Class: II",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117149177,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -279,7 +417,13 @@
       "proteinNote": "splice-5",
       "resourceNote": "3120+1G->A/ Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117246808,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -290,7 +434,13 @@
       "proteinNote": "I507del",
       "resourceNote": "\u2206I507/ Class: II",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117199644,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -301,7 +451,13 @@
       "proteinNote": "splice-5",
       "resourceNote": "1898+1G->A/ Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117230494,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -312,7 +468,13 @@
       "proteinNote": "L1177Frameshift",
       "resourceNote": "3659delC/ Class: I",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117267635,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -323,7 +485,13 @@
       "proteinNote": "R347P; R347H",
       "resourceNote": "R347P/ Class:  IV; R347H",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117180324,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -334,7 +502,13 @@
       "proteinNote": "R560T",
       "resourceNote": "R560T/ Class: III",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117227887,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -345,7 +519,13 @@
       "proteinNote": "R334W",
       "resourceNote": "R334W/ Class: IV",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117180284,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -356,7 +536,13 @@
       "proteinNote": "A455E",
       "resourceNote": "A455E/ Class: V",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117188849,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -367,7 +553,13 @@
       "proteinNote": "K684Frameshift",
       "resourceNote": "2184delA/ Class: I",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117232273,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -378,7 +570,13 @@
       "proteinNote": "splice-5",
       "resourceNote": "711+1G->T/ Class: I",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117174420,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -389,7 +587,13 @@
       "proteinNote": "E56K",
       "resourceNote": "E56K",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117149089,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -400,7 +604,13 @@
       "proteinNote": "P67L",
       "resourceNote": "P67L",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117149123,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -411,7 +621,13 @@
       "proteinNote": "R74W",
       "resourceNote": "R74W",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117149143,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -422,7 +638,13 @@
       "proteinNote": "D110E",
       "resourceNote": "D110E",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117171009,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -433,7 +655,13 @@
       "proteinNote": "D110H",
       "resourceNote": "D110H",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117171007,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -444,7 +672,13 @@
       "proteinNote": "R117C",
       "resourceNote": "R117C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117171028,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -455,7 +689,13 @@
       "proteinNote": "E193K",
       "resourceNote": "E193K",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117174417,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -466,7 +706,13 @@
       "proteinNote": "L206W",
       "resourceNote": "L206W",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117175339,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -477,7 +723,13 @@
       "proteinNote": "R352Q",
       "resourceNote": "R352Q",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117180339,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -488,7 +740,13 @@
       "proteinNote": "D579G",
       "resourceNote": "D579G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117230463,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -499,7 +757,13 @@
       "proteinNote": "S945L",
       "resourceNote": "S945L",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117243762,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -510,7 +774,13 @@
       "proteinNote": "S977F",
       "resourceNote": "S977F",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117246749,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -521,7 +791,13 @@
       "proteinNote": "F1052V",
       "resourceNote": "F1052V",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117251649,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -532,7 +808,13 @@
       "proteinNote": "K1060T",
       "resourceNote": "K1060T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117251674,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -543,7 +825,13 @@
       "proteinNote": "A1067T",
       "resourceNote": "A1067T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117251694,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -554,7 +842,13 @@
       "proteinNote": "G1069R",
       "resourceNote": "G1069R",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117251700,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -565,7 +859,13 @@
       "proteinNote": "R1070Q",
       "resourceNote": "R1070Q",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117251704,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -576,7 +876,13 @@
       "proteinNote": "R1070W",
       "resourceNote": "R1070W",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117251703,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -587,7 +893,13 @@
       "proteinNote": "F1074L",
       "resourceNote": "F1074L",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117251717,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -598,7 +910,13 @@
       "proteinNote": "D1152H",
       "resourceNote": "D1152H",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117254753,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr7",
@@ -609,7 +927,13 @@
       "proteinNote": "D1270N",
       "resourceNote": "D1270N",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr7",
+        "position": 117282582,
+        "synonyms": []
+      }
     }
   ],
   "variantAlleles": [

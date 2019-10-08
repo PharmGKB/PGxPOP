@@ -25,7 +25,13 @@
       "proteinNote": "W12G",
       "resourceNote": "34T>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr19",
+        "position": 16008388,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr19",
@@ -36,7 +42,13 @@
       "proteinNote": "V433M",
       "resourceNote": "1297G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr19",
+        "position": 15990431,
+        "synonyms": []
+      }
     }
   ],
   "variantAlleles": [

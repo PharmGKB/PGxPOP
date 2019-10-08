@@ -35,7 +35,13 @@
       "proteinNote": "p.F100Sfs",
       "resourceNote": "c.295_298delTCAT",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 98205971,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -46,7 +52,13 @@
       "proteinNote": "p.Y186C",
       "resourceNote": "c.557A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 98165030,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -57,7 +69,13 @@
       "proteinNote": "p.R235W",
       "resourceNote": "c.703C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 98157332,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -68,7 +86,13 @@
       "proteinNote": null,
       "resourceNote": "c.1129-5923C>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 98045449,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -79,7 +103,13 @@
       "proteinNote": "p.E386X",
       "resourceNote": "c.1156G>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 98039499,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -90,7 +120,13 @@
       "proteinNote": "p.I560S",
       "resourceNote": "c.1679T>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 97981343,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -101,7 +137,13 @@
       "proteinNote": "p.P633Qfs",
       "resourceNote": "c.1898delC",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 97915622,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -112,7 +154,13 @@
       "proteinNote": null,
       "resourceNote": "c.1905+1G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 97915614,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -123,7 +171,13 @@
       "proteinNote": "p.D949V",
       "resourceNote": "c.2846A>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 97547947,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr1",
@@ -134,7 +188,13 @@
       "proteinNote": "p.V995F",
       "resourceNote": "c.2983G>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr1",
+        "position": 97544627,
+        "synonyms": []
+      }
     }
   ],
   "variantAlleles": [

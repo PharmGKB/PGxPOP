@@ -26,7 +26,13 @@
       "proteinNote": "M1V(Start)",
       "resourceNote": "1A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96698440,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -37,7 +43,13 @@
       "proteinNote": "L19I",
       "resourceNote": "55C>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96698494,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -48,7 +60,13 @@
       "proteinNote": "P30L",
       "resourceNote": "89C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96698528,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -59,7 +77,13 @@
       "proteinNote": "N41D",
       "resourceNote": "121A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96698560,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -70,7 +94,13 @@
       "proteinNote": "D49G",
       "resourceNote": "146A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96698585,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -81,7 +111,13 @@
       "proteinNote": "G70R",
       "resourceNote": "3215G>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701654,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -92,7 +128,13 @@
       "proteinNote": "V76M",
       "resourceNote": "3233G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701672,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -103,7 +145,13 @@
       "proteinNote": "L90P",
       "resourceNote": "3276T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701715,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -114,7 +162,13 @@
       "proteinNote": "G96A",
       "resourceNote": "3294G>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701733,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -125,7 +179,13 @@
       "proteinNote": "G98V",
       "resourceNote": "3300G>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701739,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -136,7 +196,13 @@
       "proteinNote": "F110S",
       "resourceNote": "3336T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701775,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -147,7 +213,13 @@
       "proteinNote": "118 Frameshift",
       "resourceNote": "3531_3540delAGAAATGGAA",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701970,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -158,7 +230,13 @@
       "proteinNote": "K119R",
       "resourceNote": "3534A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701973,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -169,7 +247,13 @@
       "proteinNote": "R124W",
       "resourceNote": "3548C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701987,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -180,7 +264,13 @@
       "proteinNote": "R124Q",
       "resourceNote": "3549G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701988,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -191,7 +281,13 @@
       "proteinNote": "R125H; R125L",
       "resourceNote": "3552G>A; 3552G>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96701991,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -202,7 +298,13 @@
       "proteinNote": "T130M; T130R",
       "resourceNote": "3567C>T; 3567C>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96702006,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -213,7 +315,13 @@
       "proteinNote": "R132W",
       "resourceNote": "3572C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96702011,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -224,7 +332,13 @@
       "proteinNote": "R132Q",
       "resourceNote": "3573G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96702012,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -235,7 +349,13 @@
       "proteinNote": "R144C",
       "resourceNote": "3608C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96702047,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -246,7 +366,13 @@
       "proteinNote": "A149T",
       "resourceNote": "3623G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96702062,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -257,7 +383,13 @@
       "proteinNote": "R150H; R150L",
       "resourceNote": "3627G>A; 3627G>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96702066,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -268,7 +400,13 @@
       "proteinNote": "S162X",
       "resourceNote": "9100C>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96707539,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -279,7 +417,13 @@
       "proteinNote": "P163L",
       "resourceNote": "9103C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96707542,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -290,7 +434,13 @@
       "proteinNote": "N204H",
       "resourceNote": "9225A>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96707664,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -301,7 +451,13 @@
       "proteinNote": "I207T",
       "resourceNote": "9235T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96707674,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -312,7 +468,13 @@
       "proteinNote": "Q214L",
       "resourceNote": "9256A>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96707695,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -323,7 +485,13 @@
       "proteinNote": "I222V",
       "resourceNote": "10447A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96708886,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -334,7 +502,13 @@
       "proteinNote": "P227S",
       "resourceNote": "10462C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96708901,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -345,7 +519,13 @@
       "proteinNote": "H251R",
       "resourceNote": "10535A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96708974,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -356,7 +536,13 @@
       "proteinNote": "E272G",
       "resourceNote": "10598A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96709037,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -370,7 +556,15 @@
       "referenceRepeat": null,
       "synonyms": [
         94949281
-      ]
+      ],
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96709039,
+        "synonyms": [
+          96709039
+        ]
+      }
     },
     {
       "chromosome": "chr10",
@@ -381,7 +575,13 @@
       "proteinNote": "P279T",
       "resourceNote": "33437C>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96731876,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -392,7 +592,13 @@
       "proteinNote": "I284V",
       "resourceNote": "33452A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96731891,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -403,7 +609,13 @@
       "proteinNote": "T299A",
       "resourceNote": "33497A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96731936,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -414,7 +626,13 @@
       "proteinNote": "T299R",
       "resourceNote": "33498C>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96731937,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -425,7 +643,13 @@
       "proteinNote": "P317S",
       "resourceNote": "33551C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96731990,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -436,7 +660,13 @@
       "proteinNote": "I327T",
       "resourceNote": "42519T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96740958,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -447,7 +677,13 @@
       "proteinNote": "R335W",
       "resourceNote": "42542C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96740981,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -458,7 +694,13 @@
       "proteinNote": "R335Q",
       "resourceNote": "42543G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96740982,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -469,7 +711,13 @@
       "proteinNote": "S343R",
       "resourceNote": "42568C>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96741007,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -480,7 +728,13 @@
       "proteinNote": "E354K",
       "resourceNote": "42599G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96741038,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -491,7 +745,13 @@
       "proteinNote": "I359L",
       "resourceNote": "42614A>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96741053,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -502,7 +762,13 @@
       "proteinNote": "I359T",
       "resourceNote": "42615T>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96741054,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -513,7 +779,13 @@
       "proteinNote": "D360E",
       "resourceNote": "42619C>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96741058,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -524,7 +796,13 @@
       "proteinNote": "L361I",
       "resourceNote": "42620C>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96741059,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -535,7 +813,13 @@
       "proteinNote": "P382S",
       "resourceNote": "42683C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96741122,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -546,7 +830,13 @@
       "proteinNote": "I387V",
       "resourceNote": "47360A>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96745799,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -557,7 +847,13 @@
       "proteinNote": "D397A",
       "resourceNote": "47391A>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96745830,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -568,7 +864,13 @@
       "proteinNote": "Q454H",
       "resourceNote": "50235G>C",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96748674,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -579,7 +881,13 @@
       "proteinNote": "A477T",
       "resourceNote": "50302G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96748741,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -590,7 +898,13 @@
       "proteinNote": "P489S",
       "resourceNote": "50338C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96748777,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr10",
@@ -601,7 +915,13 @@
       "proteinNote": "V490F",
       "resourceNote": "50341G>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96748780,
+        "synonyms": []
+      }
     }
   ],
   "variantAlleles": [

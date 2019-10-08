@@ -34,7 +34,13 @@
       "proteinNote": "nearGene-5",
       "resourceNote": "-1639G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr16",
+        "position": 31107689,
+        "synonyms": []
+      }
     }
   ],
   "variantAlleles": [

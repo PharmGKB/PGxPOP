@@ -39,7 +39,13 @@
       "proteinNote": "5' of UGT1A1; intronic for other UGT1As e.g. UGT1A4",
       "resourceNote": "-3275T>G",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr2",
+        "position": 234665659,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr2",
@@ -50,9 +56,14 @@
       "proteinNote": "nearGene-5",
       "resourceNote": "-364C>T",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr2",
+        "position": 234668570,
+        "synonyms": []
+      }
     },
-
     {
       "chromosome": "chr2",
       "position": 233760233,
@@ -62,7 +73,13 @@
       "proteinNote": "Promoter region",
       "resourceNote": "CA(TA)5TAA, CA(TA)6TAA, CA(TA)7TAA, CA(TA)8TAA",
       "type": "DEL",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr2",
+        "position": 234668879,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr2",
@@ -73,7 +90,13 @@
       "proteinNote": "Promoter region",
       "resourceNote": "CA(TA)5TAA, CA(TA)6TAA, CA(TA)7TAA, CA(TA)8TAA",
       "type": "INS",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr2",
+        "position": 234668879,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr2",
@@ -84,7 +107,13 @@
       "proteinNote": "Promoter region",
       "resourceNote": "CA(TA)5TAA, CA(TA)6TAA, CA(TA)7TAA, CA(TA)8TAA",
       "type": "INS",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr2",
+        "position": 234668879,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr2",
@@ -95,7 +124,13 @@
       "proteinNote": "G71R",
       "resourceNote": "211G>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr2",
+        "position": 234669144,
+        "synonyms": []
+      }
     },
     {
       "chromosome": "chr2",
@@ -106,7 +141,13 @@
       "proteinNote": "P229Q",
       "resourceNote": "686C>A",
       "type": "SNP",
-      "referenceRepeat": null
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr2",
+        "position": 234669619,
+        "synonyms": []
+      }
     }
   ],
   "variantAlleles": [
