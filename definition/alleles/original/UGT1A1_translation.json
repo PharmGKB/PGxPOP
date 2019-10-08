@@ -56,33 +56,11 @@
       "chromosome": "chr2",
       "position": 233760233,
       "rsid": null,
-      "chromosomeHgvsName": "g.233760233_233760233delAT",
+      "chromosomeHgvsName": "g.233760233",
       "geneHgvsName": "g.175490",
       "proteinNote": "Promoter region",
       "resourceNote": "CA(TA)5TAA, CA(TA)6TAA, CA(TA)7TAA, CA(TA)8TAA",
-      "type": "DEL",
-      "referenceRepeat": null
-    },
-    {
-      "chromosome": "chr2",
-      "position": 233760233,
-      "rsid": null,
-      "chromosomeHgvsName": "g.233760233_233760233insAT",
-      "geneHgvsName": "g.175490",
-      "proteinNote": "Promoter region",
-      "resourceNote": "CA(TA)5TAA, CA(TA)6TAA, CA(TA)7TAA, CA(TA)8TAA",
-      "type": "INS",
-      "referenceRepeat": null
-    },
-    {
-      "chromosome": "chr2",
-      "position": 233760233,
-      "rsid": null,
-      "chromosomeHgvsName": "g.233760233_233760233insATAT",
-      "geneHgvsName": "g.175490",
-      "proteinNote": "Promoter region",
-      "resourceNote": "CA(TA)5TAA, CA(TA)6TAA, CA(TA)7TAA, CA(TA)8TAA",
-      "type": "INS",
+      "type": "SNP",
       "referenceRepeat": null
     },
     {
@@ -119,14 +97,8 @@
     ],
     [
       "C",
-      "CAT"
-    ],
-    [
       "CAT",
-      "CATAT"
-    ],
-    [
-      "CAT",
+      "CATAT",
       "CATATAT"
     ],
     [
@@ -146,9 +118,7 @@
       "alleles": [
         "T",
         "C",
-        null,
-        null,
-        null,
+        "CAT",
         "G",
         "C"
       ],
@@ -168,8 +138,6 @@
       "id": "CA100224.1",
       "function": "Decreased function",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -196,8 +164,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "A"
       ],
       "populationFrequency": {
@@ -218,9 +184,7 @@
       "alleles": [
         null,
         null,
-        null,
         "CATAT",
-        null,
         null,
         null
       ],
@@ -244,8 +208,6 @@
         null,
         "C",
         null,
-        null,
-        null,
         null
       ],
       "populationFrequency": {
@@ -264,8 +226,6 @@
       "id": "CA100228.1",
       "function": "Decreased function",
       "alleles": [
-        null,
-        null,
         null,
         null,
         "CATATAT",
@@ -292,8 +252,6 @@
         null,
         null,
         null,
-        null,
-        null,
         null
       ],
       "populationFrequency": {
@@ -314,9 +272,7 @@
       "alleles": [
         null,
         "T",
-        null,
         "CATAT",
-        null,
         null,
         null
       ],
@@ -338,8 +294,6 @@
       "alleles": [
         null,
         "T",
-        null,
-        null,
         "CATATAT",
         null,
         null

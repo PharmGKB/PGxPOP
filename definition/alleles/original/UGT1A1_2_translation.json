@@ -52,6 +52,7 @@
       "type": "SNP",
       "referenceRepeat": null
     },
+
     {
       "chromosome": "chr2",
       "position": 233760233,

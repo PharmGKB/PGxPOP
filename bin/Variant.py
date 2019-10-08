@@ -22,6 +22,7 @@ class Variant(object):
         self.alleles = alleles
         self.ref = None
         self.alt = []
+        self.synonyms = []
         self.index = index
         self.build = build.lower()
         self.debug = debug
@@ -46,6 +47,9 @@ class Variant(object):
         self.referenceRepeat = data['referenceRepeat']
         self.key = "%s.%s" % (self.chromosome, self.chromosomeHgvsName)
         self.keys = self.chromosomeHgvsName.split("; ")
+
+        if "synonyms" in data.keys():
+            self.synonyms = data["synonyms"]
 
         self._parse_alleles()
 

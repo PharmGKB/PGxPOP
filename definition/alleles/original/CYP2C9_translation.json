@@ -367,10 +367,7 @@
       "proteinNote": "273Frameshift",
       "resourceNote": "10601delA",
       "type": "DEL",
-      "referenceRepeat": null,
-      "synonyms": [
-        94949281
-      ]
+      "referenceRepeat": null
     },
     {
       "chromosome": "chr10",
@@ -838,7 +835,7 @@
         "G",
         "G",
         "T",
-        null,
+        "AGAAATGGAA",
         "A",
         "C",
         "G",
@@ -858,7 +855,7 @@
         "C",
         "A",
         "A",
-        null,
+        "A",
         "C",
         "A",
         "A",

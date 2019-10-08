@@ -1,4 +1,3 @@
-import tabix
 import numpy as np
 from DawgToys import parse_vcf_line, get_vcf_subject_ids, split_genotype, vcf_is_phased, fetch_genotypes
 
@@ -9,7 +8,8 @@ class GenotypeParser(object):
         self.vcf_header = get_vcf_subject_ids(vcf)
         self.gene = gene
         self.debug = debug
-        self.is_phased = vcf_is_phased(vcf)
+        #self.is_phased = vcf_is_phased(vcf) # no need for this with the command line flag.
+        self.is_phased = False
         
     def get_sample_index(self, sample_id):
         sample_index = [x for x,i in enumerate(self.vcf_header) if i == sample_id][0]
@@ -18,13 +18,9 @@ class GenotypeParser(object):
     def haplotype_matrices(self, batch_mode=False):
 
         subjects = get_vcf_subject_ids(self.vcf)
-        # IS THIS USED ANYWHERE ELSE? DON'T UNDERSTAND WHY THIS IS CREATED?
-        # subject_hap_lists = {}
-        #
-        #
+
         null_row = []
         for s in subjects:
-        #     subject_hap_lists[s] = [[], []]
             null_row.append(0)
 
         if batch_mode:
@@ -45,7 +41,6 @@ class GenotypeParser(object):
         # same length as the number of samples.
         # The left and right lists represent the left and right sides of the genotype
         all_alleles = ([], [])
-
 
         # Extract the variant with tabix
         for batch in batches:
@@ -153,11 +148,9 @@ class GenotypeParser(object):
                         variant.print_variant()
                         exit()
 
-
                     if self.debug:
                         print("%s calls found in A: %s" % (a, np.sum(alt_alleles[a][0])))
                         print("%s calls found in B: %s" % (a, np.sum(alt_alleles[a][1])))
-
 
                     all_alleles[0].append(alt_alleles[a][0])
                     all_alleles[1].append(alt_alleles[a][1])
@@ -166,4 +159,3 @@ class GenotypeParser(object):
             right_hap = np.array(all_alleles[1])
 
             yield((left_hap, right_hap))
-

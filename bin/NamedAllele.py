@@ -39,7 +39,7 @@ class NamedAllele(object):
             ref = variant.ref
             alts = variant.alt
 
-            variant.print_variant()
+            #variant.print_variant()
 
 
             # If there are multiple alts iterate over them and check if the listed allele matches the alt
@@ -72,11 +72,13 @@ class NamedAllele(object):
 
                 else:
                     # No match, just make it a zero
-                    print("NO MATCH FOUND!")
-                    variant.print_variant()
-                    print(variant.alleles)
-                    print(alts)
-                    print(self.alleles[v])
+                    if self.debug:
+                        print("NO MATCH FOUND!")
+                        variant.print_variant()
+                        print(variant.alleles)
+                        print(alts)
+                        print(self.alleles[v])
+                        print("Current alt: %s" % a)
                     #exit()
                     self.binary_alleles.append(0)
 

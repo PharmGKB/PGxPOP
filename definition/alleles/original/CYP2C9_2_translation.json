@@ -11,7 +11,7 @@
   "notes": [
     "rsID=RefSNP accession ID number (http://www.ncbi.nlm.nih.gov/snp/)",
     "All variants are annotated to the positive DNA strand.",
-    "See Human Cytochrome P450 Allele Nomenclature Committee website (http://www.cypalleles.ki.se) for comprehensive haplotype definitions of CYP2C9 variant alleles and updated allele information.",
+    "See Human Cytochrome P450 Allele Nomenrs9332131clature Committee website (http://www.cypalleles.ki.se) for comprehensive haplotype definitions of CYP2C9 variant alleles and updated allele information.",
     "An important caveat for all genotyping tests is that the decision to assign an allele a \"wild-type\" status is based upon a genotyping test that interrogates only the most common and already-proven sites of functional variation. In human DNA, it is always possible that a new, previously undiscovered (and therefore un-interrogated) site of variation may confer loss-of-function in an individual, and thus lead to the rare possibility of a non-functional allele being erroneously called as \"wild-type\".",
     "The *18 definition differs from the Cytochrome P450 Nomenclature DB because rs1057911 (G475=) has been removed. This synonomous variant appears to be in tight linkage (though not 100%) with rs1057910, the defining snp for *3. The presence of this variant does not impact activity of *18 or *3 but does complicate haplotype assignement from genotyping results, so it has been removed from this table."
   ],
@@ -360,17 +360,14 @@
     },
     {
       "chromosome": "chr10",
-      "position": 94949282,
+      "position": 94949281,
       "rsid": "rs9332131",
       "chromosomeHgvsName": "g.94949282delA",
       "geneHgvsName": "g.15625delA",
       "proteinNote": "273Frameshift",
       "resourceNote": "10601delA",
       "type": "DEL",
-      "referenceRepeat": null,
-      "synonyms": [
-        94949281
-      ]
+      "referenceRepeat": null
     },
     {
       "chromosome": "chr10",
@@ -838,7 +835,7 @@
         "G",
         "G",
         "T",
-        null,
+        "AGAAATGGAA",
         "A",
         "C",
         "G",
@@ -858,7 +855,7 @@
         "C",
         "A",
         "A",
-        null,
+        "A",
         "C",
         "A",
         "A",

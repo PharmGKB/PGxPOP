@@ -272,7 +272,7 @@ def chr_string(vcf):
                 return False
 
 
-def fetch_genotypes(vcf, variant):
+def fetch_genotypes(vcf, variant, synonym=None):
     tb = tabix.open(vcf)
 
     # Check whether the chromosomes start with 'chr' or not
@@ -282,18 +282,19 @@ def fetch_genotypes(vcf, variant):
     else:
         chr = variant.clean_chromosome
 
-    #print(chr, variant.position)
+    # synonym is just an alternate position that the variant may be at.  This is common for INDELs.
+    if synonym is not None:
+        position = synonym
+    else:
+        position = variant.position
 
-    records = tb.query("%s" % chr, variant.position - 1, variant.position + 1)
+    records = tb.query("%s" % chr, position - 1, position + 1)
 
     for r in records:
         # todo add some additional checks here
         # Otherwise check if there is an rsid, if there is check that it matches the variant file
         # If not just check the position and the alternate alleles
         # If it is an indel, try to match but it might not
-
-
-
 
         # Check that we fetched the right thing
         valid = True
@@ -305,7 +306,7 @@ def fetch_genotypes(vcf, variant):
             #print("Chromosome didn't match")
             valid = False
 
-        if str(r[1]) != str(variant.position):
+        if str(r[1]) != str(position):
             #print("Position didn't match")
             valid = False
 
@@ -345,17 +346,13 @@ def fetch_genotypes(vcf, variant):
 
                 # Check the case where it is an insertion
                 elif len(a) > 1:
-                    print(a)
                     variant.print_variant()
                     satisfied, index = ins_checker(a, r)
                     if satisfied is True:
                         valid = True
                         gt_index = index
 
-
                 # todo add other exceptions where necessary
-
-
 
         if valid is True:
             data = parse_vcf_line(r)
@@ -364,6 +361,15 @@ def fetch_genotypes(vcf, variant):
             if len(variant.alt) == 1:
                 data.gt_index = gt_index
             return data
+
+    # Recursively try any synonyms - not actually recursive
+    if synonym is None:
+        for pos in variant.synonyms:
+            syn_result = fetch_genotypes(vcf, variant, pos)
+            if syn_result is not None:
+                return syn_result
+
+
     return None
 
 def ins_checker(original, query):
@@ -376,7 +382,7 @@ def ins_checker(original, query):
         if alt == query[3] + original:
             return True, index
         index += 1
-    return False
+    return False, None
 
 def del_checker(original, query):
     # This checks the difference between the ref and the alt and checks if that matches the deletion stated in the
@@ -403,12 +409,9 @@ def del_checker(original, query):
         #except:
         #    print("Failed")
         #    continue
-    return False
+    return False, None
 
 def fetch_genotype_records(vcf, chromosome, position):
-
-
-
     tb = tabix.open(vcf)
     records = tb.query("%s" % chromosome, position - 1, position + 1)
     for r in records:
@@ -433,9 +436,9 @@ def welcome_message():
     |       (_.'""""._)   \___|_|\__|\_, |___/\__,_|\_/\_/\__, |  (_.'""""._)        |
     |                                |__/                 |___/                      |
     |                                                                                |
-    | v0.0 (pre-pre Alpha) (seriously don't use this)                                |
-    | Written by Adam Lavertu and Greg McInnes with help from PharmGKB.              |
-    | We do not certify that the output from this program are correct in any way.    |
+    |               v0.0 (pre-pre Alpha) (seriously don't use this)                  |
+    |     Written by Adam Lavertu and Greg McInnes with help from PharmGKB.          |
+    |  We do not certify that the output from this program are correct in any way.   |
     |________________________________________________________________________________|
     '''
 

@@ -185,13 +185,13 @@
       "id": "CA100258.1",
       "function": "Normal Function",
       "alleles": [
-        null,
+        "AGTA",
         "T",
         "G",
         "G",
         "C",
         "A",
-        null,
+        "G",
         "C",
         "T",
         "C"
