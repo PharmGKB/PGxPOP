@@ -15,8 +15,9 @@ from Gene import Gene
 from DawgToys import parse_vcf_line
 
 class SynonymChecker(object):
-    def __init__(self, file, debug):
+    def __init__(self, file, build='grch38', debug=False):
         self.file = file
+        self.build = build
         self.debug = debug
 
         self.run()
@@ -31,7 +32,6 @@ class SynonymChecker(object):
         with open(self.file) as f:
             for line in f:
                 vcf_line = parse_vcf_line(line)
-
                 if vcf_line.id in definition_rsids.keys():
                     print("rsid found: %s" % vcf_line.id)
                     if str(definition_rsids[vcf_line.id]) != str(vcf_line.pos):
@@ -48,12 +48,9 @@ class SynonymChecker(object):
 
         for g in genes:
             gene_definition = self.get_definition_file(g)
-            gene = Gene(gene_definition, debug=self.debug)
+            gene = Gene(gene_definition, build=self.build, debug=self.debug)
 
             for v in gene.variants:
-                print(v)
-                gene.variants[v].print_variant()
-
                 if gene.variants[v].rsid != None:
                     variants[gene.variants[v].rsid] = gene.variants[v].position
 
@@ -74,6 +71,7 @@ def parse_command_line():
         description = 'Check all definitions RSIDs against a VCF file for any positions '
                       'where the RSID is the same but the position is different')
     parser.add_argument("-f", "--file", help="Input")
+    parser.add_argument("-b", "--build", default="grch38", help="Alternate genome build")
     parser.add_argument("-d", "--debug", action='store_true', default=False,
                                 help="Output debugging messages.  May be very verbose.")
     options = parser.parse_args()
@@ -85,5 +83,5 @@ Main
 """
 if __name__ == "__main__":
     options = parse_command_line()
-    SynonymChecker(options.file, options.debug)
+    SynonymChecker(options.file, options.build, options.debug)
 

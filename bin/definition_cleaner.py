@@ -21,6 +21,9 @@ synonyms = {
     "CYP2C9": {94949282: [94949281]}
 }
 
+# CFTR hg19 synonym
+# 117199645: 117199644
+
 class DefinitionCleaner(object):
     def __init__(self, file, debug=False):
         self.file = file
