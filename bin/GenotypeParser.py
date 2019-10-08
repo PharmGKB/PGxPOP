@@ -102,7 +102,7 @@ class GenotypeParser(object):
                             # Determine which alterate allele
                             found = False
                             for alt in alt_indices:
-                                print(alt)
+                                #print(alt)
                                 if str(alt_indices[alt]) == allele:
                                     if self.debug:
                                         print("Found alt call")

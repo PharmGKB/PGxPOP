@@ -1,0 +1,2 @@
+sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,phenotype
+SAMPLE,UGT1A1,*27/*60,*27,*60,Decreased Function,Normal Function,Normal Metabolizer

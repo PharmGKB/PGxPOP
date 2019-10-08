@@ -21,7 +21,7 @@ from ExceptionCaller import ExceptionCaller
 from Phenotype import Phenotype
 
 class CityDawg(object):
-    def __init__(self, vcf, gene, phased=False, build='grch38', output="citydawg_results.csv",
+    def __init__(self, vcf, gene, phased=False, build='grch38', output=None,
                  debug=False, batch_mode=False):
         self.vcf = vcf
         self.gene = gene
@@ -146,8 +146,8 @@ class CityDawg(object):
             print("Diplotype calling finished")
             print("Execution time: %s" % timedelta(seconds=diplotype_caller_end_time - diplotype_caller_start_time))
 
-            #for k, v in sample_calls.items():
-            #    print("%s: %s" % (k, v))
+            for k, v in sample_calls.items():
+                print("%s: %s" % (k, v))
 
         return sample_calls
 
@@ -160,8 +160,13 @@ class CityDawg(object):
         results = []
 
         for sample, diplotype in diplotypes.items():
-            haps = diplotype.split("/")
-
+            if "/" in diplotype:
+                haps = diplotype.split("/")
+            elif "|" in diplotype:
+                haps = diplotype.split("|")
+            else:
+                print("Unrecognized delimiter in %s.  Should be / or |" % diplotype)
+                exit(1)
             haplotype_data = {}
             for i in range(len(haps)):
                 h = haps[i]
@@ -174,6 +179,7 @@ class CityDawg(object):
             results.append({
                 "sample": sample,
                 "gene": g,
+                "diplotype": diplotype,
                 "hap_1": haplotype_data["hap_0"],
                 "hap_2": haplotype_data["hap_1"],
                 "hap_1_function": haplotype_data["hap_0_function"],
@@ -183,14 +189,15 @@ class CityDawg(object):
 
         return results
 
+
     def print_results(self, results):
         f = open(self.output, "w")
-        f.write("sample_id,gene,hap_1,hap_2,hap_1_function,hap_2_function,phenotype\n")
+        f.write("sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,phenotype\n")
         for r in results:
             if self.debug:
-                print("%s,%s,%s,%s,%s,%s,%s" % (r["sample"], r["gene"], r["hap_1"], r["hap_2"], r["hap_1_function"],
-                                             r["hap_2_function"], r["phenotype"]))
-            f.write("%s,%s,%s,%s,%s,%s,%s\n" % (r["sample"], r["gene"], r["hap_1"], r["hap_2"], r["hap_1_function"],
+                print("%s,%s,%s,%s,%s,%s,%s,%s" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"], r["hap_2"],
+                                                r["hap_1_function"], r["hap_2_function"], r["phenotype"]))
+            f.write("%s,%s,%s,%s,%s,%s,%s,%s\n" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"], r["hap_2"], r["hap_1_function"],
                                              r["hap_2_function"], r["phenotype"]))
 
 

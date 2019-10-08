@@ -1,0 +1,2 @@
+sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,phenotype
+NA12878,SLCO1B1,*1A/*5,*1A,*5,Normal Function,Decreased Function,Decreased Function

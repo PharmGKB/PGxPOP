@@ -95,8 +95,8 @@ class Variant(object):
 
             return
 
-        print(self.chromosomeHgvsName)
         print("Allele parsing of %s not yet supported" % self.type)
+        print(self.chromosomeHgvsName)
         exit()
 
     def liftover(self):

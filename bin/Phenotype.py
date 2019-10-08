@@ -33,12 +33,14 @@ class Phenotype(object):
         for g in self.data:
             if g["gene"] == gene_name:
                 return g
-        print("Gene not found in phenotypes! %s" % gene_name)
-        exit(1)
+        #print("Gene not found in phenotypes! %s" % gene_name)
+        return None
 
     def get_haplotype_function(self, gene_name, hap):
         # Determine the function of a single haplotype
         gene = self.get_gene(gene_name)
+        if gene is None:
+            return None
         if hap in gene["haplotypes"].keys():
             return gene["haplotypes"][hap]
         print("Haplotype %s not found in %s phenotypes!" % (hap, gene_name))
@@ -48,6 +50,10 @@ class Phenotype(object):
         # Determine the function of two haplotypes for a given gene
         hap1_function = self.get_haplotype_function(gene_name, hap1)
         hap2_function = self.get_haplotype_function(gene_name, hap2)
+
+        if hap1_function is None or hap2_function is None:
+            return None
+
         hap_functions = [hap1_function, hap2_function].sort()
 
         # Next we need to iterate over the list of diplotypes and do a list comparison
