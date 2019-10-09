@@ -1,4 +1,5 @@
 import numpy as np
+from itertools import combinations
 
 np.seterr(divide='ignore', invalid='ignore')
 
@@ -22,9 +23,9 @@ class DiplotypeCaller(object):
             for x in combs[0]:
                 for y in combs[1]:
                     if self.is_phased:
-                        star_dip = "|".join(sorted([x,y]))
+                        star_dip = "|".join([x,y])
                     else:
-                        star_dip = "/".join(sorted([x,y]))
+                        star_dip = "/".join(sorted([x,y], key=lambda a: float(a[1:])))
                     out_dips.append(star_dip)
                         
         return(out_dips[0])
@@ -73,3 +74,31 @@ class DiplotypeCaller(object):
         else:
             alleles = [self.stars[x] for x in np.where(hap_scores == top_score)[0]]
         return([top_score, alleles])
+    
+    def test_gene(self, gene):
+        haps, stars = gene.haplotype_matrix()
+        indices = [x for x in range(len(stars))]
+        true_dips = []
+        true_haps = []
+        for hap1,hap2 in combinations(indices, 2):
+            if self.is_phased:
+                true_dips.append("|".join([stars[hap1], stars[hap2]]))
+            else:
+                true_dips.append("/".join([stars[hap1], stars[hap2]]))
+            true_haps.append([haps[hap1], haps[hap2]])
+#         len(fake_dips)
+
+        pred_dips = []
+        for hap_set in true_haps:
+            pred_dips.append(self.call_diplotype(hap_set))
+        
+        misses = []
+        for x in range(len(pred_dips)):
+            if true_dips[x] != pred_dips[x]:
+                misses.append([true_dips[x], pred_dips[x]])
+        
+        return({"error rate":len(misses)/len(true_dips), "true_dips":true_dips, "pred_dips":pred_dips})
+        
+        
+        
+        
