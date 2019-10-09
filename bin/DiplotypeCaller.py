@@ -1,3 +1,5 @@
+import re
+
 import numpy as np
 from itertools import combinations
 
@@ -25,7 +27,10 @@ class DiplotypeCaller(object):
                     if self.is_phased:
                         star_dip = "|".join([x,y])
                     else:
-                        star_dip = "/".join(sorted([x,y], key=lambda a: float(a[1:])))
+                        try:
+                            star_dip = "/".join(sorted([x,y], key=lambda a: float(a[1:])))
+                        except:
+                            star_dip = "/".join(sorted([x,y]))
                     out_dips.append(star_dip)
                         
         return(out_dips[0])
@@ -94,10 +99,15 @@ class DiplotypeCaller(object):
         
         misses = []
         for x in range(len(pred_dips)):
-            if true_dips[x] != pred_dips[x]:
+            if self.is_phased and true_dips[x] != pred_dips[x]:
                 misses.append([true_dips[x], pred_dips[x]])
-        
-        return({"error rate":len(misses)/len(true_dips), "true_dips":true_dips, "pred_dips":pred_dips})
+            else:
+                t = set(re.split(r"[/\|]+", true_dips[x]))
+                p = set(re.split(r"[/\|]+", pred_dips[x]))
+                if len(p.difference(t)) > 0:
+                    misses.append([true_dips[x], pred_dips[x]])
+                
+        return({"error rate":len(misses)/len(true_dips), "misses":misses, "true_dips":true_dips, "pred_dips":pred_dips})
         
         
         
