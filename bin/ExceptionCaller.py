@@ -49,7 +49,6 @@ class ExceptionCaller(object):
                             sample_dips[sid][1] = hap
         
         out_calls = dict()
-        print(sample_dips)
         if self.is_phased:
             for sample in sample_dips:
                 out_calls[sample] = "|".join(sample_dips[sample])
