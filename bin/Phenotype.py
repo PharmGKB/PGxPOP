@@ -54,12 +54,12 @@ class Phenotype(object):
         if hap1_function is None or hap2_function is None:
             return None
 
-        hap_functions = [hap1_function, hap2_function].sort()
+        hap_functions = sorted([hap1_function, hap2_function])
 
         # Next we need to iterate over the list of diplotypes and do a list comparison
         gene = self.get_gene(gene_name)
         for d in gene['diplotypes']:
-            if d['diplotype'].sort() == hap_functions:
+            if sorted(d['diplotype']) == hap_functions:
                 return d['phenotype']
         print('Unable to determine function of %s and %s for %s' % (hap1, hap2, gene_name))
         print('%s: %s' % (hap1, hap1_function))

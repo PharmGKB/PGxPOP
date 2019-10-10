@@ -6,7 +6,7 @@ from itertools import combinations
 np.seterr(divide='ignore', invalid='ignore')
 
 class DiplotypeCaller(object):
-    def __init__(self, gene, is_phased = False):
+    def __init__(self, gene, is_phased=False):
         self.hap_matrix, self.stars = gene.haplotype_matrix()
         self.hap_alleles_nums = np.sum(self.hap_matrix, axis =1)
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
@@ -35,7 +35,7 @@ class DiplotypeCaller(object):
                         
         return(out_dips[0])
     
-    def score_diplotypes(self,hap_sets):
+    def score_diplotypes(self, hap_sets):
         dips = []
         dip_scores = []
         for haps in hap_sets:
@@ -85,7 +85,7 @@ class DiplotypeCaller(object):
         indices = [x for x in range(len(stars))]
         true_dips = []
         true_haps = []
-        for hap1,hap2 in combinations(indices, 2):
+        for hap1, hap2 in combinations(indices, 2):
             if self.is_phased:
                 true_dips.append("|".join([stars[hap1], stars[hap2]]))
             else:

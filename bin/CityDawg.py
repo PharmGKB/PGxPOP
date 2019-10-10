@@ -14,7 +14,7 @@ from timeit import default_timer as timer
 from datetime import timedelta
 
 import Gene
-from DawgToys import welcome_message, get_vcf_subject_ids, phenotype_lookup
+from DawgToys import *
 from GenotypeParser import GenotypeParser
 from DiplotypeCaller import *
 from ExceptionCaller import ExceptionCaller
@@ -51,12 +51,6 @@ class CityDawg(object):
         diplotypes = self.get_calls(gene, gt_matrices)
         phenotypes = self.get_phenotypes(gene, diplotypes)
         return phenotypes
-
-    def get_definition_file(self, g):
-        definition_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../definition/alleles/")
-        filename = "%s_translation.json" % g
-        definition_file = os.path.join(definition_dir, filename)
-        return definition_file
     
     def get_exception_file(self, g):
         definition_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../definition/alleles/")
@@ -68,8 +62,12 @@ class CityDawg(object):
             return(False)
 
     def get_genes(self):
-        genes = ['CFTR', 'CYP2C9', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
-                 'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1']
+        #genes = ['CFTR', 'CYP2C9', 'CYP2D6', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
+        #         'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1']
+
+        # DPYD has problems
+        genes = ['CFTR', 'CYP2C9', 'CYP2D6', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
+                 'CYP2C19', 'CYP3A5', 'SLCO1B1', 'UGT1A1']
 
         if self.gene == 'all':
             return genes
@@ -83,7 +81,7 @@ class CityDawg(object):
 
     def get_gene(self, g):
         # Get the definition file
-        gene_definition = self.get_definition_file(g)
+        gene_definition = get_definition_file(g)
         gene = Gene.Gene(gene_definition, build=self.build, debug=self.debug)
         return gene
 
@@ -159,13 +157,7 @@ class CityDawg(object):
         results = []
 
         for sample, diplotype in diplotypes.items():
-            if "/" in diplotype:
-                haps = diplotype.split("/")
-            elif "|" in diplotype:
-                haps = diplotype.split("|")
-            else:
-                print("Unrecognized delimiter in %s.  Should be / or |" % diplotype)
-                exit(1)
+            haps = split_genotype(diplotype)
             haplotype_data = {}
             for i in range(len(haps)):
                 h = haps[i]

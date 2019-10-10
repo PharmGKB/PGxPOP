@@ -59,7 +59,8 @@ class Gene(object):
 
         index = 0
         for v in variants:
-            new_variant = Variant(v, alleles=alleles[index], index=index, build=self.build, debug=self.debug)
+            #new_variant = Variant(v, alleles=alleles[index], index=index, build=self.build, debug=self.debug)
+            new_variant = Variant(v, alleles=[], index=index, build=self.build, debug=self.debug)
             if self.debug:
                 new_variant.print_variant()
             formatted_variants[new_variant.index] = new_variant

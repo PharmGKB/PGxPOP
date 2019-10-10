@@ -1,5 +1,5 @@
 import json
-from DawgToys import clean_chr
+from DawgToys import clean_chr, iupac_nt
 
 '''
 Define the Variant object
@@ -69,14 +69,13 @@ class Variant(object):
             hgvs = self.chromosomeHgvsName.split(";")
             for i in hgvs:
                 i = i.strip()
-                #print(i)
                 ref, alt = i[-3:].split('>')
                 if self.ref != ref:
                     self.ref = ref
-                self.alt.append(alt)
+                self.alt = self.alt + iupac_nt(alt)
             return
-        if self.type =="DEL":
 
+        if self.type =="DEL":
             hgvs = self.chromosomeHgvsName.split(";")
             for i in hgvs:
                 i = i.strip()
@@ -85,6 +84,7 @@ class Variant(object):
                     self.ref = ref
                 self.alt.append("del" + ref)
             return
+
         if self.type =="INS":
             hgvs = self.chromosomeHgvsName.split(";")
             for i in hgvs:
@@ -92,12 +92,13 @@ class Variant(object):
                 alt = i.split('ins')[1]
                 self.alt.append(alt)
             self.ref = "ins"
-
             return
 
         print("Allele parsing of %s not yet supported" % self.type)
         print(self.chromosomeHgvsName)
         exit()
+
+
 
     def liftover(self):
 

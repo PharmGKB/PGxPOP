@@ -9,9 +9,12 @@ import argparse
 import os
 
 from CityDawg import CityDawg
+from DiplotypeCaller import DiplotypeCaller
+from DawgToys import *
+from Gene import Gene
 
 class DawgTest(object):
-    def __init__(self, file, debug):
+    def __init__(self, file, debug=False):
         self.file = file
         self.debug = debug
 
@@ -28,37 +31,90 @@ class DawgTest(object):
 
         self.pharmcat_tests()
 
+        self.combo_tests()
 
-        pass
+
+    def combo_tests(self):
+        print("Running haplotype combination tests")
+
+        genes = ['CFTR', 'CYP2C9', 'CYP2D6', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
+                 'CYP2C19', 'CYP3A5', 'DPYD', 'SLCO1B1', 'UGT1A1']
+
+        for g in genes:
+            # Create the gene object
+            gene_definition = get_definition_file(g)
+            gene = Gene(gene_definition, debug=self.debug)
+            for phased in [False, True]:
+                dc = DiplotypeCaller(gene, is_phased=phased)
+                combo_gene_results = dc.test_gene(gene)
+                print("%s error rate (phased = %s): %s" % (g, phased, combo_gene_results['error rate']))
+            #print(combo_gene_results.keys())
+
+
+
+
 
     def pharmcat_tests(self, gene='all'):
         print("Executing PharmCAT tests")
         tests = self.get_tests()
+
+        failed = []
+        missed_alleles = {}
         for t in tests:
             if t['skip'] == '1':
                 continue
-            self.run_pharmcat_test(t)
+            result, missed = self.run_pharmcat_test(t)
+
+            if result is not None:
+                t['result'] = result
+                failed.append(t)
+
+                if t['gene'] not in missed_alleles.keys():
+                    missed_alleles[t['gene']] = {}
+                for h in missed:
+                    if h not in missed_alleles[t['gene']].keys():
+                        missed_alleles[t['gene']][h] = 0
+                    missed_alleles[t['gene']][h] += 1
+
+        print("--------------------------------------------------------------------")
+        print("%s failed tests" % len(failed))
+        for f in failed:
+            print("%s %s %s" % (f['gene'], f['file'], f['result']))
+
+        print(missed_alleles)
+
 
     def run_pharmcat_test(self, test):
         #if self.debug:
+        print("--------------------------------------------------------------------")
         print("Gene: %s, File: %s" % (test['gene'], test['file']))
 
         test_file = self.test_path(test['gene'], test['file'])
-        if test['phased'] == 1:
+
+
+        if test['phased'] == '1':
             phased = True
         else:
             phased = False
 
+        failure = None
+        missed = []
 
-        cd = CityDawg(vcf=test_file, gene=test['gene'], phased=phased, debug=self.debug)
-        result = cd.process_gene(test['gene'])[0]
+        try:
+            cd = CityDawg(vcf=test_file, gene=test['gene'], phased=phased, debug=self.debug)
+            result = cd.process_gene(test['gene'])[0]
+        except:
+            failure = "parse error"
+            print("TEST FAILED")
+            print("Parse error")
+            return failure, missed
+
 
         test_haps = [test['hap1'], test['hap2']]
         result_haps = [result['hap_1'], result['hap_2']]
 
-        if phased is True:
-            test_haps.sort()
-            result_haps.sort()
+        test_haps.sort()
+        result_haps.sort()
 
         if test_haps == result_haps:
             print("Test passed")
@@ -67,6 +123,14 @@ class DawgTest(object):
             print("TEST FAILED")
             print("Expected: %s" % ",".join(test_haps))
             print("Found: %s" % ",".join(result_haps))
+            failure = "Match error"
+
+            missed = []
+            for h in test_haps:
+                if h not in result_haps:
+                    missed.append(h)
+
+        return failure, missed
 
 
     def test_path(self, gene, file):
@@ -91,7 +155,6 @@ class DawgTest(object):
                 }
                 tests.append(new_row)
         return tests
-
 
     def get_pharmcat_test_file(self):
         definition_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../test/")

@@ -46,9 +46,10 @@ class GenotypeParser(object):
         for batch in batches:
             for v in range(len(variants)):
                 variant = variants[v]
-                if self.debug:
 
+                if self.debug:
                     variant.print_variant()
+
                 genotypes = fetch_genotypes(self.vcf, variant)
 
                 # if nothing found, make a row of all zeroes
@@ -72,8 +73,11 @@ class GenotypeParser(object):
                 # For example most alternate alleles will get a value of 1 if they are the only alt.
                 alt_indices = {}
                 for a in variant.alt:
+                #for a in genotypes.alt:
                     #print("Variant alt: %s" % a)
                     # Get the index of the alt in the listed genotypes.
+
+                    #print(genotypes.gt_index)
 
                     if genotypes.gt_index is not None:
                         alt_indices[a] = genotypes.gt_index + 1
@@ -90,10 +94,12 @@ class GenotypeParser(object):
                 # Loop over every genotype in the row, 1 for each subject
                 for i, s in enumerate(batch):
                     # Get the genotype and split it into an array
+                    #print(genotypes.calls[i])
                     gt = split_genotype(genotypes.calls[i])
 
                     # For each allele in the genotype (2) figure out if it is a ref call, or if it's an alt, which one.
-                    for g in range(len(gt)):
+                    #for g in range(len(gt)): # for some reason there are 0/0/0 genotypes in the pharmcat test files
+                    for g in range(2):
                         allele = gt[g]
                         if allele == '0':
                             for a in alt_alleles.keys():

@@ -11,6 +11,15 @@ gmcinnes@stanford.edu
 # Add known synonyms
 # Add hg19 position
 
+'''
+CYP2D6 almost needs it's own script
+Due to the whole gene deletion (*5), every single variant is of type deletion in the file, which doesn't make sense
+and breaks things on our end.  These need to be changed to the actual type of variant they represent.
+
+Additionally, for *4 IUPAC nucleotide representations are used, perhaps overused. For instance an R is used for a 
+purine.  This is not handled at the moment, so I manually changed all them to the nucleotide in the PharmVar definition.
+'''
+
 import json
 import argparse
 from pyliftover import LiftOver
@@ -18,7 +27,15 @@ from Gene import Gene
 
 # todo put this in a file
 synonyms = {
-    "CYP2C9": {94949282: [94949281]}
+    "CYP2C9": {94949282: [94949281]},
+    "CYP2D6": {42129084: [42129083],
+               42128249: [42128248],
+               42128242: [42128241],
+               42128218: [42128211],
+               42128201: [42128200],
+               42128174: [42128173],
+               42127963: [42127962],
+               42127846: [42127845]}
 }
 
 # CFTR hg19 synonym
@@ -59,7 +76,25 @@ class DefinitionCleaner(object):
 
         # For CYP3A5, *3 needs to have the R and Y changed to G and T
 
+        #if self.data["gene"] == "CYP2D6":
+        #    self.CYP2D6()
+
         pass
+
+    def CYP2D6(self):
+        if self.debug:
+            print("Fixing CYP2D6")
+        # Fix all the types
+        self.fix_type()
+        exit()
+        pass
+
+
+    def fix_type(self):
+        for i in self.gene.variants:
+            print(self.data["variants"][i]["type"])
+            pass
+
 
     def add_synonyms(self):
         current_gene = self.data["gene"]

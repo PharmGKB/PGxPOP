@@ -1,6 +1,6 @@
 import numpy as np
 import tabix
-import difflib
+import os
 
 def get_competitive_haplotype_indices(haplotype_matrix):
     dual_sites = np.where(np.sum(haplotype_matrix, axis=0) > 1)[0]
@@ -288,9 +288,22 @@ def fetch_genotypes(vcf, variant, synonym=None):
     else:
         position = variant.position
 
+    records = tb.query("%s" % chr, position-1, position+1)
+    #records = tb.query("%s" % chr, position - 1, position + 1)
+
+    n_records = 0
+    for r in records:
+        n_records += 1
+
+    if n_records > 1:
+        strict = True
+    else:
+        strict = False
+
     records = tb.query("%s" % chr, position - 1, position + 1)
 
     for r in records:
+        #print("Record!")
         # todo add some additional checks here
         # Otherwise check if there is an rsid, if there is check that it matches the variant file
         # If not just check the position and the alternate alleles
@@ -306,29 +319,40 @@ def fetch_genotypes(vcf, variant, synonym=None):
             #print("Chromosome didn't match")
             valid = False
 
+            if variant.rsid != r[2] and strict is True:
+                continue
+
         if str(r[1]) != str(position):
-            #print("Position didn't match")
             valid = False
+            #if variant.rsid != r[2] and strict is True:
+            #    continue
 
         if r[3] != variant.ref:
             #print("Ref didnt' match")
             valid = False
+            #if variant.rsid != r[2] and strict is True:
+            #    continue
 
         any_alt = False
-        for alt in r[4].split(","):
+        #print(r[4])
+
+        found_alts = r[4].split(",")
+
+        for alt in found_alts:
             if alt in variant.alt:
-                gt_index = variant.alt.index(alt)
+                #gt_index = variant.alt.index(alt)
+                gt_index = found_alts.index(alt)
+                #print("GT index: %s " % gt_index)
                 any_alt = True
-                valid = True
+
+                if r[3] == variant.ref:
+                    valid = True
+
+
         #if any_alt is False:
         #    print("Alt didn't match")
 
-        if variant.rsid == r[2]:
-            # if the IDs match then nothing else matters
-            # This will especially catch INDELs with different conventions for ref and alt representation
-            #if valid == False:
-            #    print("RSIDs matched.  Overriding.")
-            valid = True
+
 
         if valid is False:
             # Check if it's an INDEL
@@ -339,24 +363,36 @@ def fetch_genotypes(vcf, variant, synonym=None):
                     # Check if any alt listed satisfies the deletion
                     satisfied, index = del_checker(a, r)
                     if satisfied is True:
-                        #print("found deletion")
                         valid = True
                         gt_index = index
-                #if a.startswith
 
                 # Check the case where it is an insertion
                 elif len(a) > 1:
-                    variant.print_variant()
                     satisfied, index = ins_checker(a, r)
                     if satisfied is True:
                         valid = True
                         gt_index = index
 
+            # I know this is duplicatd but it works.  The last one wasn't catching cases where a single nucleotide was
+            # added
+            if variant.type == "INS":
+                for a in variant.alt:
+                    satisfied, index = ins_checker(a, r)
+                    if satisfied is True:
+                        valid = True
+                        gt_index = index
+
+
                 # todo add other exceptions where necessary
+
+        if variant.rsid == r[2]:
+            # if the IDs match then nothing else matters
+            # This will especially catch INDELs with different conventions for ref and alt representation
+            #if valid == False:
+            valid = True
 
         if valid is True:
             data = parse_vcf_line(r)
-
             # If there is only one alternate allele in the definition, set the index
             if len(variant.alt) == 1:
                 data.gt_index = gt_index
@@ -364,6 +400,7 @@ def fetch_genotypes(vcf, variant, synonym=None):
 
     # Recursively try any synonyms - not actually recursive
     if synonym is None:
+        #print("Checking synonyms")
         for pos in variant.synonyms:
             syn_result = fetch_genotypes(vcf, variant, pos)
             if syn_result is not None:
@@ -392,7 +429,7 @@ def del_checker(original, query):
     index = 0
     for alt in query[4].split(","):
         if alt in ref:
-            diff_nts = ref.replace(alt, '')
+            diff_nts = ref.replace(alt, '', 1)
             if diff_nts == deleted_nts:
                 return True, index
         index += 1
@@ -424,10 +461,45 @@ def fetch_genotype_records(vcf, chromosome, position):
             return data
     return None
 
-def phenotype_lookup(gene_name, phenotypes, diplotype):
-    gene_phenotypes = phenotypes.get_gene(gene_name)
+
+# Sometimes multiple nucleotides ban be found at a position and have the same function.  In this case
+# rather than representing them as multiple letters they can be collapsed into a single letter.  For example
+# R is used to represent any purine, so the site could be an A or a G.  This function will map a nucleotide to
+# it's IUPAC definition and return a list of nucleotides it could be.
+def iupac_nt(nt):
+    nts = {
+        "A": ["A"],
+        "C": ["C"],
+        "T": ["T"],
+        "G": ["G"],
+        "W": ["A", "T"],
+        "S": ["C", "G"],
+        "M": ["A", "C"],
+        "K": ["G", "T"],
+        "R": ["A", "G"],
+        "Y": ["C", "T"],
+        "B": ["C", "G", "T"],
+        "D": ["A", "G", "T"],
+        "H": ["A", "C", "T"],
+        "V": ["A", "C", "G"],
+        "N": ["A", "C", "G", "T"],
+        "Z": []
+    }
+
+    if nt in nts.keys():
+        return nts[nt]
+
+    print("%s not found in nucleotide definition!" % nt)
+    return []
+
+pass
 
 
+def get_definition_file(g):
+    definition_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../definition/alleles/")
+    filename = "%s_translation.json" % g
+    definition_file = os.path.join(definition_dir, filename)
+    return definition_file
 
 
 def welcome_message():

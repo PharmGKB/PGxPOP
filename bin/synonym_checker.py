@@ -44,7 +44,9 @@ class SynonymChecker(object):
         variants = {}
 
         genes = ['CFTR', 'CYP2C9', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
-                 'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1']
+                 'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1', 'CYP2D6']
+
+        genes = ['CYP2D6']
 
         for g in genes:
             gene_definition = self.get_definition_file(g)

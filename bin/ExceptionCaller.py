@@ -15,15 +15,15 @@ class ExceptionCaller(object):
             if 'rsids' in self.data['rules'][haplotype]:
                 for rsid in self.data['rules'][haplotype]['rsids']:
                     hapCond_to_index_mapping[rsid] = None
-                for ind,var in gene.variants.items():
+                for ind, var in gene.variants.items():
                     if var.rsid in hapCond_to_index_mapping:
                         hapCond_to_index_mapping[var.rsid] = ind
                         
         self.hap_defs = {}
-        for hap,rules in self.data['rules'].items():
+        for hap, rules in self.data['rules'].items():
             temp = {}
             for v in rules.values():
-                for var,info in v.items():
+                for var, info in v.items():
                     temp[hapCond_to_index_mapping[var]] = int(info)
             self.hap_defs[hap] = temp
             
@@ -31,8 +31,8 @@ class ExceptionCaller(object):
     def call_samples(self, sample_order, gt_matrices):
         sample_dips = {}
         for gt_mat in gt_matrices:
-            for hap,crits in self.hap_defs.items():
-                for crit,val in crits.items():
+            for hap, crits in self.hap_defs.items():
+                for crit, val in crits.items():
                     
                     for samp in np.where(gt_mat[0][crit] == val)[0]:
                         sid = sample_order[samp]
@@ -44,11 +44,12 @@ class ExceptionCaller(object):
                     for samp in np.where(gt_mat[1][crit] == val)[0]:
                         sid = sample_order[samp]
                         if sid not in sample_dips:
-                            sample_dips[sid] = [None,hap]
+                            sample_dips[sid] = [None, hap]
                         else:
                             sample_dips[sid][1] = hap
         
         out_calls = dict()
+        print(sample_dips)
         if self.is_phased:
             for sample in sample_dips:
                 out_calls[sample] = "|".join(sample_dips[sample])
@@ -57,4 +58,3 @@ class ExceptionCaller(object):
                 out_calls[sample] = "/".join(sorted(sample_dips[sample]))
                 
         return(out_calls)
-    
