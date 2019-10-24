@@ -504,7 +504,10 @@ def get_definition_file(g):
 
 def welcome_message():
     message = '''
-     ________________________________________________________________________________
+                                                                D\___/\  
+                                                                 (0_o)    
+                                                                  (V)    
+     _________________________________________________________oOo__U__oOo____________
     |                      ___ _ _        ___                                        |
     |        _       _    / __(_) |_ _  _|   \ __ ___ __ ____ _    _       _         | 
     |       (_'-----'_)  | (__| |  _| || | |) / _` \ V  V / _` |  (_'-----'_)        |
@@ -514,6 +517,7 @@ def welcome_message():
     |               v0.0 (pre-pre Alpha) (seriously don't use this)                  |
     |     Written by Adam Lavertu and Greg McInnes with help from PharmGKB.          |
     |  We do not certify that the output from this program are correct in any way.   |
+    |                                                                                |
     |________________________________________________________________________________|
     '''
 

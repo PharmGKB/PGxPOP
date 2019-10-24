@@ -47,12 +47,23 @@ class Phenotype(object):
         exit(1)
 
     def get_diplotype_function(self, gene_name, hap1, hap2):
+
+        # Haplotypes with equal scores will now be output as H1A;H1B, so we'll split those
+        # and check the function of each separately.  If they have the same function, we
+        # can assign the function.  If it is different, then we will report "Conflicting"
+
+
         # Determine the function of two haplotypes for a given gene
-        hap1_function = self.get_haplotype_function(gene_name, hap1)
-        hap2_function = self.get_haplotype_function(gene_name, hap2)
+        hap1_function = self.haplotype_checker(gene_name, hap1)
+        hap2_function = self.haplotype_checker(gene_name, hap2)
+
+
 
         if hap1_function is None or hap2_function is None:
             return None
+
+        if hap1_function == "Conflicting" or hap2_function == "Conflicting":
+            return "Conflicting"
 
         hap_functions = sorted([hap1_function, hap2_function])
 
@@ -65,3 +76,12 @@ class Phenotype(object):
         print('%s: %s' % (hap1, hap1_function))
         print('%s: %s' % (hap2, hap2_function))
         exit(1)
+
+    def haplotype_checker(self, gene_name, hap):
+        found_functions = set()
+        for h in hap.split(";"):
+            found_functions.add(self.get_haplotype_function(gene_name, h))
+        if len(found_functions) > 1:
+            return "Conflicting"
+        return list(found_functions)[0]
+
