@@ -285,6 +285,7 @@ def fetch_genotypes(vcf, variant, synonym=None):
     # synonym is just an alternate position that the variant may be at.  This is common for INDELs.
     if synonym is not None:
         position = synonym
+
     else:
         position = variant.position
 

@@ -63,11 +63,11 @@ class CityDawg(object):
 
     def get_genes(self):
         #genes = ['CFTR', 'CYP2C9', 'CYP2D6', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
-        #         'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1']
+        #         'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1', 'CYP2B6', 'NUDT15']
 
-        # DPYD has problems
+        # DPYD and NUDT15 have problems.  Will fix.
         genes = ['CFTR', 'CYP2C9', 'CYP2D6', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
-                 'CYP2C19', 'CYP3A5', 'SLCO1B1', 'UGT1A1']
+                 'CYP2C19', 'CYP3A5', 'SLCO1B1', 'UGT1A1', 'CYP2B6']
 
         if self.gene == 'all':
             return genes

@@ -18,6 +18,17 @@ and breaks things on our end.  These need to be changed to the actual type of va
 
 Additionally, for *4 IUPAC nucleotide representations are used, perhaps overused. For instance an R is used for a 
 purine.  This is not handled at the moment, so I manually changed all them to the nucleotide in the PharmVar definition.
+
+CYP2B6, I changed the multiallelic sites to be single alts.  This isn't a problem in the UKBB, but the other 
+alts are common enough that this should be fixed.
+
+g.40991390C>A/T to g.40991390C>T
+g.41004406G>A/C/T to g.41004406G>T
+g.41010006G>T/A/C to g.41010006G>C
+ 
+Add allele flips for 
+CYP2C19: rs3758581
+CYP3A5: rs776746
 '''
 
 import json

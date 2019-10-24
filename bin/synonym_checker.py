@@ -34,8 +34,14 @@ class SynonymChecker(object):
                 vcf_line = parse_vcf_line(line)
                 if vcf_line.id in definition_rsids.keys():
                     print("rsid found: %s" % vcf_line.id)
-                    if str(definition_rsids[vcf_line.id]) != str(vcf_line.pos):
+                    variant = definition_rsids[vcf_line.id]
+                    if str(variant["position"]) != str(vcf_line.pos):
                         print("Position mismatch!")
+                        vcf_line.print_row()
+                        print(definition_rsids[vcf_line.id])
+                    # Also check for allele flips
+                    if variant["ref"] != vcf_line.ref:
+                        print("Ref mismatch!")
                         vcf_line.print_row()
                         print(definition_rsids[vcf_line.id])
 
@@ -46,15 +52,17 @@ class SynonymChecker(object):
         genes = ['CFTR', 'CYP2C9', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
                  'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1', 'CYP2D6']
 
-        genes = ['CYP2D6']
-
         for g in genes:
             gene_definition = self.get_definition_file(g)
             gene = Gene(gene_definition, build=self.build, debug=self.debug)
 
             for v in gene.variants:
                 if gene.variants[v].rsid != None:
-                    variants[gene.variants[v].rsid] = gene.variants[v].position
+                    variants[gene.variants[v].rsid] = {
+                        "position": gene.variants[v].position,
+                        "ref": gene.variants[v].ref,
+                        "alt": gene.variants[v].alt
+                    }
 
         return variants
 

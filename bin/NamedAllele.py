@@ -20,7 +20,7 @@ class NamedAllele(object):
     def _setup(self, data):
         self.name = data["name"]
         self.id = data["id"]
-        self.function = data["function"]
+        #self.function = data["function"]
         self.alleles = data["alleles"]
         self.populationFrequency = data["populationFrequency"]
 
