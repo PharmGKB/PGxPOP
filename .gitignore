@@ -1,2 +1,5 @@
 notebooks/*
 *.pyc
+*.sbatch
+*.err
+*.out
