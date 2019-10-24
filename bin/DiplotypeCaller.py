@@ -11,16 +11,19 @@ class DiplotypeCaller(object):
         self.hap_alleles_nums = np.sum(self.hap_matrix, axis =1)
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
         self.is_phased = is_phased
+        # For mixed phasing, give binary vector of position specific phasing info
+        # 1 = not-phased, 0 = phased. Multiply by the sumed hap vector
         
     def call_diplotype(self, diplotype):
         if self.is_phased:
-            possib_haplotypes = [diplotype]
+            possib_diplotypes = [diplotype]
         else:
-            possib_haplotypes = self.get_possible_haplotypes(*diplotype)
+            possib_diplotypes = self.get_possible_diplotypes(*diplotype)
             
-        dips, dip_scores = self.score_diplotypes(possib_haplotypes)
+        dips, dip_scores = self.score_diplotypes(possib_diplotypes)
         top_dip_score = np.max(dip_scores)
-        out_dips = list()
+        out_dips = set()
+
         for combs in [dips[x] for x in np.where(dip_scores == top_dip_score)[0]]:
             for x in combs[0]:
                 for y in combs[1]:
@@ -31,9 +34,9 @@ class DiplotypeCaller(object):
                             star_dip = "/".join(sorted([x,y], key=lambda a: float(a[1:])))
                         except:
                             star_dip = "/".join(sorted([x,y]))
-                    out_dips.append(star_dip)
+                    out_dips.add(star_dip)
                         
-        return(out_dips[0])
+        return(";".join(out_dips))
     
     def score_diplotypes(self, hap_sets):
         dips = []
@@ -47,7 +50,7 @@ class DiplotypeCaller(object):
         return([dips, dip_scores])
     
     
-    def get_possible_haplotypes(self, haplo1, haplo2):
+    def get_possible_diplotypes(self, haplo1, haplo2):
         alt_sites = np.where(haplo1 != haplo2)[0]
         hap_sets = []
 
@@ -72,12 +75,16 @@ class DiplotypeCaller(object):
         
     def get_max_star_alleles(self,hap):
         hap_hit_nums = np.sum(np.multiply(self.hap_matrix,hap), axis=1)
-        hap_scores = np.multiply((hap_hit_nums/self.hap_alleles_nums),hap_hit_nums)
-        top_score = np.nanmax(hap_scores)
-        if top_score == 0.0:
+        hap_prop = (hap_hit_nums/self.hap_alleles_nums)
+        if np.nanmax(hap_prop) != 1.0:
+            top_score = 0.0
             alleles = [self.ref_allele]
         else:
-            alleles = [self.stars[x] for x in np.where(hap_scores == top_score)[0]]
+            hit_locs = np.zeros(hap_prop.shape)
+            hit_locs[np.argwhere(hap_prop == 1.0)] = 1
+            hap_scores = np.multiply(hit_locs,self.hap_alleles_nums)
+            top_score = np.max(hap_scores)
+            alleles = [self.stars[x] for x in np.argwhere(hap_scores == top_score)[:,0]]
         return([top_score, alleles])
     
     def test_gene(self, gene):
