@@ -22,6 +22,7 @@ class Variant(object):
         self.alleles = alleles
         self.ref = None
         self.alt = []
+        self.flipped = False
         self.synonyms = []
         self.index = index
         self.build = build.lower()
@@ -68,6 +69,7 @@ class Variant(object):
                 if "ref" in data[self.build].keys():
                     self.ref = data[self.build]['ref']
                     self.alt = data[self.build]['alt']
+                    self.flipped = True
 
     def _parse_alleles(self):
         if self.type == "SNP":

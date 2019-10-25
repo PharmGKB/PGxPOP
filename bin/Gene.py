@@ -52,7 +52,7 @@ class Gene(object):
         if self.debug:
             print("Formatting variants")
             if self.build != "grch38":
-                print("Alternate build detected.  Coordinate conversion may take a few minutes.")
+                print("Alternate build detected.")
         variants = self.data['variants']
         alleles = self.data['variantAlleles']
         formatted_variants = {}

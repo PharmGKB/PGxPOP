@@ -38,6 +38,12 @@ class NamedAllele(object):
             variant = self.variants[v]
             ref = variant.ref
             alts = variant.alt
+            flipped = variant.flipped
+
+            if flipped is True:
+                temp = ref
+                ref = alts[0]
+                alts = [temp]
 
             #variant.print_variant()
 
