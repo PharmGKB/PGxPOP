@@ -43,8 +43,9 @@ class Phenotype(object):
             return None
         if hap in gene["haplotypes"].keys():
             return gene["haplotypes"][hap]
-        print("Haplotype %s not found in %s phenotypes!" % (hap, gene_name))
-        exit(1)
+        #print("Haplotype %s not found in %s phenotypes!" % (hap, gene_name))
+        return None
+        #exit(1)
 
     def get_diplotype_function(self, gene_name, hap1, hap2):
 
