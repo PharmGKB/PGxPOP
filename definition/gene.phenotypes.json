@@ -1438,6 +1438,34 @@
           "Possible Decreased function"
         ],
         "phenotype": "Possible Poor Function"
+      },
+            {
+        "diplotype": [
+          "Probable Decreased function",
+          "Possible Decreased function"
+        ],
+        "phenotype": "Possible Poor Function"
+      },
+      {
+        "diplotype": [
+          "Probable Decreased function",
+          "Normal function"
+        ],
+        "phenotype": "Probable Poor Function"
+      },
+      {
+        "diplotype": [
+          "Probable Decreased function",
+          "Unknown or Uncertain function"
+        ],
+        "phenotype": "Indeterminate"
+      },
+      {
+        "diplotype": [
+          "Probable Decreased function",
+          "Possible Increased function"
+        ],
+        "phenotype": "Indeterminate"
       }
     ],
     "gene": "SLCO1B1",

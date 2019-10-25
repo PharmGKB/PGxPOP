@@ -76,7 +76,8 @@ class Phenotype(object):
         print('Unable to determine function of %s and %s for %s' % (hap1, hap2, gene_name))
         print('%s: %s' % (hap1, hap1_function))
         print('%s: %s' % (hap2, hap2_function))
-        exit(1)
+        return None
+        #exit(1)
 
     def haplotype_checker(self, gene_name, hap):
         found_functions = set()
