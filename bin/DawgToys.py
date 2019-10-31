@@ -255,6 +255,14 @@ def vcf_is_phased(vcf):
         print("Phasing status could not be determined.  VCF may be corrupted.")
         exit(1)
 
+def is_gt_phased(gt):
+    if "/" in gt:
+        return False
+    if "|" in gt:
+        return True
+    # otherwise I don't know, so we'll say false
+    return False
+
 def chr_string(vcf):
     with smart_open(vcf) as f:
         for line in f:

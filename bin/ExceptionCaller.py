@@ -30,7 +30,7 @@ class ExceptionCaller(object):
             
     def call_samples(self, sample_order, gt_matrices):
         sample_dips = {}
-        for gt_mat in gt_matrices:
+        for gt_mat, phase_matrix in gt_matrices:
             for hap, crits in self.hap_defs.items():
                 for crit, val in crits.items():
                     
