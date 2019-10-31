@@ -21,8 +21,10 @@ class GenotypeParser(object):
         subjects = get_vcf_subject_ids(self.vcf)
 
         null_row = []
+        null_phase_row = []
         for s in subjects:
             null_row.append(0)
+            null_phase_row.append(1)
 
         if batch_mode:
             samps_per_batch = int(np.floor(np.sqrt(len(subjects))))
@@ -67,7 +69,7 @@ class GenotypeParser(object):
                         all_alleles[0].append(null_row)
                         all_alleles[1].append(null_row)
 
-                        phase_index.append(null_row)
+                        phase_index.append(null_phase_row)
 
                     continue
 
