@@ -62,20 +62,17 @@ class CityDawg(object):
             return(False)
 
     def get_genes(self):
-        #genes = ['CFTR', 'CYP2C9', 'CYP2D6', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
-        #         'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1', 'CYP2B6', 'NUDT15']
-
-        # DPYD and NUDT15 have problems.  Will fix.
         genes = ['CFTR', 'CYP2C9', 'CYP2D6', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
-                 'CYP2C19', 'CYP3A5', 'SLCO1B1', 'UGT1A1', 'CYP2B6', 'DPYD']
+                 'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1', 'CYP2B6', 'NUDT15']
+
 
         if self.gene == 'all':
             return genes
 
-        #if not self.gene in genes:
-        #    print("Selected gene not available.  Please choose from list:")
-        #    print(",".join(genes))
-        #    exit(1)
+        if not self.gene in genes:
+            print("Selected gene not available.  Please choose from list:")
+            print(",".join(genes))
+            exit(1)
 
         return [self.gene]
 
