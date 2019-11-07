@@ -991,6 +991,10 @@
       "*55": "Unknown or Uncertain function",
       "*56": "Unknown or Uncertain function",
       "*57": "Unknown or Uncertain function",
+      "*58": "Unknown or Uncertain function",
+      "*59": "Unknown or Uncertain function",
+      "*60": "Unknown or Uncertain function",
+      "*61": "Unknown or Uncertain function",
       "*6": "No function",
       "*7": "Unknown or Uncertain function",
       "*8": "Possible Decreased function",
@@ -1130,7 +1134,8 @@
         "phenotype": "Poor Metabolizer"
       }
     ],
-    "gene": "NUDT15"
+    "gene": "NUDT15",
+    "haplotypes": {}
   },
   {
     "diplotypes": [
@@ -1455,7 +1460,7 @@
       },
       {
         "diplotype": [
-          "Probable Decreased function",
+          "Probable Decreased Function",
           "Unknown or Uncertain function"
         ],
         "phenotype": "Indeterminate"

@@ -31,6 +31,8 @@ class SynonymChecker(object):
         # VCF than it is in the definition
         with open(self.file) as f:
             for line in f:
+                if line.startswith("#"):
+                    continue
                 vcf_line = parse_vcf_line(line)
                 if vcf_line.id in definition_rsids.keys():
                     print("rsid found: %s" % vcf_line.id)
@@ -49,8 +51,8 @@ class SynonymChecker(object):
     def get_rsids(self):
         variants = {}
 
-        genes = ['CFTR', 'CYP2C9', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
-                 'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1', 'CYP2D6']
+        genes = ['CFTR', 'CYP2C9', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1', 'NUDT15',
+                 'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1', 'CYP2D6', 'CYP2B6', ]
 
         for g in genes:
             gene_definition = self.get_definition_file(g)

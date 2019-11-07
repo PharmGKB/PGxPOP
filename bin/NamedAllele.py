@@ -41,6 +41,8 @@ class NamedAllele(object):
             flipped = variant.flipped
 
             if flipped is True:
+                #if self.debug:
+                #    print("Checking flipped allele")
                 temp = ref
                 ref = alts[0]
                 alts = [temp]
