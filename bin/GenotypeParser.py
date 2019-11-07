@@ -37,8 +37,8 @@ class GenotypeParser(object):
         variants = self.gene.variants
 
         # Variants not called
-        uncalled = []
-
+        self.uncalled = []
+        self.called = []
         # This will be a list of lists.  Where the inner lists represent the allele status for every variant in the
         # definition table.  Column represent subjects.  Same order as in the VCF.  Each added row should be of the
         # same length as the number of samples.
@@ -61,7 +61,7 @@ class GenotypeParser(object):
                 # if nothing found, make a row of all zeroes
                 # also save all the variants that were not callable
                 if genotypes is None:
-                    uncalled.append(variant)
+                    self.uncalled.append((variant,v))
                     if self.debug:
                         print("Variant not found")
                     # add the same number of null rows as there are genotypes
@@ -72,7 +72,7 @@ class GenotypeParser(object):
                         phase_index.append(null_phase_row)
 
                     continue
-
+                self.called.append((variant,v))
                 # dictionary of alts to store genotypes in
                 alt_alleles = {}
                 for a in variant.alt:
