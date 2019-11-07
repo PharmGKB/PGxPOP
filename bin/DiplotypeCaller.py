@@ -14,11 +14,11 @@ class DiplotypeCaller(object):
         # For mixed phasing, give binary vector of position specific phasing info
         # 1 = not-phased, 0 = phased. Multiply by the sumed hap vector
         
-    def call_diplotype(self, diplotype):
+    def call_diplotype(self, diplotype, phase_vector = None):
         if self.is_phased:
             possib_diplotypes = [diplotype]
         else:
-            possib_diplotypes = self.get_possible_diplotypes(*diplotype)
+            possib_diplotypes = self.get_possible_diplotypes(*diplotype, phase_vector)
             
         dips, dip_scores = self.score_diplotypes(possib_diplotypes)
         top_dip_score = np.max(dip_scores)
@@ -50,8 +50,13 @@ class DiplotypeCaller(object):
         return([dips, dip_scores])
     
     
-    def get_possible_diplotypes(self, haplo1, haplo2):
-        alt_sites = np.where(haplo1 != haplo2)[0]
+    def get_possible_diplotypes(self, haplo1, haplo2, phase_vector=None):
+        if self.is_phased:
+            temp_hap1 = np.multiply(haplo1,phase_vector)
+            temp_hap2 = np.multiply(haplo2,phase_vector)
+            alt_sites = np.where(temp_hap1 != temp_hap2)[0]
+        else:
+            alt_sites = np.where(haplo1 != haplo2)[0]
         hap_sets = []
 
         if len(alt_sites) > 1:

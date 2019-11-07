@@ -1,5 +1,5 @@
 """
-Greg McInes
+Greg McInnes and Adam Lavertu
 Altman Lab
 gmcinnes@stanford.edu
 """
@@ -134,7 +134,7 @@ class CityDawg(object):
             sample_calls = {}
             for gt_mat, phase_matrix in gt_matrices:
                 for samp in range(gt_mat[0].shape[1]):
-                    cd_call = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]])
+                    cd_call = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]], phase_matrix[:,samp])
                     sample_calls[sample_ids[samp]] = cd_call
 
         diplotype_caller_end_time = timer()
