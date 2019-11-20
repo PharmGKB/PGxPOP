@@ -12,6 +12,8 @@ class DiplotypeCaller(object):
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
         self.is_phased = is_phased
 
+    
+        
 #     def get_overlapping_haplotypes(self):
 #         hap_map_dict = dict()
 #         temp_hap_mat = np.matrix(self.hap_matrix)
@@ -52,8 +54,13 @@ class DiplotypeCaller(object):
 #         print(dips)
         for combs in [dips[x] for x in np.where(dip_scores == top_dip_score)[0]]:
 #             print(combs)
-            x = "+".join(combs[0])
-            y = "+".join(combs[1])
+            try:
+                x = "+".join(sorted(combs[0], key=lambda a: float(a[1:])))
+                y = "+".join(sorted(combs[1], key=lambda a: float(a[1:])))
+            except:
+                x = "+".join(sorted(combs[0]))
+                y = "+".join(sorted(combs[1]))
+                
             if self.is_phased:
                 star_dip = "|".join([x,y])
             else:
@@ -113,11 +120,32 @@ class DiplotypeCaller(object):
             top_score = 0.0
             alleles = [self.ref_allele]
         else:
-            hit_locs = np.zeros(hap_prop.shape)
-            hit_locs[np.argwhere(hap_prop == 1.0)] = 1
-            hap_scores = np.multiply(hit_locs,self.hap_alleles_nums)
-            top_score = np.max(hap_scores)
-            alleles = [self.stars[x] for x in np.argwhere(hap_scores == top_score)[:,0]]
+            top_score = 1.0
+            matching_alleles = np.argwhere(hap_prop == 1.0)[:,0]
+            
+            # CHECK FOR OVERLAPPING HAPLOTYPES
+            pot_dips = self.hap_matrix[matching_alleles,:]
+            pot_sum = np.sum(pot_dips, axis=0)
+            toRemove = set()
+            if np.nanmax(pot_sum) > 1:
+                # Find which positions have overlapping alleles
+                cols_oi = np.argwhere(pot_sum > 1)[0]
+                
+                for pos in cols_oi:
+                    # Get haplotypes corresponding to the overlapping alleles
+                    overlap_coords = np.squeeze(np.asarray(np.argwhere(self.hap_matrix[:,pos] == 1)[:,0]))
+                    overlap_scores = sorted([(self.hap_alleles_nums[x],self.stars[x]) for x in overlap_coords], reverse=True)
+                    _ = [toRemove.add(x[1]) for x in overlap_scores[1:]]
+                
+            alleles = {self.stars[x] for x in np.argwhere(hap_prop == 1.0)[:,0]}
+            alleles = list(alleles.difference(toRemove))
+#             print(alleles)
+#             hit_locs = np.zeros(hap_prop.shape)
+#             hit_locs[np.argwhere(hap_prop == 1.0)] = 1
+#             hap_scores = np.multiply(hit_locs,self.hap_alleles_nums)
+#             hap_scores = hap_prop
+            
+#             alleles = [self.stars[x] for x in np.argwhere(hap_scores == top_score)[:,0]]
         return([top_score, alleles])
     
     def test_gene(self, gene):
