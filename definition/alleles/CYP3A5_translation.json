@@ -242,6 +242,70 @@
       "populationFrequency": {}
     },
     {
+      "name": "*3",
+      "id": "CA100127.1A",
+      "function": "",
+      "alleles": [
+        null,
+        "C",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*3",
+      "id": "CA100127.1B",
+      "function": "",
+      "alleles": [
+        null,
+        "C",
+        "G",
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*3",
+      "id": "CA100127.1C",
+      "function": "",
+      "alleles": [
+        null,
+        "C",
+        "G",
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*3",
+      "id": "CA100127.1D",
+      "function": "",
+      "alleles": [
+        null,
+        "C",
+        "G",
+        null,
+        null,
+        "T",
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
       "name": "*4",
       "id": "CA100128.1",
       "function": "",
