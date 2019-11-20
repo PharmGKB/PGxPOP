@@ -48,8 +48,8 @@
         "build": "hg19",
         "chromosome": "chr7",
         "position": 99270539,
-	"ref": "C",
-	"alt": "T",
+	    "ref": "C",
+	    "alt": "T",
         "synonyms": []
       }
     },
@@ -199,7 +199,7 @@
       "function": "",
       "alleles": [
         "G",
-        "T",
+        null,
         "A",
         "T",
         "C",
@@ -280,10 +280,10 @@
       "alleles": [
         null,
         "C",
-        "G",
         null,
         null,
         null,
+        "T",
         null,
         null
       ],
