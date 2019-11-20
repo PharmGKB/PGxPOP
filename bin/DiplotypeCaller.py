@@ -114,16 +114,25 @@ class DiplotypeCaller(object):
     
     
     def get_max_star_alleles(self,hap):
+        # Calculate the number of hits per haplotype
         hap_hit_nums = np.sum(np.multiply(self.hap_matrix,hap), axis=1)
+        
+        # Calculate the proportion of alleles matched per haplotype
         hap_prop = (hap_hit_nums/self.hap_alleles_nums)
+        
+        # If no haplotype matches 100%, return reference
         if np.nanmax(hap_prop) != 1.0:
             top_score = 0.0
             alleles = [self.ref_allele]
+        
         else:
+            
             top_score = 1.0
+            
+            # Find all alleles with a 100% match
             matching_alleles = np.argwhere(hap_prop == 1.0)[:,0]
             
-            # CHECK FOR OVERLAPPING HAPLOTYPES
+            # Check for overlapping haplotypes, i.e. those with positions that sum to more than 1
             pot_dips = self.hap_matrix[matching_alleles,:]
             pot_sum = np.sum(pot_dips, axis=0)
             toRemove = set()
@@ -134,18 +143,16 @@ class DiplotypeCaller(object):
                 for pos in cols_oi:
                     # Get haplotypes corresponding to the overlapping alleles
                     overlap_coords = np.squeeze(np.asarray(np.argwhere(self.hap_matrix[:,pos] == 1)[:,0]))
+                    
+                    # Find the position with the maximum matching and remove the rest
                     overlap_scores = sorted([(self.hap_alleles_nums[x],self.stars[x]) for x in overlap_coords], reverse=True)
-                    _ = [toRemove.add(x[1]) for x in overlap_scores[1:]]
-                
+                    # MAke sure we're not removing duplicate star alleles
+                    toRemove = {x[1] for x in overlap_scores[1:] if x[1] != overlap_scores[0][1]}
+                    
+            # Filter alleles for the overlaps then return the remaining matching alleles
             alleles = {self.stars[x] for x in np.argwhere(hap_prop == 1.0)[:,0]}
             alleles = list(alleles.difference(toRemove))
-#             print(alleles)
-#             hit_locs = np.zeros(hap_prop.shape)
-#             hit_locs[np.argwhere(hap_prop == 1.0)] = 1
-#             hap_scores = np.multiply(hit_locs,self.hap_alleles_nums)
-#             hap_scores = hap_prop
             
-#             alleles = [self.stars[x] for x in np.argwhere(hap_scores == top_score)[:,0]]
         return([top_score, alleles])
     
     def test_gene(self, gene):
