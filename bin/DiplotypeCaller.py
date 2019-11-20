@@ -12,8 +12,6 @@ class DiplotypeCaller(object):
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
         self.is_phased = is_phased
 
-    
-        
 #     def get_overlapping_haplotypes(self):
 #         hap_map_dict = dict()
 #         temp_hap_mat = np.matrix(self.hap_matrix)
@@ -54,13 +52,18 @@ class DiplotypeCaller(object):
 #         print(dips)
         for combs in [dips[x] for x in np.where(dip_scores == top_dip_score)[0]]:
 #             print(combs)
+
             try:
-                x = "+".join(sorted(combs[0], key=lambda a: float(a[1:])))
-                y = "+".join(sorted(combs[1], key=lambda a: float(a[1:])))
+                # Reformat diplotype call for output
+                x = "+".join(sorted(combs[0]))
+                x = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",x) if len(z) > 0])])
+
+                y = "+".join(sorted(combs[1]))
+                y = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",y) if len(z) > 0])])
             except:
                 x = "+".join(sorted(combs[0]))
                 y = "+".join(sorted(combs[1]))
-                
+                                                            
             if self.is_phased:
                 star_dip = "|".join([x,y])
             else:
