@@ -3377,8 +3377,8 @@
       "populationFrequency": {}
     },
         {
-      "name": "*4A",
-      "id": "CA000327.1",
+      "name": "*4",
+      "id": "CA000327.1A",
       "function": "",
       "alleles": [
         null,
@@ -3511,8 +3511,8 @@
       "populationFrequency": {}
     },
             {
-      "name": "*4B",
-      "id": "CA000327.1",
+      "name": "*4",
+      "id": "CA000327.1B",
       "function": "",
       "alleles": [
         null,
@@ -3645,8 +3645,8 @@
       "populationFrequency": {}
     },
                 {
-      "name": "*4C",
-      "id": "CA000327.1",
+      "name": "*4",
+      "id": "CA000327.1C",
       "function": "",
       "alleles": [
         null,
@@ -3779,8 +3779,8 @@
       "populationFrequency": {}
     },
                 {
-      "name": "*4D",
-      "id": "CA000327.1",
+      "name": "*4",
+      "id": "CA000327.1D",
       "function": "",
       "alleles": [
         null,
@@ -3913,8 +3913,8 @@
       "populationFrequency": {}
     },
         {
-      "name": "*4E",
-      "id": "CA000359.1",
+      "name": "*4",
+      "id": "CA000359.1E",
       "function": "",
       "alleles": [
         null,
