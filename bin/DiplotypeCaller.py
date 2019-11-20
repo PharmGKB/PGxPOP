@@ -1,7 +1,7 @@
 import re
 
 import numpy as np
-from itertools import combinations
+from itertools import combinations,product
 
 np.seterr(divide='ignore', invalid='ignore')
 
@@ -11,9 +11,35 @@ class DiplotypeCaller(object):
         self.hap_alleles_nums = np.sum(self.hap_matrix, axis =1)
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
         self.is_phased = is_phased
-        # For mixed phasing, give binary vector of position specific phasing info
-        # 1 = not-phased, 0 = phased. Multiply by the sumed hap vector
-        
+
+#     def get_overlapping_haplotypes(self):
+#         hap_map_dict = dict()
+#         temp_hap_mat = np.matrix(self.hap_matrix)
+#         pos_oi = np.where(temp_hap_mat==1)
+
+#         var_sets = dict()
+#         for i in range(len(pos_oi[0])):
+#             if pos_oi[1][i] not in var_sets:
+#                 var_sets[pos_oi[1][i]] = set()
+#             var_sets[pos_oi[1][i]].add(pos_oi[0][i])
+
+#         var_oi = sorted([k for k,v in var_sets.items() if len(v) > 1])
+#         for j in range(temp_hap_mat[:,var_oi].shape[0]):
+#             pos_num = np.sum(temp_hap_mat[j,var_oi])
+#             if pos_num > 1:
+#                 pos_vars = dict()
+#                 for pos_var in np.where(temp_hap_mat[j,:] > 0)[1]:
+#                     pos_vars[pos_var] = list(np.where(temp_hap_mat[:,pos_var] == 1)[0])
+
+#                 comb_components = list(pos_vars.values())
+
+#                 for combs in product(*comb_components):
+#                     combs = sorted(list(set(combs)))
+#                     if len(combs) != 1:
+#                         if np.all(np.sum(temp_hap_mat[combs,:], axis=0) == temp_hap_mat[j,:]):
+#                             hap_map_dict[";".join([self.stars[k] for k in combs])] = self.stars[j]
+
+
     def call_diplotype(self, diplotype, phase_vector = None):
         if self.is_phased:
             possib_diplotypes = [diplotype]
@@ -23,18 +49,19 @@ class DiplotypeCaller(object):
         dips, dip_scores = self.score_diplotypes(possib_diplotypes)
         top_dip_score = np.max(dip_scores)
         out_dips = set()
-
+#         print(dips)
         for combs in [dips[x] for x in np.where(dip_scores == top_dip_score)[0]]:
-            for x in combs[0]:
-                for y in combs[1]:
-                    if self.is_phased:
-                        star_dip = "|".join([x,y])
-                    else:
-                        try:
-                            star_dip = "/".join(sorted([x,y], key=lambda a: float(a[1:])))
-                        except:
-                            star_dip = "/".join(sorted([x,y]))
-                    out_dips.add(star_dip)
+#             print(combs)
+            x = "+".join(combs[0])
+            y = "+".join(combs[1])
+            if self.is_phased:
+                star_dip = "|".join([x,y])
+            else:
+                try:
+                    star_dip = "/".join(sorted([x,y], key=lambda a: float(a[1:])))
+                except:
+                    star_dip = "/".join(sorted([x,y]))
+            out_dips.add(star_dip) 
                         
         return(";".join(out_dips))
     
@@ -77,7 +104,8 @@ class DiplotypeCaller(object):
         else:
             hap_sets.append([haplo1, haplo2])
         return(hap_sets)
-        
+    
+    
     def get_max_star_alleles(self,hap):
         hap_hit_nums = np.sum(np.multiply(self.hap_matrix,hap), axis=1)
         hap_prop = (hap_hit_nums/self.hap_alleles_nums)
@@ -122,5 +150,5 @@ class DiplotypeCaller(object):
         return({"error rate":len(misses)/len(true_dips), "misses":misses, "true_dips":true_dips, "pred_dips":pred_dips})
         
         
-        
+
         
