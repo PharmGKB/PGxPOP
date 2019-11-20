@@ -1,6 +1,6 @@
 {
   "formatVersion": "1",
-  "modificationDate": "Oct 8, 2019 12:00:00 AM",
+  "modificationDate": "Apr 24, 2018 12:00:00 AM",
   "gene": "CYP2C19",
   "orientation": "forward",
   "chromosome": "chr10",
@@ -17,6 +17,23 @@
   ],
   "populations": null,
   "variants": [
+    {
+      "chromosome": "chr10",
+      "position": 94761665,
+      "rsid": "rs7902257",
+      "chromosomeHgvsName": "g.94761665G>A",
+      "geneHgvsName": "g.3960G>A",
+      "proteinNote": "5' region",
+      "resourceNote": "-1041G>A",
+      "type": "SNP",
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96521422,
+        "synonyms": []
+      }
+    },
     {
       "chromosome": "chr10",
       "position": 94761900,
@@ -444,25 +461,6 @@
     },
     {
       "chromosome": "chr10",
-      "position": 94842866,
-      "rsid": "rs3758581",
-      "chromosomeHgvsName": "g.94842866A>G",
-      "geneHgvsName": "g.85186A>G",
-      "proteinNote": "I331V",
-      "resourceNote": "80161A>G",
-      "type": "SNP",
-      "referenceRepeat": null,
-      "hg19": {
-        "build": "hg19",
-        "chromosome": "chr10",
-        "position": 96602623,
-	"ref": "G",
-	"alt": "A",
-        "synonyms": []
-      }
-    },
-    {
-      "chromosome": "chr10",
       "position": 94842879,
       "rsid": "rs118203757",
       "chromosomeHgvsName": "g.94842879G>A",
@@ -492,6 +490,23 @@
         "build": "hg19",
         "chromosome": "chr10",
         "position": 96602752,
+        "synonyms": []
+      }
+    },
+    {
+      "chromosome": "chr10",
+      "position": 94849964,
+      "rsid": "rs377184510",
+      "chromosomeHgvsName": "g.94849964A>G",
+      "geneHgvsName": "g.92259A>G",
+      "proteinNote": "K399=",
+      "resourceNote": "87259A>G",
+      "type": "SNP",
+      "referenceRepeat": null,
+      "hg19": {
+        "build": "hg19",
+        "chromosome": "chr10",
+        "position": 96609721,
         "synonyms": []
       }
     },
@@ -583,9 +598,12 @@
   ],
   "variantAlleles": [
     [
+      "A",
+      "G"
+    ],
+    [
       "C",
-      "T",
-      "Y"
+      "T"
     ],
     [
       "A",
@@ -649,7 +667,6 @@
     ],
     [
       "A",
-      "R",
       "G"
     ],
     [
@@ -685,7 +702,7 @@
       "G"
     ],
     [
-      "R",
+      "A",
       "G"
     ],
     [
@@ -721,7 +738,9 @@
     {
       "name": "*1",
       "id": "CA100092.1",
+      "function": "Normal function",
       "alleles": [
+        "G",
         "C",
         "A",
         "C",
@@ -747,9 +766,9 @@
         "G",
         "T",
         "G",
-        "R",
         "G",
         "G",
+        "A",
         "C",
         "C",
         "C",
@@ -761,6 +780,7 @@
     {
       "name": "*2",
       "id": "CA100093.1",
+      "function": "No function",
       "alleles": [
         null,
         null,
@@ -774,11 +794,12 @@
         null,
         null,
         null,
+        null,
         "G",
         null,
         null,
         null,
-        "R",
+        null,
         null,
         null,
         null,
@@ -787,7 +808,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -801,7 +822,9 @@
     {
       "name": "*3",
       "id": "CA100094.1",
+      "function": "No function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -827,7 +850,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -839,10 +862,54 @@
       "populationFrequency": {}
     },
     {
-      "name": "*4",
-      "id": "CA100464.1",
+      "name": "*4A",
+      "id": "CA100095.1",
+      "function": "No function",
       "alleles": [
-        "Y",
+        null,
+        null,
+        "G",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*4B",
+      "id": "CA100096.1",
+      "function": "No function",
+      "alleles": [
+        null,
+        "T",
         "G",
         null,
         null,
@@ -867,7 +934,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -881,6 +948,7 @@
     {
       "name": "*5",
       "id": "CA100097.1",
+      "function": "No function",
       "alleles": [
         null,
         null,
@@ -907,7 +975,8 @@
         null,
         null,
         null,
-        "R",
+        null,
+        null,
         null,
         null,
         null,
@@ -921,7 +990,9 @@
     {
       "name": "*6",
       "id": "CA100098.1",
+      "function": "No function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -947,7 +1018,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -961,7 +1032,9 @@
     {
       "name": "*7",
       "id": "CA100099.1",
+      "function": "No function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1001,7 +1074,9 @@
     {
       "name": "*8",
       "id": "CA100100.1",
+      "function": "No function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1041,7 +1116,9 @@
     {
       "name": "*9",
       "id": "CA100101.1",
+      "function": "Decreased function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1067,7 +1144,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1081,7 +1158,9 @@
     {
       "name": "*10",
       "id": "CA100102.1",
+      "function": "Decreased function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1107,7 +1186,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1121,7 +1200,9 @@
     {
       "name": "*11",
       "id": "CA100103.1",
+      "function": "Normal function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1147,7 +1228,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1161,6 +1242,7 @@
     {
       "name": "*12",
       "id": "CA100104.1",
+      "function": "Uncertain function",
       "alleles": [
         null,
         null,
@@ -1187,7 +1269,8 @@
         null,
         null,
         null,
-        "G",
+        null,
+        null,
         null,
         null,
         null,
@@ -1201,6 +1284,7 @@
     {
       "name": "*13",
       "id": "CA100105.1",
+      "function": "Normal function",
       "alleles": [
         null,
         null,
@@ -1227,7 +1311,8 @@
         null,
         null,
         null,
-        "G",
+        null,
+        null,
         null,
         null,
         "T",
@@ -1241,7 +1326,9 @@
     {
       "name": "*14",
       "id": "CA100106.1",
+      "function": "Uncertain function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1267,7 +1354,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1281,7 +1368,9 @@
     {
       "name": "*15",
       "id": "CA100107.1",
+      "function": "Normal function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1307,7 +1396,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1321,7 +1410,9 @@
     {
       "name": "*16",
       "id": "CA100108.1",
+      "function": "Decreased function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1361,7 +1452,9 @@
     {
       "name": "*17",
       "id": "CA100109.1",
+      "function": "Increased function",
       "alleles": [
+        null,
         "T",
         null,
         null,
@@ -1387,7 +1480,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1401,6 +1494,7 @@
     {
       "name": "*18",
       "id": "CA100110.1",
+      "function": "Normal function",
       "alleles": [
         null,
         null,
@@ -1426,8 +1520,9 @@
         null,
         null,
         null,
+        null,
         "A",
-        "G",
+        null,
         null,
         null,
         null,
@@ -1441,6 +1536,7 @@
     {
       "name": "*19",
       "id": "CA100111.1",
+      "function": "Decreased function",
       "alleles": [
         null,
         null,
@@ -1449,25 +1545,26 @@
         null,
         null,
         null,
-        "G",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         "G",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -1481,7 +1578,9 @@
     {
       "name": "*22",
       "id": "CA100112.1",
+      "function": "No function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1507,7 +1606,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1521,7 +1620,9 @@
     {
       "name": "*23",
       "id": "CA100113.1",
+      "function": "Uncertain function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1547,7 +1648,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1561,6 +1662,7 @@
     {
       "name": "*24",
       "id": "CA100114.1",
+      "function": "No function",
       "alleles": [
         null,
         null,
@@ -1587,9 +1689,10 @@
         null,
         null,
         null,
-        "G",
+        null,
         "A",
         null,
+        "G",
         null,
         null,
         null,
@@ -1601,6 +1704,7 @@
     {
       "name": "*25",
       "id": "CA100115.1",
+      "function": "Decreased function",
       "alleles": [
         null,
         null,
@@ -1627,7 +1731,8 @@
         null,
         null,
         null,
-        "G",
+        null,
+        null,
         null,
         null,
         null,
@@ -1641,7 +1746,9 @@
     {
       "name": "*26",
       "id": "CA100116.1",
+      "function": "Decreased function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1667,7 +1774,49 @@
         "A",
         null,
         null,
-        "G",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*27",
+      "id": "CA100117.1",
+      "function": "Uncertain function",
+      "alleles": [
+        "A",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -1681,7 +1830,9 @@
     {
       "name": "*28",
       "id": "CA100118.1",
+      "function": "Normal function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1707,9 +1858,9 @@
         null,
         null,
         null,
-        "G",
         null,
         "A",
+        null,
         null,
         null,
         null,
@@ -1721,7 +1872,9 @@
     {
       "name": "*29",
       "id": "CA100119.1",
+      "function": "Uncertain function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1747,7 +1900,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1761,7 +1914,9 @@
     {
       "name": "*30",
       "id": "CA100120.1",
+      "function": "Uncertain function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1801,7 +1956,9 @@
     {
       "name": "*31",
       "id": "CA100121.1",
+      "function": "Uncertain function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1827,7 +1984,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1841,6 +1998,7 @@
     {
       "name": "*32",
       "id": "CA100122.1",
+      "function": "Uncertain function",
       "alleles": [
         null,
         null,
@@ -1853,21 +2011,22 @@
         null,
         null,
         null,
-        "G",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         "G",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -1881,7 +2040,9 @@
     {
       "name": "*33",
       "id": "CA100123.1",
+      "function": "Uncertain function",
       "alleles": [
+        null,
         null,
         null,
         null,
@@ -1907,7 +2068,7 @@
         null,
         null,
         null,
-        "G",
+        null,
         null,
         null,
         null,
@@ -1921,7 +2082,9 @@
     {
       "name": "*34",
       "id": "CA100124.1",
+      "function": "Uncertain function",
       "alleles": [
+        null,
         null,
         null,
         "T",
@@ -1961,6 +2124,7 @@
     {
       "name": "*35",
       "id": "CA100233.1",
+      "function": "No function",
       "alleles": [
         null,
         null,
@@ -1974,20 +2138,21 @@
         null,
         null,
         null,
-        "G",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         "G",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
