@@ -1348,6 +1348,13 @@
       },
       {
         "diplotype": [
+          "Probable Decreased Function",
+          "Unknown or Uncertain function"
+        ],
+        "phenotype": "Indeterminate"
+      },
+      {
+        "diplotype": [
           "Decreased function",
           "Unknown or Uncertain function"
         ],
