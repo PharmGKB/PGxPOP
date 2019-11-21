@@ -161,6 +161,8 @@ class DiplotypeCaller(object):
                     
             # Filter alleles for the overlaps then return the remaining matching alleles
             alleles = list(alleles.difference(toRemove))
+            if "*1" in alleles and len(alleles) > 1:
+                _ = alleles.remove("*1")
             
         return([top_score, alleles])
     
