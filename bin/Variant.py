@@ -65,11 +65,19 @@ class Variant(object):
                 self.position = data[self.build]['position']
                 self.synonyms = data[self.build]['synonyms']
 
+                #print("yooooooooo")
+                #exit()
                 # Sometimes the allele can flip between builds.  I only updated the handful where they were different
+
                 if "ref" in data[self.build].keys():
+
                     self.ref = data[self.build]['ref']
                     self.alt = data[self.build]['alt']
                     self.flipped = True
+
+
+
+
 
     def _parse_alleles(self):
         if self.type == "SNP":

@@ -40,14 +40,15 @@ class NamedAllele(object):
             alts = variant.alt
             flipped = variant.flipped
 
-            if flipped is True:
-                #if self.debug:
-                #    print("Checking flipped allele")
-                temp = ref
-                ref = alts[0]
-                alts = [temp]
+            #if flipped is True:
+            #    #if self.debug:
+            #    #    print("Checking flipped allele")
+            #    temp = ref
+            #    ref = alts[0]
+            #    alts = [temp]
 
             #variant.print_variant()
+
 
 
             # If there are multiple alts iterate over them and check if the listed allele matches the alt
