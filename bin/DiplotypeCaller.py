@@ -134,26 +134,32 @@ class DiplotypeCaller(object):
             
             # Find all alleles with a 100% match
             matching_alleles = np.argwhere(hap_prop == 1.0)[:,0]
+            alleles = {self.stars[x] for x in np.argwhere(hap_prop == 1.0)[:,0]}
             
             # Check for overlapping haplotypes, i.e. those with positions that sum to more than 1
             pot_dips = self.hap_matrix[matching_alleles,:]
             pot_sum = np.sum(pot_dips, axis=0)
             toRemove = set()
             if np.nanmax(pot_sum) > 1:
+                
                 # Find which positions have overlapping alleles
-                cols_oi = np.argwhere(pot_sum > 1)[0]
+                cols_oi = np.argwhere(pot_sum > 1)
                 
                 for pos in cols_oi:
                     # Get haplotypes corresponding to the overlapping alleles
                     overlap_coords = np.squeeze(np.asarray(np.argwhere(self.hap_matrix[:,pos] == 1)[:,0]))
                     
                     # Find the position with the maximum matching and remove the rest
-                    overlap_scores = sorted([(self.hap_alleles_nums[x],self.stars[x]) for x in overlap_coords], reverse=True)
-                    # MAke sure we're not removing duplicate star alleles
-                    toRemove = {x[1] for x in overlap_scores[1:] if x[1] != overlap_scores[0][1]}
+                    overlap_scores = sorted([(self.hap_alleles_nums[x],self.stars[x]) for x in overlap_coords if self.stars[x] in alleles], reverse=True)
+                    
+                    # Make sure we're not removing duplicate star alleles
+                    for x in overlap_scores[1:]:
+                        # Check that the allele is not the same as the lead allele and is not tied
+                        # for overlap score with the lead allele
+                        if x[1] != overlap_scores[0][1] and x[0] != overlap_scores[0][0]:
+                            toRemove.add(x[1]) 
                     
             # Filter alleles for the overlaps then return the remaining matching alleles
-            alleles = {self.stars[x] for x in np.argwhere(hap_prop == 1.0)[:,0]}
             alleles = list(alleles.difference(toRemove))
             
         return([top_score, alleles])
