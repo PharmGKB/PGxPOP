@@ -31,6 +31,8 @@
         "build": "hg19",
         "chromosome": "chr10",
         "position": 96521422,
+        "ref": "A",
+	    "alt": ["G"],
         "synonyms": []
       }
     },
