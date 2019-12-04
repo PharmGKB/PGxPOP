@@ -75,19 +75,29 @@ class Variant(object):
                     self.alt = data[self.build]['alt']
                     self.flipped = True
 
-
-
-
-
     def _parse_alleles(self):
         if self.type == "SNP":
             hgvs = self.chromosomeHgvsName.split(";")
             for i in hgvs:
                 i = i.strip()
-                ref, alt = i[-3:].split('>')
+
+                fields = i.split('>')
+                ref = fields[0][-1]
+
+                alt = fields[1].split('/')
+                alt_set = set()
+                for a in alt:
+                    all_alts = iupac_nt(a)
+                    for new_alt in all_alts:
+                        alt_set.add(new_alt)
+
+                self.alt = list(alt_set)
+
                 if self.ref != ref:
                     self.ref = ref
-                self.alt = self.alt + iupac_nt(alt)
+
+                # print(fields, ref, alt_set)
+
             return
 
         if self.type =="DEL":

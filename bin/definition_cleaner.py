@@ -12,29 +12,43 @@ gmcinnes@stanford.edu
 # Add hg19 position
 
 '''
+***FIXED***
 CYP2D6 almost needs it's own script
 Due to the whole gene deletion (*5), every single variant is of type deletion in the file, which doesn't make sense
 and breaks things on our end.  These need to be changed to the actual type of variant they represent.
+*6 has an extra variant in it S486T
+*3 extra: N166D
+***********
 
+***FIXED***
 Additionally, for *4 IUPAC nucleotide representations are used, perhaps overused. For instance an R is used for a 
 purine.  This is not handled at the moment, so I manually changed all them to the nucleotide in the PharmVar definition.
+***********
 
+***FIXED***
 CYP2B6, I changed the multiallelic sites to be single alts.  This isn't a problem in the UKBB, but the other 
 alts are common enough that this should be fixed.
 
 g.40991390C>A/T to g.40991390C>T
 g.41004406G>A/C/T to g.41004406G>T
 g.41010006G>T/A/C to g.41010006G>C
+***********
  
 Add allele flips for 
 CYP2C19: rs3758581
 CYP3A5: rs776746
+
+# CFTR hg19 synonym
+# 117199645: 117199644
 '''
 
 import json
 import argparse
 from pyliftover import LiftOver
 from Gene import Gene
+from DawgToys import iupac_nt
+import copy
+import myvariant
 
 # todo put this in a file
 synonyms = {
@@ -65,11 +79,17 @@ class DefinitionCleaner(object):
 
     def run(self):
 
+        # Get ref and alts from MyVariant
+        #self.update_variants()
+
         # Handle special cases
         self.special_cases()
 
         # Add synonynms
         self.add_synonyms()
+
+        # Expand out the wobble nucleotides
+        self.dewobbler()
 
         # Fix all the INDELs
         self.update_indels()
@@ -79,6 +99,17 @@ class DefinitionCleaner(object):
 
         # print the output
         print(json.dumps(self.data, indent=2))
+
+    def update_variants(self):
+        for variant in self.data["variants"]:
+            print(variant)
+            mv = myvariant.MyVariantInfo()
+            rsid = variant['rsid']
+            mv_result = mv.query('dbsnp.rsid:%s' % rsid, fields='dbsnp')
+            print(mv_result['ref'])
+            print(mv_result['alt'])
+            exit()
+        exit()
 
     def special_cases(self):
 
@@ -91,6 +122,89 @@ class DefinitionCleaner(object):
         #    self.CYP2D6()
 
         pass
+
+    def dewobbler(self):
+        # go through each named allele
+        new_alleles = []
+
+        for allele in self.data["namedAlleles"]:
+            cyp2d6_exon_9_conv = False
+            cyp2d6_exon_9_conv_copy = None
+            if self.data['gene'] == "CYP2D6" and allele["name"] == "*4":
+                cyp2d6_exon_9_conv = True
+
+            branched_alleles = [[]]
+            #print(allele['name'])
+            for v in range(len(allele['alleles'])):
+
+
+                #print("Current variant: %s" % v)
+                expanded = iupac_nt(allele['alleles'][v])
+
+
+
+                #print("Expanded: %s" % expanded)
+                if len(expanded) > 1:
+
+                    # create a copy of the original for safe keeping
+                    if cyp2d6_exon_9_conv is True and cyp2d6_exon_9_conv_copy is None:
+                        # check which variant we're at
+                        position = self.data['variants'][v]['position']
+                        if position == 42126663:
+                            # We're in the conversion.  Stop splitting.
+                            #print("We're in the conversion!")
+                            cyp2d6_exon_9_conv_copy = copy.deepcopy(branched_alleles)
+
+                    if cyp2d6_exon_9_conv_copy is not None:
+                        for i in range(len(branched_alleles)):
+                            branched_alleles[i].append(expanded[0])
+                        for i in range(len(cyp2d6_exon_9_conv_copy)):
+                            cyp2d6_exon_9_conv_copy[i].append(expanded[1])
+
+                    else:
+                        new_branches = []
+                        for nt in expanded:
+
+                            # create a new copy of all branches and append the new variant
+                            new_branch = copy.deepcopy(branched_alleles)
+
+                            #print("original: %s" % branched_alleles)
+                            #print(new_branch)
+                            for b in range(len(new_branch)):
+                                new_branch[b].append(nt)
+                                #print(new_branch)
+
+                            new_branches = new_branches + new_branch
+
+                        branched_alleles = new_branches
+
+                else:
+                    for i in range(len(branched_alleles)):
+                        branched_alleles[i].append(expanded[0])
+
+                    if cyp2d6_exon_9_conv_copy is not None:
+                        for i in range(len(cyp2d6_exon_9_conv_copy)):
+                            cyp2d6_exon_9_conv_copy[i].append(expanded[0])
+
+            if cyp2d6_exon_9_conv_copy is not None:
+                branched_alleles = branched_alleles + cyp2d6_exon_9_conv_copy
+
+            # add the new branches to namedAlleles
+            if len(branched_alleles) > 1:
+                print("Created %s branches" % len(branched_alleles))
+                for i in range(len(branched_alleles)):
+                    new_allele = copy.deepcopy(allele)
+                    new_allele['alleles'] = branched_alleles[i]
+                    new_allele['id'] = new_allele['id'] + '.%s' % i
+                    #print(new_allele)
+                    new_alleles.append(new_allele)
+
+        self.data["namedAlleles"] = self.data["namedAlleles"] + new_alleles
+        #print(self.data["namedAlleles"])
+
+
+
+
 
     def CYP2D6(self):
         if self.debug:

@@ -342,6 +342,9 @@ def fetch_genotypes(vcf, variant, synonym=None):
             #if variant.rsid != r[2] and strict is True:
             #    continue
 
+        #if variant.position == 42130655:
+        #    print("*15!!!!")
+
         any_alt = False
         #print(r[4])
 
@@ -408,8 +411,7 @@ def fetch_genotypes(vcf, variant, synonym=None):
             return data
 
     # Recursively try any synonyms - not actually recursive
-    if synonym is None:
-        #print("Checking synonyms")
+    if synonym is not None:
         for pos in variant.synonyms:
             syn_result = fetch_genotypes(vcf, variant, pos)
             if syn_result is not None:
@@ -498,8 +500,8 @@ def iupac_nt(nt):
     if nt in nts.keys():
         return nts[nt]
 
-    print("%s not found in nucleotide definition!" % nt)
-    return []
+    #print("%s not found in nucleotide definition!" % nt)
+    return [nt]
 
 pass
 
