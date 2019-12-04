@@ -48,6 +48,8 @@
         "build": "hg19",
         "chromosome": "chr7",
         "position": 99270539,
+        "ref": "C",
+	    "alt": ["T"],
         "synonyms": []
       }
     },
