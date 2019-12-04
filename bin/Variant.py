@@ -114,8 +114,13 @@ class Variant(object):
             hgvs = self.chromosomeHgvsName.split(";")
             for i in hgvs:
                 i = i.strip()
-                alt = i.split('ins')[1]
-                self.alt.append(alt)
+
+                alts = i.split('/')
+
+                for a in alts:
+                    alt = a.split('ins')[1]
+                    self.alt.append(alt)
+
             self.ref = "ins"
             return
 

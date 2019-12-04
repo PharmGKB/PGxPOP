@@ -503,7 +503,7 @@ def iupac_nt(nt):
     #print("%s not found in nucleotide definition!" % nt)
     return [nt]
 
-pass
+
 
 
 def get_definition_file(g):
@@ -511,6 +511,7 @@ def get_definition_file(g):
     filename = "%s_translation.json" % g
     definition_file = os.path.join(definition_dir, filename)
     return definition_file
+
 
 
 def welcome_message():

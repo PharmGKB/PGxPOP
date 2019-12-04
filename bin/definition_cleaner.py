@@ -38,7 +38,7 @@ Add allele flips for
 CYP2C19: rs3758581
 CYP3A5: rs776746
 
-# CFTR hg19 synonym
+# CFTR hg19 synonym - note that this synonym is not in hg38
 # 117199645: 117199644
 '''
 
@@ -82,9 +82,6 @@ class DefinitionCleaner(object):
         # Get ref and alts from MyVariant
         #self.update_variants()
 
-        # Handle special cases
-        self.special_cases()
-
         # Add synonynms
         self.add_synonyms()
 
@@ -97,19 +94,11 @@ class DefinitionCleaner(object):
         # Add hg19 position
         self.add_alternate_build()
 
+        # Handle special cases
+        self.special_cases()
+
         # print the output
         print(json.dumps(self.data, indent=2))
-
-    def update_variants(self):
-        for variant in self.data["variants"]:
-            print(variant)
-            mv = myvariant.MyVariantInfo()
-            rsid = variant['rsid']
-            mv_result = mv.query('dbsnp.rsid:%s' % rsid, fields='dbsnp')
-            print(mv_result['ref'])
-            print(mv_result['alt'])
-            exit()
-        exit()
 
     def special_cases(self):
 
@@ -118,8 +107,8 @@ class DefinitionCleaner(object):
 
         # For CYP3A5, *3 needs to have the R and Y changed to G and T
 
-        #if self.data["gene"] == "CYP2D6":
-        #    self.CYP2D6()
+        if self.data["gene"] == "CYP2D6":
+            self.CYP2D6()
 
         pass
 
@@ -191,7 +180,7 @@ class DefinitionCleaner(object):
 
             # add the new branches to namedAlleles
             if len(branched_alleles) > 1:
-                print("Created %s branches" % len(branched_alleles))
+                #print("Created %s branches" % len(branched_alleles))
                 for i in range(len(branched_alleles)):
                     new_allele = copy.deepcopy(allele)
                     new_allele['alleles'] = branched_alleles[i]
@@ -209,10 +198,98 @@ class DefinitionCleaner(object):
     def CYP2D6(self):
         if self.debug:
             print("Fixing CYP2D6")
-        # Fix all the types
-        self.fix_type()
-        exit()
-        pass
+
+        self.variant_splitter('rs72549356')
+
+        # Fix all the types - no longer need to do this after ryan removed *5
+        #self.fix_type()
+
+        #exit()
+        #pass
+
+    def variant_splitter(self, rsid):
+        # Find the variant in the variants
+
+        index = None
+
+        for i in range(len(self.data['variants'])):
+            variant = self.data['variants'][i]
+            if variant['rsid'] == rsid:
+                index = i
+                break
+
+        if index is None:
+            print("Variant not found in definition: %s" % rsid)
+            exit(1)
+
+        # Update the variant definition
+        variant = self.gene.variants[index]
+        alts = variant.alt
+
+        if variant.type == "INS":
+            for i in range(len(alts)):
+                alts[i] = "ins" + alts[i]
+
+        new_variants = []
+        for alt in variant.alt:
+            new_variant = copy.deepcopy(self.data['variants'][index])
+
+            if variant.type == "INS":
+
+                new_alt = new_variant['chromosomeHgvsName'].split('ins')[0] + alt
+                new_variant['chromosomeHgvsName'] = new_alt
+
+            new_variants.append(new_variant)
+
+        del self.data['variants'][index]
+
+        for i in range(len(new_variants)):
+
+            self.data['variants'].insert(index+i, new_variants[i])
+
+        #print(self.data['variants'][index])
+        #print(self.data['variants'][index+1])
+
+        # fix variantAlleles
+        #print(self.data['variantAlleles'][index])
+        del self.data['variantAlleles'][index]
+        for i in range(len(alts)):
+            new_alts = [alts[i], variant.ref]
+
+            self.data['variantAlleles'].insert(index + i, new_alts)
+
+        #print(self.data['variantAlleles'][index])
+        #print(self.data['variantAlleles'][index+1])
+
+        # ok now go through all the named allele definitinos
+        for i in range(len(self.data['namedAlleles'])):
+            #print(self.data['namedAlleles'][i]['name'])
+            if self.data['namedAlleles'][i]['name'] == "*1":
+                # skip *1, just because
+                self.data['namedAlleles'][i]['alleles'].insert(index, None)
+                continue
+
+            if self.data['namedAlleles'][i]['alleles'][index] is None:
+                #just add another one
+                self.data['namedAlleles'][i]['alleles'].insert(index, None)
+
+            else:
+                found_alt = self.data['namedAlleles'][i]['alleles'][index]
+
+                del self.data['namedAlleles'][i]['alleles'][index]
+                for j in range(len(alts)):
+                    if found_alt == alts[j]:
+                        #print('inserting %s' % found_alt)
+                        self.data['namedAlleles'][i]['alleles'].insert(index+j, found_alt)
+                    else:
+                        self.data['namedAlleles'][i]['alleles'].insert(index+j, None)
+
+                #print(self.data['namedAlleles'][i]['alleles'][index])
+                #print(self.data['namedAlleles'][i]['alleles'][index+1])
+
+                #exit()
+
+        #exit()
 
 
     def fix_type(self):

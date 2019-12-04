@@ -30,7 +30,7 @@
         "build": "hg19",
         "chromosome": "chr7",
         "position": 117199645,
-        "synonyms": []
+        "synonyms": [117199644]
       }
     },
     {
