@@ -905,7 +905,6 @@
     {
       "name": "Reference",
       "id": "CA100000.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -955,7 +954,6 @@
     {
       "name": "F508del(TCT)",
       "id": "CA100002.1",
-      "function": "",
       "alleles": [
         "delTCT",
         null,
@@ -1005,7 +1003,6 @@
     {
       "name": "F508del(CTT)",
       "id": "CA100001.1",
-      "function": "",
       "alleles": [
         null,
         "delCTT",
@@ -1055,7 +1052,6 @@
     {
       "name": "2789+5G->A",
       "id": "CA100020.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1105,7 +1101,6 @@
     {
       "name": "3272-26A->G",
       "id": "CA100271.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1155,7 +1150,6 @@
     {
       "name": "3849+10kbC- >T",
       "id": "CA100021.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1205,7 +1199,6 @@
     {
       "name": "711+1G->T",
       "id": "CA100033.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1255,7 +1248,6 @@
     {
       "name": "A1067T",
       "id": "CA100251.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1305,7 +1297,6 @@
     {
       "name": "A455E",
       "id": "CA100031.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1355,7 +1346,6 @@
     {
       "name": "D110E",
       "id": "CA100240.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1405,7 +1395,6 @@
     {
       "name": "D110H",
       "id": "CA100241.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1455,7 +1444,6 @@
     {
       "name": "D1152H",
       "id": "CA100256.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1505,7 +1493,6 @@
     {
       "name": "D1270N",
       "id": "CA100257.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1555,7 +1542,6 @@
     {
       "name": "D579G",
       "id": "CA100246.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1605,7 +1591,6 @@
     {
       "name": "E193K",
       "id": "CA100243.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1655,7 +1640,6 @@
     {
       "name": "E56K",
       "id": "CA100237.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1705,7 +1689,6 @@
     {
       "name": "E831X",
       "id": "CA100272.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1755,7 +1738,6 @@
     {
       "name": "F1052V",
       "id": "CA100249.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1805,7 +1787,6 @@
     {
       "name": "F1074L",
       "id": "CA100255.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1855,7 +1836,6 @@
     {
       "name": "G1069R",
       "id": "CA100252.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1905,7 +1885,6 @@
     {
       "name": "G1244E",
       "id": "CA100004.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -1955,7 +1934,6 @@
     {
       "name": "G1349D",
       "id": "CA100005.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2005,7 +1983,6 @@
     {
       "name": "G178R",
       "id": "CA100006.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2055,7 +2032,6 @@
     {
       "name": "G551D",
       "id": "CA100003.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2105,7 +2081,6 @@
     {
       "name": "G551S",
       "id": "CA100007.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2155,7 +2130,6 @@
     {
       "name": "G85E",
       "id": "CA100023.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2205,7 +2179,6 @@
     {
       "name": "K1060T",
       "id": "CA100250.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2255,7 +2228,6 @@
     {
       "name": "L206W",
       "id": "CA100244.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2305,7 +2277,6 @@
     {
       "name": "P67L",
       "id": "CA100238.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2355,7 +2326,6 @@
     {
       "name": "R1070Q",
       "id": "CA100253.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2405,7 +2375,6 @@
     {
       "name": "R1070W",
       "id": "CA100254.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2455,7 +2424,6 @@
     {
       "name": "R117C",
       "id": "CA100242.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2505,7 +2473,6 @@
     {
       "name": "R117H",
       "id": "CA100016.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2555,7 +2522,6 @@
     {
       "name": "R347H",
       "id": "CA100236.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2605,7 +2571,6 @@
     {
       "name": "R352Q",
       "id": "CA100245.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2655,7 +2620,6 @@
     {
       "name": "R74W",
       "id": "CA100239.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2705,7 +2669,6 @@
     {
       "name": "S1251N",
       "id": "CA100008.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2755,7 +2718,6 @@
     {
       "name": "S1255P",
       "id": "CA100009.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2805,7 +2767,6 @@
     {
       "name": "S549N",
       "id": "CA100010.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2855,7 +2816,6 @@
     {
       "name": "S549R(A>C)",
       "id": "CA100011.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2905,7 +2865,6 @@
     {
       "name": "S549R(T>G)",
       "id": "CA100012.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -2955,7 +2914,6 @@
     {
       "name": "S945L",
       "id": "CA100247.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -3005,7 +2963,6 @@
     {
       "name": "S977F",
       "id": "CA100248.1",
-      "function": "",
       "alleles": [
         null,
         null,

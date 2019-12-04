@@ -65,7 +65,6 @@
     {
       "name": "*1",
       "id": "CA100233.1",
-      "function": "",
       "alleles": [
         "A",
         "C"
@@ -75,7 +74,6 @@
     {
       "name": "*2",
       "id": "CA100234.1",
-      "function": "",
       "alleles": [
         "C",
         null
@@ -85,7 +83,6 @@
     {
       "name": "*3",
       "id": "CA100235.1",
-      "function": "",
       "alleles": [
         null,
         "T"

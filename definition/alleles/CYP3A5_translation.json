@@ -48,8 +48,6 @@
         "build": "hg19",
         "chromosome": "chr7",
         "position": 99270539,
-	    "ref": "C",
-	    "alt": ["T"],
         "synonyms": []
       }
     },
@@ -196,7 +194,6 @@
     {
       "name": "*1",
       "id": "CA100125.1",
-      "function": "",
       "alleles": [
         "G",
         "T",
@@ -212,7 +209,6 @@
     {
       "name": "*2",
       "id": "CA100126.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -228,7 +224,6 @@
     {
       "name": "*3",
       "id": "CA100127.1",
-      "function": "",
       "alleles": [
         null,
         "C",
@@ -242,73 +237,8 @@
       "populationFrequency": {}
     },
     {
-      "name": "*3",
-      "id": "CA100127.1A",
-      "function": "",
-      "alleles": [
-        null,
-        "C",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "populationFrequency": {}
-    },
-    {
-      "name": "*3",
-      "id": "CA100127.1B",
-      "function": "",
-      "alleles": [
-        null,
-        "C",
-        "G",
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "populationFrequency": {}
-    },
-    {
-      "name": "*3",
-      "id": "CA100127.1C",
-      "function": "",
-      "alleles": [
-        null,
-        "C",
-        null,
-        null,
-        null,
-        "T",
-        null,
-        null
-      ],
-      "populationFrequency": {}
-    },
-    {
-      "name": "*3",
-      "id": "CA100127.1D",
-      "function": "",
-      "alleles": [
-        null,
-        "C",
-        "G",
-        null,
-        null,
-        "T",
-        null,
-        null
-      ],
-      "populationFrequency": {}
-    },
-    {
       "name": "*4",
       "id": "CA100128.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -324,7 +254,6 @@
     {
       "name": "*5",
       "id": "CA100129.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -340,7 +269,6 @@
     {
       "name": "*6",
       "id": "CA100130.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -356,7 +284,6 @@
     {
       "name": "*7",
       "id": "CA100131.1",
-      "function": "",
       "alleles": [
         null,
         null,
@@ -372,7 +299,6 @@
     {
       "name": "*8",
       "id": "CA100132.1",
-      "function": "",
       "alleles": [
         "A",
         null,
@@ -388,11 +314,70 @@
     {
       "name": "*9",
       "id": "CA100133.1",
-      "function": "",
       "alleles": [
         null,
         null,
         null,
+        null,
+        null,
+        "T",
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*3",
+      "id": "CA100127.1.0",
+      "alleles": [
+        null,
+        "C",
+        "A",
+        null,
+        null,
+        "C",
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*3",
+      "id": "CA100127.1.1",
+      "alleles": [
+        null,
+        "C",
+        "G",
+        null,
+        null,
+        "C",
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*3",
+      "id": "CA100127.1.2",
+      "alleles": [
+        null,
+        "C",
+        "A",
+        null,
+        null,
+        "T",
+        null,
+        null
+      ],
+      "populationFrequency": {}
+    },
+    {
+      "name": "*3",
+      "id": "CA100127.1.3",
+      "alleles": [
+        null,
+        "C",
+        "G",
         null,
         null,
         "T",
