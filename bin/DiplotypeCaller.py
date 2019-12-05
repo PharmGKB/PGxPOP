@@ -37,7 +37,9 @@ class DiplotypeCaller(object):
             if self.get_partial_matches:
                 partial_vars_hap1 = self.check_for_partial_haps(combs[0])
                 partial_vars_hap2 = self.check_for_partial_haps(combs[1])
-
+            else:
+                partial_vars_hap1 = []
+                partial_vars_hap2 = []
             # Add partial matches to list of output alleles
             try:
                 x = "+".join(sorted(combs[0][0]))
