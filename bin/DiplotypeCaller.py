@@ -6,39 +6,22 @@ from itertools import combinations,product
 np.seterr(divide='ignore', invalid='ignore')
 
 class DiplotypeCaller(object):
-    def __init__(self, gene, is_phased=False):
+    def __init__(self, gene, is_phased=False, get_partials=True):
         self.hap_matrix, self.stars = gene.haplotype_matrix()
+        self.gene = gene
         self.hap_alleles_nums = np.sum(self.hap_matrix, axis =1)
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
         self.is_phased = is_phased
+        self.star2dip = dict()
+        for j,x in enumerate(self.stars):
+            self.star2dip[x] = self.hap_matrix[j,:]
+        self.get_partial_matches = get_partials
 
-#     def get_overlapping_haplotypes(self):
-#         hap_map_dict = dict()
-#         temp_hap_mat = np.matrix(self.hap_matrix)
-#         pos_oi = np.where(temp_hap_mat==1)
-
-#         var_sets = dict()
-#         for i in range(len(pos_oi[0])):
-#             if pos_oi[1][i] not in var_sets:
-#                 var_sets[pos_oi[1][i]] = set()
-#             var_sets[pos_oi[1][i]].add(pos_oi[0][i])
-
-#         var_oi = sorted([k for k,v in var_sets.items() if len(v) > 1])
-#         for j in range(temp_hap_mat[:,var_oi].shape[0]):
-#             pos_num = np.sum(temp_hap_mat[j,var_oi])
-#             if pos_num > 1:
-#                 pos_vars = dict()
-#                 for pos_var in np.where(temp_hap_mat[j,:] > 0)[1]:
-#                     pos_vars[pos_var] = list(np.where(temp_hap_mat[:,pos_var] == 1)[0])
-
-#                 comb_components = list(pos_vars.values())
-
-#                 for combs in product(*comb_components):
-#                     combs = sorted(list(set(combs)))
-#                     if len(combs) != 1:
-#                         if np.all(np.sum(temp_hap_mat[combs,:], axis=0) == temp_hap_mat[j,:]):
-#                             hap_map_dict[";".join([self.stars[k] for k in combs])] = self.stars[j]
-
+    def check_for_partial_haps(self, comb):
+        outPartials = []
+        for x in np.where(comb[1] - np.sum([self.star2dip.get(s) for s in comb[0]], axis=0) == 1)[0]:
+            outPartials.append(self.gene.variants[x].keys[0])
+        return(outPartials)
 
     def call_diplotype(self, diplotype, phase_vector = None):
         if self.is_phased:
@@ -51,18 +34,24 @@ class DiplotypeCaller(object):
         out_dips = set()
 #         print(dips)
         for combs in [dips[x] for x in np.where(dip_scores == top_dip_score)[0]]:
-#             print(combs)
+            if self.get_partial_matches:
+                partial_vars_hap1 = self.check_for_partial_haps(combs[0])
+                partial_vars_hap2 = self.check_for_partial_haps(combs[1])
+
+            # Add partial matches to list of output alleles
 
             try:
-                # Reformat diplotype call for output
-                x = "+".join(sorted(combs[0]))
-                x = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",x) if len(z) > 0])])
+                # Access star allele calls and sort star alleles
+                x = "+".join(sorted(combs[0][0]))
+                x = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",x) if len(z) > 0])] + partial_vars_hap1)
 
-                y = "+".join(sorted(combs[1]))
-                y = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",y) if len(z) > 0])])
+                # Access star allele call
+                y = "+".join(sorted(combs[1][0]))
+                y = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",y) if len(z) > 0])] + partial_vars_hap2)
             except:
-                x = "+".join(sorted(combs[0]))
-                y = "+".join(sorted(combs[1]))
+                # Access star allele calls
+                x = "+".join(sorted(combs[0][0]) + partial_vars_hap1)
+                y = "+".join(sorted(combs[1][1]) + partial_vars_hap2)
                                                             
             if self.is_phased:
                 star_dip = "|".join([x,y])
@@ -83,7 +72,7 @@ class DiplotypeCaller(object):
             hap2_results = self.get_max_star_alleles(haps[1])
             tot_dip_score = hap1_results[0] + hap2_results[0]
             dip_scores.append(tot_dip_score)
-            dips.append([hap1_results[1], hap2_results[1]])
+            dips.append([hap1_results[1:], hap2_results[1:]])
         return([dips, dip_scores])
     
     
@@ -164,7 +153,7 @@ class DiplotypeCaller(object):
             if "*1" in alleles and len(alleles) > 1:
                 _ = alleles.remove("*1")
             
-        return([top_score, alleles])
+        return([top_score, alleles, hap])
     
     def test_gene(self, gene):
         haps, stars = gene.haplotype_matrix()
