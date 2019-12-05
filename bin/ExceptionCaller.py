@@ -30,7 +30,9 @@ class ExceptionCaller(object):
             
     def call_samples(self, sample_order, gt_matrices):
         sample_dips = {}
-        for gt_mat, phase_matrix in gt_matrices:
+        sample_variants = {}
+        for gt_mat, phase_matrix, sample_vars in gt_matrices:
+            sample_variants.update(sample_vars)
             for hap, crits in self.hap_defs.items():
                 for crit, val in crits.items():
                     
@@ -47,6 +49,7 @@ class ExceptionCaller(object):
                             sample_dips[sid] = [None, hap]
                         else:
                             sample_dips[sid][1] = hap
+
         
         out_calls = dict()
         if self.is_phased:
@@ -56,4 +59,4 @@ class ExceptionCaller(object):
             for sample in sample_dips:
                 out_calls[sample] = "/".join(sorted(sample_dips[sample]))
                 
-        return(out_calls)
+        return([out_calls, sample_variants])

@@ -124,7 +124,7 @@ class CityDawg(object):
             if self.debug:
                 print("Exception override, calling with ExceptionCaller")
             sample_ids = get_vcf_subject_ids(self.vcf)
-            sample_calls = ec.call_samples(sample_ids, gt_matrices)
+            sample_calls, sample_variants = ec.call_samples(sample_ids, gt_matrices)
 
         else:
             dipCal = DiplotypeCaller(gene, is_phased=self.phased)
