@@ -39,9 +39,7 @@ class DiplotypeCaller(object):
                 partial_vars_hap2 = self.check_for_partial_haps(combs[1])
 
             # Add partial matches to list of output alleles
-
             try:
-                # Access star allele calls and sort star alleles
                 x = "+".join(sorted(combs[0][0]))
                 x = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",x) if len(z) > 0])] + partial_vars_hap1)
 
@@ -51,7 +49,7 @@ class DiplotypeCaller(object):
             except:
                 # Access star allele calls
                 x = "+".join(sorted(combs[0][0]) + partial_vars_hap1)
-                y = "+".join(sorted(combs[1][1]) + partial_vars_hap2)
+                y = "+".join(sorted(combs[1][0]) + partial_vars_hap2)
                                                             
             if self.is_phased:
                 star_dip = "|".join([x,y])
