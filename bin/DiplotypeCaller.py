@@ -13,6 +13,7 @@ class DiplotypeCaller(object):
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
         self.is_phased = is_phased
         self.star2dip = dict()
+        self.variant_list = None
         for j,x in enumerate(self.stars):
             self.star2dip[x] = self.hap_matrix[j,:]
         self.get_partial_matches = get_partials
@@ -20,7 +21,7 @@ class DiplotypeCaller(object):
     def check_for_partial_haps(self, comb):
         outPartials = []
         for x in np.where(comb[1] - np.sum([self.star2dip.get(s) for s in comb[0]], axis=0) == 1)[0]:
-            outPartials.append(self.gene.variants[x].keys[0])
+            outPartials.append(self.variant_list[x])
         return(outPartials)
 
     def call_diplotype(self, diplotype, phase_vector = None):
@@ -50,6 +51,8 @@ class DiplotypeCaller(object):
                 y = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",y) if len(z) > 0])] + partial_vars_hap2)
             except:
                 # Access star allele calls
+                print(partial_vars_hap1)
+                print(partial_vars_hap2)
                 x = "+".join(sorted(combs[0][0]) + partial_vars_hap1)
                 y = "+".join(sorted(combs[1][0]) + partial_vars_hap2)
                                                             

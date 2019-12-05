@@ -14,6 +14,7 @@ class GenotypeParser(object):
         self.sample_variants = {}
         self.uncalled = []
         self.called = []
+        self.variant_list = []
         
     def get_sample_index(self, sample_id):
         sample_index = [x for x,i in enumerate(self.vcf_header) if i == sample_id][0]
@@ -23,10 +24,11 @@ class GenotypeParser(object):
 
         subjects = get_vcf_subject_ids(self.vcf)
 
-        # Variants not called
-        self.uncalled = []
-        self.called = []
-        self.sample_variants = {}
+        #
+        #self.uncalled = []
+        #self.called = []
+        #self.sample_variants = {}
+        #self.variant_list = []
 
         null_row = []
         null_phase_row = []
@@ -80,12 +82,19 @@ class GenotypeParser(object):
 
                         phase_index.append(null_phase_row)
 
+                        new_key = "%s.g.%s%s>%s" % (variant.chromosome, variant.position, variant.ref, variant.alt[i])
+                        self.variant_list.append(new_key)
+
                     continue
                 self.called.append((variant,v))
                 # dictionary of alts to store genotypes in
                 alt_alleles = {}
+                print(variant.key)
                 for a in variant.alt:
                     alt_alleles[a] = [[], []]
+                    new_key = "%s.g.%s%s>%s" % (variant.chromosome, variant.position, variant.ref, a)
+                    print("ALT: %s" % a)
+                    self.variant_list.append(new_key)
 
                 # Dictionary of allele indices in the VCF.  This will be the genotype (e.g. 0/1) that we look for
                 # For example most alternate alleles will get a value of 1 if they are the only alt.
@@ -199,7 +208,5 @@ class GenotypeParser(object):
             right_hap = np.array(all_alleles[1])
 
             phase_matrix = np.array(phase_index)
-            #print(self.sample_variants)
-            #exit()
 
-            yield((left_hap, right_hap), phase_matrix, self.sample_variants)
+            yield((left_hap, right_hap), phase_matrix, self.sample_variants, self.variant_list)
