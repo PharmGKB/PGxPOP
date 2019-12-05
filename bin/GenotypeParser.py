@@ -11,6 +11,9 @@ class GenotypeParser(object):
         self.debug = debug
         #self.is_phased = vcf_is_phased(vcf) # no need for this with the command line flag.
         self.is_phased = False
+        self.sample_variants = {}
+        self.uncalled = []
+        self.called = []
         
     def get_sample_index(self, sample_id):
         sample_index = [x for x,i in enumerate(self.vcf_header) if i == sample_id][0]
@@ -20,11 +23,17 @@ class GenotypeParser(object):
 
         subjects = get_vcf_subject_ids(self.vcf)
 
+        # Variants not called
+        self.uncalled = []
+        self.called = []
+        self.sample_variants = {}
+
         null_row = []
         null_phase_row = []
         for s in subjects:
             null_row.append(0)
             null_phase_row.append(1)
+            self.sample_variants[s] = [[], []]
 
         if batch_mode:
             samps_per_batch = int(np.floor(np.sqrt(len(subjects))))
@@ -36,9 +45,8 @@ class GenotypeParser(object):
         # For each variant in the gene
         variants = self.gene.variants
 
-        # Variants not called
-        self.uncalled = []
-        self.called = []
+
+
         # This will be a list of lists.  Where the inner lists represent the allele status for every variant in the
         # definition table.  Column represent subjects.  Same order as in the VCF.  Each added row should be of the
         # same length as the number of samples.
@@ -50,6 +58,7 @@ class GenotypeParser(object):
 
         # Extract the variant with tabix
         for batch in batches:
+
             for v in range(len(variants)):
                 variant = variants[v]
 
@@ -128,9 +137,16 @@ class GenotypeParser(object):
                                 if str(alt_indices[alt]) == allele:
                                     if self.debug:
                                         print("Found alt call")
-                                        print(gt)
+                                        #print(s)
+                                        #print(gt)
+                                        #print(alt)
+                                        #exit()
 
                                     alt_alleles[alt][g].append(1)
+                                    self.sample_variants[s][g].append(variant.key)
+                                    #print(self.sample_variants)
+                                    #exit()
+
 
                                     # Update the other alleles
                                     for other_alt in alt_indices:
@@ -183,5 +199,7 @@ class GenotypeParser(object):
             right_hap = np.array(all_alleles[1])
 
             phase_matrix = np.array(phase_index)
+            #print(self.sample_variants)
+            #exit()
 
-            yield((left_hap, right_hap), phase_matrix)
+            yield((left_hap, right_hap), phase_matrix, self.sample_variants)

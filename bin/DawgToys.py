@@ -512,6 +512,13 @@ def get_definition_file(g):
     definition_file = os.path.join(definition_dir, filename)
     return definition_file
 
+def get_alt_list(variants, haplotype):
+    changes = []
+    print(variants)
+    for x in np.where(haplotype == 1)[0]:
+        _ = changes.append(variants[x].keys)
+    changes = [y for x in changes for y in x]
+    return changes
 
 
 def welcome_message():

@@ -85,3 +85,4 @@ class Gene(object):
 
         return formatted_haplotypes
 
+
