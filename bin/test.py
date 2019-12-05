@@ -122,7 +122,8 @@ class DawgTest(object):
         else:
             print("TEST FAILED")
             print("Expected: %s" % ",".join(test_haps))
-            print("Found: %s" % ",".join(result_haps))
+            #print("Found: %s" % ",".join(result_haps))
+            print("Found: %s" % result['diplotype'])
             failure = "Match error"
 
             missed = []
