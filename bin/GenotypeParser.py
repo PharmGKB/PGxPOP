@@ -89,11 +89,11 @@ class GenotypeParser(object):
                 self.called.append((variant,v))
                 # dictionary of alts to store genotypes in
                 alt_alleles = {}
-                print(variant.key)
+                #print(variant.key)
                 for a in variant.alt:
                     alt_alleles[a] = [[], []]
                     new_key = "%s.g.%s%s>%s" % (variant.chromosome, variant.position, variant.ref, a)
-                    print("ALT: %s" % a)
+                    #print("ALT: %s" % a)
                     self.variant_list.append(new_key)
 
                 # Dictionary of allele indices in the VCF.  This will be the genotype (e.g. 0/1) that we look for
