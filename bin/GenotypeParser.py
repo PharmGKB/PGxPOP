@@ -122,8 +122,11 @@ class GenotypeParser(object):
                 row_phasing_data = []
                 for i, s in enumerate(batch):
                     # Get the genotype and split it into an array
+                    #print(genotypes.alts())
                     #print(genotypes.calls[i])
+
                     gt = split_genotype(genotypes.calls[i])
+                    #print(gt)
 
                     # Check the phasing status first.  Add a zero if it is phased, one if it's not
                     if is_gt_phased(gt):
@@ -134,7 +137,11 @@ class GenotypeParser(object):
                     # For each allele in the genotype (2) figure out if it is a ref call, or if it's an alt, which one.
                     #for g in range(len(gt)): # for some reason there are 0/0/0 genotypes in the pharmcat test files
                     for g in range(2):
+
+                        #print(g)
+                        #print(gt)
                         allele = gt[g]
+
                         if allele == '0':
                             for a in alt_alleles.keys():
                                 alt_alleles[a][g].append(0)

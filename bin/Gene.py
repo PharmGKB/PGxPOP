@@ -72,12 +72,22 @@ class Gene(object):
         if self.debug:
             print("Formatting haplotypes")
         haplotypes = self.data['namedAlleles']
+        stars = {}
 
         formatted_haplotypes = {}
 
         index = 0
         for h in haplotypes:
             new_haplotype = NamedAllele(h, variants=self.variants, index=index, debug=self.debug)
+            star = new_haplotype.name
+
+            if star not in stars.keys():
+                stars[star] = 0
+            else:
+                substar = f'{star}%{stars[star]}'
+                stars[star] += 1
+                new_haplotype.name = substar
+
             if self.debug:
                 new_haplotype.print_haplotype()
             formatted_haplotypes[new_haplotype.id] = new_haplotype

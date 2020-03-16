@@ -327,7 +327,7 @@
     {
       "chromosome": "chr12",
       "position": 21202553,
-      "rsid": null,
+      "rsid": "rs1228465562",
       "chromosomeHgvsName": "g.21202553T>G",
       "geneHgvsName": "g.76360T>G",
       "proteinNote": "F400V",

@@ -1,6 +1,6 @@
 {
   "formatVersion": "1",
-  "modificationDate": "Nov 19, 2019 12:00:00 AM",
+  "modificationDate": "Feb 27, 2020 12:00:00 AM",
   "gene": "DPYD",
   "orientation": "reverse",
   "chromosome": "chr1",
@@ -13,10 +13,7 @@
     "All variants are annotated to the positive DNA strand.",
     "Table only reflects no and decreased function variants of the 2017 DPYD CPIC update (not normal or uncertain function variants). Please see guideline manuscript and supplements.",
     "As an individual only carries a maximum of two fully functional DPYD copies, common normal function variants may be located on the same gene copy as other normal",
-    "c.1129-5923C>G is likely the HapB3 haplotype causal variant. c.1236G>A (E412E) is a proxy SNP for HapB3.",
-    "c.680+139G>A is not exclusive to HapB3 and therefore not a suitable proxy.",
-    "The c.151-69G>A variant was found to be in linkage disequilibrium (D'=1) with the decreased function variant rs115232898 (Y186C); the decreased function associated with this var",
-    "This rsID rs3918290, when combined with rs1801159, makes up DPYD*2B"
+    "c.1129-5923C>G is likely the HapB3 haplotype causal variant. c.1236G>A (E412E) is a proxy SNP for HapB3."
   ],
   "populations": null,
   "variants": [
@@ -34,23 +31,6 @@
         "build": "hg19",
         "chromosome": "chr1",
         "position": 98348909,
-        "synonyms": []
-      }
-    },
-    {
-      "chromosome": "chr1",
-      "position": 97828265,
-      "rsid": "rs115632870",
-      "chromosomeHgvsName": "g.97828265C>T",
-      "geneHgvsName": "g.97795G>A",
-      "proteinNote": null,
-      "resourceNote": "c.151-69G>A",
-      "type": "SNP",
-      "referenceRepeat": null,
-      "hg19": {
-        "build": "hg19",
-        "chromosome": "chr1",
-        "position": 98293821,
         "synonyms": []
       }
     },
@@ -119,23 +99,6 @@
         "build": "hg19",
         "chromosome": "chr1",
         "position": 98164955,
-        "synonyms": []
-      }
-    },
-    {
-      "chromosome": "chr1",
-      "position": 97699212,
-      "rsid": "rs6668296",
-      "chromosomeHgvsName": "g.97699212C>T",
-      "geneHgvsName": "g.226848G>A",
-      "proteinNote": null,
-      "resourceNote": "c.680+139G>A",
-      "type": "SNP",
-      "referenceRepeat": null,
-      "hg19": {
-        "build": "hg19",
-        "chromosome": "chr1",
-        "position": 98164768,
         "synonyms": []
       }
     },
@@ -537,12 +500,8 @@
       "G"
     ],
     [
-      "C",
-      "T"
-    ],
-    [
-      "ATGA",
-      "delATGA"
+      "delATGA",
+      "ATGA"
     ],
     [
       "C",
@@ -557,10 +516,6 @@
       "T"
     ],
     [
-      "C",
-      "T"
-    ],
-    [
       "A",
       "G"
     ],
@@ -617,8 +572,8 @@
       "T"
     ],
     [
-      "G",
-      "delG"
+      "delG",
+      "G"
     ],
     [
       "C",
@@ -659,12 +614,10 @@
       "id": "CA100258.1",
       "alleles": [
         "G",
-        "C",
         null,
         "T",
         "T",
         "T",
-        "C",
         "G",
         "T",
         "C",
@@ -722,45 +675,6 @@
         null,
         null,
         null,
-        null,
-        null,
-        null
-      ],
-      "populationFrequency": {}
-    },
-    {
-      "name": "c.151-69G>A",
-      "id": "CA100299.1",
-      "alleles": [
-        null,
-        "T",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -770,9 +684,7 @@
       "id": "CA100259.1",
       "alleles": [
         null,
-        null,
         "delATGA",
-        null,
         null,
         null,
         null,
@@ -808,9 +720,7 @@
       "alleles": [
         null,
         null,
-        null,
         "C",
-        null,
         null,
         null,
         null,
@@ -846,9 +756,7 @@
         null,
         null,
         null,
-        null,
         "G",
-        null,
         null,
         null,
         null,
@@ -884,46 +792,7 @@
         null,
         null,
         null,
-        null,
         "C",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "populationFrequency": {}
-    },
-    {
-      "name": "c.680+139G>A",
-      "id": "CA100303.1",
-      "alleles": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        "T",
         null,
         null,
         null,
@@ -959,8 +828,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "A",
         null,
         null,
@@ -991,8 +858,6 @@
       "name": "c.868A>G",
       "id": "CA100304.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1035,8 +900,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "T",
         null,
         null,
@@ -1065,8 +928,6 @@
       "name": "c.1057C>T",
       "id": "CA100306.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1111,8 +972,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "C",
         "T",
         null,
@@ -1139,8 +998,6 @@
       "name": "c.1156G>T",
       "id": "CA100263.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1188,8 +1045,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "C",
         null,
         null,
@@ -1213,8 +1068,6 @@
       "name": "c.1475C>T",
       "id": "CA100309.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1264,8 +1117,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "C",
         null,
         null,
@@ -1287,8 +1138,6 @@
       "name": "c.1679T>G",
       "id": "CA100264.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1340,8 +1189,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "A",
         null,
         null,
@@ -1361,8 +1208,6 @@
       "name": "c.1775G>A",
       "id": "CA100312.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1416,8 +1261,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "T",
         null,
         null,
@@ -1435,8 +1278,6 @@
       "name": "c.1898delC",
       "id": "CA100265.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1492,8 +1333,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "T",
         null,
         null,
@@ -1509,8 +1348,6 @@
       "name": "c.2021G>A",
       "id": "CA100314.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1568,8 +1405,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "A",
         null,
         null,
@@ -1583,8 +1418,6 @@
       "name": "c.2639G>T",
       "id": "CA100316.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1644,8 +1477,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "A",
         null,
         null,
@@ -1657,8 +1488,6 @@
       "name": "c.2872A>G",
       "id": "CA100317.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,
@@ -1720,8 +1549,6 @@
         null,
         null,
         null,
-        null,
-        null,
         "C",
         null
       ],
@@ -1731,8 +1558,6 @@
       "name": "c.2983G>T",
       "id": "CA100268.1",
       "alleles": [
-        null,
-        null,
         null,
         null,
         null,

@@ -134,6 +134,9 @@ class CityDawg(object):
                 dipCal.variant_list = variant_list
                 for samp in range(gt_mat[0].shape[1]):
                     cd_call = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]], phase_matrix[:,samp])
+
+                    cd_call = self.clean_up_call(cd_call)
+
                     sample_calls[sample_ids[samp]] = cd_call
                     sample_variants.update(sample_vars)
 
@@ -147,6 +150,31 @@ class CityDawg(object):
                 print("%s: %s" % (k, v))
 
         return sample_calls, sample_variants
+
+    # This is hacky, but wobbles weren't working so I named them differently, like *2%1, *2%2, etc are all *2.
+    # As a result of this a *2.1 will get called a *2+*2.1.  So I merge all identical calls here.  We can remove this
+    # but I just want to get calls for Katrin that she won't complain about.
+    def clean_up_call(self, call):
+
+        if "|" in call:
+            calls = call.split("|")
+            delim = "|"
+        elif "/" in call:
+            calls = call.split("/")
+            delim = "/"
+        else:
+            return call
+        final_calls = []
+        for c in calls:
+            subs = c.split("+")
+            core_star = []
+            for s in subs:
+                core = s.split('%')[0]
+                if not core in core_star:
+                    core_star.append(core)
+            final_calls.append("+".join(core_star))
+        #final_calls.sort()
+        return f'{delim.join(final_calls)}'
 
     def get_phenotypes(self, gene, diplotypes, sample_variants):
         g = gene.name

@@ -1,6 +1,7 @@
 import numpy as np
 import tabix
 import os
+import sys
 
 def get_competitive_haplotype_indices(haplotype_matrix):
     dual_sites = np.where(np.sum(haplotype_matrix, axis=0) > 1)[0]
@@ -219,7 +220,8 @@ def split_genotype(gt):
     elif "|" in gt:
         alleles = gt.split("|")
         return alleles
-    print("Unrecognized delimiter! %s" % gt)
+    print("Unrecognized delimiter! %s" % gt, file=sys.stderr)
+    gt = [None, None]
     return gt
 
 '''
@@ -511,14 +513,6 @@ def get_definition_file(g):
     filename = "%s_translation.json" % g
     definition_file = os.path.join(definition_dir, filename)
     return definition_file
-
-def get_alt_list(variants, haplotype):
-    changes = []
-    print(variants)
-    for x in np.where(haplotype == 1)[0]:
-        _ = changes.append(variants[x].keys)
-    changes = [y for x in changes for y in x]
-    return changes
 
 
 def welcome_message():
