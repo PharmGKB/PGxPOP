@@ -51,8 +51,8 @@ class DiplotypeCaller(object):
                 y = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",y) if len(z) > 0])] + partial_vars_hap2)
             except:
                 # Access star allele calls
-                print(partial_vars_hap1)
-                print(partial_vars_hap2)
+                #print(partial_vars_hap1)
+                #print(partial_vars_hap2)
                 x = "+".join(sorted(combs[0][0]) + partial_vars_hap1)
                 y = "+".join(sorted(combs[1][0]) + partial_vars_hap2)
                                                             
@@ -155,7 +155,7 @@ class DiplotypeCaller(object):
             alleles = list(alleles.difference(toRemove))
             if "*1" in alleles and len(alleles) > 1:
                 _ = alleles.remove("*1")
-            
+
         return([top_score, alleles, hap])
     
     def test_gene(self, gene):

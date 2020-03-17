@@ -78,6 +78,7 @@ class Variant(object):
     def _parse_alleles(self):
         if self.type == "SNP":
             hgvs = self.chromosomeHgvsName.split(";")
+            alt_set = set()
             for i in hgvs:
                 i = i.strip()
 
@@ -85,7 +86,7 @@ class Variant(object):
                 ref = fields[0][-1]
 
                 alt = fields[1].split('/')
-                alt_set = set()
+
                 for a in alt:
                     all_alts = iupac_nt(a)
                     for new_alt in all_alts:
@@ -96,7 +97,9 @@ class Variant(object):
                 if self.ref != ref:
                     self.ref = ref
 
-                # print(fields, ref, alt_set)
+                #if self.chromosomeHgvsName == 'g.94942309G>A;g.94942309G>T':
+
+                #    print(fields, ref, alt_set)
 
             return
 
