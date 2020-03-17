@@ -130,7 +130,7 @@ class CityDawg(object):
             dipCal = DiplotypeCaller(gene, is_phased=self.phased)
             sample_ids = get_vcf_subject_ids(self.vcf)
             sample_calls = {}
-            for gt_mat, phase_matrix, sample_vars, variant_list in gt_matrices:
+            for gt_mat, phase_matrix, sample_vars, variant_list, uncalled in gt_matrices:
                 dipCal.variant_list = variant_list
                 for samp in range(gt_mat[0].shape[1]):
                     cd_call = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]], phase_matrix[:,samp])
@@ -202,7 +202,6 @@ class CityDawg(object):
             #if phenotype != presumptive_phenotype:
             #    print(phenotype, presumptive_phenotype)
             #    exit()
-
 
             results.append({
                 "sample": sample,

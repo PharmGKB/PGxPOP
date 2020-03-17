@@ -111,7 +111,7 @@ class Phenotype(object):
             return None
 
         if hap1_function == "Not available" or hap2_function == "Not available":
-            return None
+            return "Not available"
 
 
         if hap1_function == "Conflicting" or hap2_function == "Conflicting":
