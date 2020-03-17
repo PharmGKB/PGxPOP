@@ -190,10 +190,19 @@ class CityDawg(object):
             for i in range(len(haps)):
                 h = haps[i]
                 h_function = phenotypes.get_haplotype_function(g, h)
+                h_presumptive = phenotypes.get_presumptive_haplotype_function(g, h)
+
                 haplotype_data["hap_%s" % i] = h
                 haplotype_data["hap_%s_function" % i] = h_function
+                haplotype_data["hap_%s_presumptive" % i] = h_presumptive
 
             phenotype = phenotypes.get_diplotype_function(g, haps[0], haps[1])
+            presumptive_phenotype = phenotypes.get_diplotype_function(g, haps[0], haps[1], presumptive=True)
+
+            #if phenotype != presumptive_phenotype:
+            #    print(phenotype, presumptive_phenotype)
+            #    exit()
+
 
             results.append({
                 "sample": sample,
@@ -203,9 +212,12 @@ class CityDawg(object):
                 "hap_2": haplotype_data["hap_1"],
                 "hap_1_function": haplotype_data["hap_0_function"],
                 "hap_2_function": haplotype_data["hap_1_function"],
+                "hap_1_presumptive_function": haplotype_data["hap_0_presumptive"],
+                "hap_2_presumptive_function": haplotype_data["hap_1_presumptive"],
                 "hap_1_variants": sample_variants[sample][0],
                 "hap_2_variants": sample_variants[sample][1],
-                "phenotype": phenotype
+                "phenotype": phenotype,
+                "phenotype_presumptive": presumptive_phenotype
             })
 
         return results
@@ -213,16 +225,24 @@ class CityDawg(object):
 
     def print_results(self, results):
         f = open(self.output, "w")
-        f.write("sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,hap_1_variants,hap_2_variants,phenotype\n")
+        f.write("sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,hap_1_variants,hap_2_variants,"
+                "phenotype,hap_1_presumptive,hap_2_presumptive,phenotype_presumptive\n")
         for r in results:
             if self.debug:
                 print("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"], r["hap_2"],
                                                 r["hap_1_function"], r["hap_2_function"], ";".join(r["hap_1_variants"]),
                                                          ";".join(r["hap_2_variants"]), r["phenotype"]))
-            f.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"],
-                                                         r["hap_2"], r["hap_1_function"], r["hap_2_function"],
-                                                         ";".join(r["hap_1_variants"]), ";".join(r["hap_2_variants"]),
-                                                         r["phenotype"]))
+            #f.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"],
+            #                                             r["hap_2"], r["hap_1_function"], r["hap_2_function"],
+            #                                             ";".join(r["hap_1_variants"]), ";".join(r["hap_2_variants"]),
+            #                                             r["phenotype"]))
+
+
+
+            f.write(f"{r['sample']},{r['gene']},{r['diplotype']},{r['hap_1']},{r['hap_2']},{r['hap_1_function']},"
+                    f"{r['hap_2_function']},{';'.join(r['hap_1_variants'])},{';'.join(r['hap_2_variants'])},"
+                    f"{r['phenotype']},{r['hap_1_presumptive_function']},{r['hap_2_presumptive_function']},{r['phenotype_presumptive']}\n")
+            
 
 
 """

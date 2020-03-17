@@ -40,14 +40,62 @@ class Phenotype(object):
         # Determine the function of a single haplotype
         gene = self.get_gene(gene_name)
         if gene is None:
-            return None
+            return "Not available"
         if hap in gene["haplotypes"].keys():
             return gene["haplotypes"][hap]
         #print("Haplotype %s not found in %s phenotypes!" % (hap, gene_name))
-        return None
+        return "Not available"
         #exit(1)
 
-    def get_diplotype_function(self, gene_name, hap1, hap2):
+    def get_presumptive_haplotype_function(self, gene_name, hap):
+
+        # Determine the function of a combination of haplotypes (+ calls)
+        gene = self.get_gene(gene_name)
+        if gene is None:
+            return None
+
+        #if gene == "DPYD" and hap == "c.1905+1G>A":
+        #    return self.get_haplotype_function(gene_name, hap)
+
+        # todo list other known +'s
+
+        split_haps = hap.split("+")
+
+        #print(split_haps)
+        #exit()
+
+        if len(split_haps) == 1:
+            return self.get_haplotype_function(gene_name, hap)
+
+        minimum_function = "Not available"
+
+        #print(split_haps)
+
+        for h in split_haps:
+            f = self.get_haplotype_function(gene_name, h)
+            #print(h, f)
+            if f in ["No Function", "Loss of function"]:
+                # This could be adjusted to account for a ranking.  Right now only checking for no function
+                minimum_function = f
+
+        return minimum_function
+
+
+    def function_rank(self):
+        functions = {
+            "No function": 0,
+            "Loss of function": 0,
+            "Decreased function": 1,
+            "Probable Decreased Function": 2,
+            "Possible Decreased function": 2,
+            "Normal function": 3,
+            "Increased function": 4
+
+        }
+
+        return functions
+
+    def get_diplotype_function(self, gene_name, hap1, hap2, presumptive=False):
 
         # Haplotypes with equal scores will now be output as H1A;H1B, so we'll split those
         # and check the function of each separately.  If they have the same function, we
@@ -55,13 +103,16 @@ class Phenotype(object):
 
 
         # Determine the function of two haplotypes for a given gene
-        hap1_function = self.haplotype_checker(gene_name, hap1)
-        hap2_function = self.haplotype_checker(gene_name, hap2)
-
+        hap1_function = self.haplotype_checker(gene_name, hap1, presumptive)
+        hap2_function = self.haplotype_checker(gene_name, hap2, presumptive)
 
 
         if hap1_function is None or hap2_function is None:
             return None
+
+        if hap1_function == "Not available" or hap2_function == "Not available":
+            return None
+
 
         if hap1_function == "Conflicting" or hap2_function == "Conflicting":
             return "Conflicting"
@@ -76,13 +127,17 @@ class Phenotype(object):
         print('Unable to determine function of %s and %s for %s' % (hap1, hap2, gene_name))
         print('%s: %s' % (hap1, hap1_function))
         print('%s: %s' % (hap2, hap2_function))
-        return None
+        return "Not available"
         #exit(1)
 
-    def haplotype_checker(self, gene_name, hap):
+
+    def haplotype_checker(self, gene_name, hap, presumptive=False):
         found_functions = set()
         for h in hap.split(";"):
-            found_functions.add(self.get_haplotype_function(gene_name, h))
+            if presumptive is True:
+                found_functions.add(self.get_presumptive_haplotype_function(gene_name, h))
+            else:
+                found_functions.add(self.get_haplotype_function(gene_name, h))
         if len(found_functions) > 1:
             return "Conflicting"
         return list(found_functions)[0]
