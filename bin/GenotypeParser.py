@@ -240,17 +240,4 @@ class GenotypeParser(object):
             phase_matrix = np.array(phase_index)
             no_call_matrix = np.array(no_call_index)
 
-            #print(phase_index)
-            #for i in phase_index:
-            #    print(len(i))
-
-            print("GP SUMMARY")
-            print(len(self.variant_list))
-            print(phase_matrix.shape)
-
-            #print(phase_matrix)
-
-            print(no_call_matrix.shape)
-            exit()
-
             yield((left_hap, right_hap), phase_matrix, self.sample_variants, self.variant_list, no_call_matrix)
