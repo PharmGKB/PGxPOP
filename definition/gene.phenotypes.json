@@ -147,7 +147,33 @@
           "Unknown"
         ],
         "phenotype": "Gating Variant (Strong)"
+      },
+
+      {
+        "diplotype": [
+          "ivacaftor non-responsive",
+          "ivacaftor non-responsive"
+        ],
+        "phenotype": "ivacaftor non-responsive"
+      },
+
+      {
+        "diplotype": [
+          "ivacaftor non-responsive",
+          "ivacaftor responsive"
+        ],
+        "phenotype": "Unknown"
+      },
+
+      {
+        "diplotype": [
+          "ivacaftor responsive",
+          "ivacaftor responsive"
+        ],
+        "phenotype": "ivacaftor responsive"
       }
+
+
     ],
     "gene": "CFTR",
     "haplotypes": {

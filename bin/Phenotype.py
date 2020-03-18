@@ -1,6 +1,6 @@
 import json
 import os
-import numpy as np
+import sys
 
 '''
 Define the Gene object
@@ -124,9 +124,9 @@ class Phenotype(object):
         for d in gene['diplotypes']:
             if sorted(d['diplotype']) == hap_functions:
                 return d['phenotype']
-        print('Unable to determine function of %s and %s for %s' % (hap1, hap2, gene_name))
-        print('%s: %s' % (hap1, hap1_function))
-        print('%s: %s' % (hap2, hap2_function))
+        print('Unable to determine function of %s and %s for %s' % (hap1, hap2, gene_name), file=sys.stderr)
+        #print('%s: %s' % (hap1, hap1_function))
+        #print('%s: %s' % (hap2, hap2_function))
         return "Not available"
         #exit(1)
 
@@ -147,15 +147,17 @@ class Phenotype(object):
         hap1_as = self.get_hap_activity_score(gene_name, hap1, presumptive)
         hap2_as = self.get_hap_activity_score(gene_name, hap2, presumptive)
 
-        print(hap1_as, hap2_as)
-
         if None in [hap1_as, hap2_as]:
             return None
 
-        return hap1_as + hap1_as
+        return hap1_as + hap2_as
 
     def get_hap_activity_score(self, gene_name, hap, presumptive=False):
         gene = self.get_gene(gene_name)
+
+        if gene is None:
+            return None
+
         if "haplotype_as" not in list(gene.keys()):
             return None
 
