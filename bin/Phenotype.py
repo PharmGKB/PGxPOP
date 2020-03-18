@@ -142,3 +142,37 @@ class Phenotype(object):
             return "Conflicting"
         return list(found_functions)[0]
 
+    def get_activity_score(self, gene_name, hap1, hap2, presumptive=False):
+
+        hap1_as = self.get_hap_activity_score(gene_name, hap1, presumptive)
+        hap2_as = self.get_hap_activity_score(gene_name, hap2, presumptive)
+
+        print(hap1_as, hap2_as)
+
+        if None in [hap1_as, hap2_as]:
+            return None
+
+        return hap1_as + hap1_as
+
+    def get_hap_activity_score(self, gene_name, hap, presumptive=False):
+        gene = self.get_gene(gene_name)
+        if "haplotype_as" not in list(gene.keys()):
+            return None
+
+        if not presumptive:
+            if hap in list(gene['haplotype_as'].keys()):
+                return gene['haplotype_as'][hap]
+            else:
+                return None
+
+        else:
+            if hap in list(gene['haplotype_as'].keys()):
+                return gene['haplotype_as'][hap]
+            if self.get_presumptive_haplotype_function(gene_name, hap) == "No Function":
+                return 0
+
+
+
+
+
+

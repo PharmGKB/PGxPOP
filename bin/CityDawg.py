@@ -198,7 +198,7 @@ class CityDawg(object):
 
             phenotype = phenotypes.get_diplotype_function(g, haps[0], haps[1])
             presumptive_phenotype = phenotypes.get_diplotype_function(g, haps[0], haps[1], presumptive=True)
-
+            activity_score = phenotypes.get_activity_score(g, haps[0], haps[1], presumptive=True)
             #if phenotype != presumptive_phenotype:
             #    print(phenotype, presumptive_phenotype)
             #    exit()
@@ -216,7 +216,8 @@ class CityDawg(object):
                 "hap_1_variants": sample_variants[sample][0],
                 "hap_2_variants": sample_variants[sample][1],
                 "phenotype": phenotype,
-                "phenotype_presumptive": presumptive_phenotype
+                "phenotype_presumptive": presumptive_phenotype,
+                "activity_score": activity_score
             })
 
         return results
@@ -225,7 +226,7 @@ class CityDawg(object):
     def print_results(self, results):
         f = open(self.output, "w")
         f.write("sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,hap_1_variants,hap_2_variants,"
-                "phenotype,hap_1_presumptive,hap_2_presumptive,phenotype_presumptive\n")
+                "phenotype,hap_1_presumptive,hap_2_presumptive,phenotype_presumptive,activity_score\n")
         for r in results:
             if self.debug:
                 print("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"], r["hap_2"],
@@ -240,7 +241,8 @@ class CityDawg(object):
 
             f.write(f"{r['sample']},{r['gene']},{r['diplotype']},{r['hap_1']},{r['hap_2']},{r['hap_1_function']},"
                     f"{r['hap_2_function']},{';'.join(r['hap_1_variants'])},{';'.join(r['hap_2_variants'])},"
-                    f"{r['phenotype']},{r['hap_1_presumptive_function']},{r['hap_2_presumptive_function']},{r['phenotype_presumptive']}\n")
+                    f"{r['phenotype']},{r['hap_1_presumptive_function']},{r['hap_2_presumptive_function']},"
+                    f"{r['phenotype_presumptive']},{r['activity_score']}\n")
             
 
 

@@ -12,7 +12,7 @@ class GenotypeParser(object):
         #self.is_phased = vcf_is_phased(vcf) # no need for this with the command line flag.
         self.is_phased = False
         self.sample_variants = {}
-        self.uncalled = []
+        #self.uncalled = []
         self.sample_no_calls = {}
         self.called = []
         self.variant_list = []
@@ -74,7 +74,7 @@ class GenotypeParser(object):
                 # if nothing found, make a row of all zeroes
                 # also save all the variants that were not callable
                 if genotypes is None:
-                    self.uncalled.append((variant, v))
+                    #self.uncalled.append((variant, v))
                     if self.debug:
                         print("Variant not found")
                     # add the same number of null rows as there are genotypes
@@ -141,19 +141,21 @@ class GenotypeParser(object):
 
                     # Update the no-call matrix.
                     if "." in gt:
-                        for i in range(n_alts):
-                            row_no_call_data[i].append(1)
+                        if self.debug:
+                            print('No call found: %s:%s' % (variant.key, genotypes.calls[i]))
+                        for a in range(n_alts):
+                            row_no_call_data[a].append(1)
                     else:
-                        for i in range(n_alts):
-                            row_no_call_data[i].append(0)
+                        for a in range(n_alts):
+                            row_no_call_data[a].append(0)
 
                     # Check the phasing status first.  Add a zero if it is phased, one if it's not
                     if is_gt_phased(genotypes.calls[i]):
-                        for i in range(n_alts):
-                            row_phasing_data[i].append(0)
+                        for a in range(n_alts):
+                            row_phasing_data[a].append(0)
                     else:
-                        for i in range(n_alts):
-                            row_phasing_data[i].append(1)
+                        for a in range(n_alts):
+                            row_phasing_data[a].append(1)
 
                     # For each allele in the genotype (2) figure out if it is a ref call, or if it's an alt, which one.
                     #for g in range(len(gt)): # for some reason there are 0/0/0 genotypes in the pharmcat test files
