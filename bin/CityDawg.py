@@ -133,9 +133,9 @@ class CityDawg(object):
             for gt_mat, phase_matrix, sample_vars, variant_list, uncalled in gt_matrices:
                 dipCal.variant_list = variant_list
                 for samp in range(gt_mat[0].shape[1]):
-                    cd_call = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]], phase_matrix[:,samp])
+                    cd_call, uncallable = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]], uncalled[:,samp], phase_matrix[:,samp])
 
-                    cd_call = self.clean_up_call(cd_call)
+#                     cd_call = self.clean_up_call(cd_call)
 
                     sample_calls[sample_ids[samp]] = cd_call
                     sample_variants.update(sample_vars)

@@ -13,7 +13,7 @@ class DiplotypeCaller(object):
         self.ref_allele = self.stars[np.where(self.hap_alleles_nums == 0)[0][0]]
         self.is_phased = is_phased
         self.star2dip = dict()
-        self.variant_list = None
+        self.variant_list = [var.key for var in gene.variants.values()]
         for j,x in enumerate(self.stars):
             self.star2dip[x] = self.hap_matrix[j,:]
         self.get_partial_matches = get_partials
@@ -24,48 +24,35 @@ class DiplotypeCaller(object):
             outPartials.append(self.variant_list[x])
         return(outPartials)
 
-    def call_diplotype(self, diplotype, phase_vector = None):
+    
+    def call_diplotype(self, diplotype, uncalled, phase_vector = None):
         if self.is_phased:
             possib_diplotypes = [diplotype]
         else:
             possib_diplotypes = self.get_possible_diplotypes(*diplotype, phase_vector)
             
         dips, dip_scores = self.score_diplotypes(possib_diplotypes)
+        
+        # Need to add this into
+        uncallable = [self.stars[x] for x in np.where(np.sum(np.multiply(self.hap_matrix, uncalled.transpose()), axis=1) > 0)[0]]
+        
         top_dip_score = np.max(dip_scores)
+
         out_dips = set()
 #         print(dips)
         for combs in [dips[x] for x in np.where(dip_scores == top_dip_score)[0]]:
-            if self.get_partial_matches:
-                partial_vars_hap1 = self.check_for_partial_haps(combs[0])
-                partial_vars_hap2 = self.check_for_partial_haps(combs[1])
-            else:
-                partial_vars_hap1 = []
-                partial_vars_hap2 = []
-            # Add partial matches to list of output alleles
-            try:
-                x = "+".join(sorted(combs[0][0]))
-                x = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",x) if len(z) > 0])] + partial_vars_hap1)
-
-                # Access star allele call
-                y = "+".join(sorted(combs[1][0]))
-                y = "+".join(["*" + str(z) for z in sorted([int(z) for z in re.split("\*|\+",y) if len(z) > 0])] + partial_vars_hap2)
-            except:
-                # Access star allele calls
-                #print(partial_vars_hap1)
-                #print(partial_vars_hap2)
-                x = "+".join(sorted(combs[0][0]) + partial_vars_hap1)
-                y = "+".join(sorted(combs[1][0]) + partial_vars_hap2)
-                                                            
+            strand1 = "or".join(self.process_for_overlaps(combs[0]))
+            strand2 = "or".join(self.process_for_overlaps(combs[1]))
             if self.is_phased:
-                star_dip = "|".join([x,y])
+                star_dip = "|".join([strand1,y])
             else:
                 try:
-                    star_dip = "/".join(sorted([x,y], key=lambda a: float(a[1:])))
+                    star_dip = "/".join(sorted([strand1,strand2], key=lambda a: float(a[1:])))
                 except:
-                    star_dip = "/".join(sorted([x,y]))
-            out_dips.add(star_dip) 
+                    star_dip = "/".join(sorted([strand1,strand2]))
+            out_dips.add(star_dip)
                         
-        return(";".join(out_dips))
+        return([";".join(out_dips), uncallable])
     
     def score_diplotypes(self, hap_sets):
         dips = []
@@ -158,6 +145,31 @@ class DiplotypeCaller(object):
 
         return([top_score, alleles, hap])
     
+    
+    def process_for_overlaps(self, hap_result):
+        hit_gen_mat = np.matrix([self.star2dip.get(x) for x in hap_result[0]])
+        overlap = np.where(np.squeeze(np.array(np.any(np.dot(hit_gen_mat, hit_gen_mat.transpose()) > 1, axis=1))))[0]
+        non_overlap = np.where(np.squeeze(np.array(np.all(np.dot(hit_gen_mat, hit_gen_mat.transpose()) <= 1, axis=1))))[0]
+        add_haps = [hap_result[0][j] for j in non_overlap]
+
+        outSet = set()
+        partial_vars_hap = []
+        if len(overlap) > 0:
+            for sep_allele in overlap:
+                subset = [hap_result[0][sep_allele]] + add_haps
+                if self.get_partial_matches:
+                    partial_vars_hap = self.check_for_partial_haps([subset,hap_result[1]])
+                subset = [a.split(f"%")[0] for a in subset]
+                x = "+".join(sorted(subset, key=lambda a: float(a[1:])) + partial_vars_hap)
+                outSet.add(x)
+        else:
+            if self.get_partial_matches:
+                partial_vars_hap = self.check_for_partial_haps([add_haps,hap_result[1]])
+            subset = [a.split(f"%")[0] for a in add_haps]
+            x = "+".join(sorted(subset, key=lambda a: float(a[1:])) + partial_vars_hap)
+            outSet.add(x)
+        return(outSet)
+    
     def test_gene(self, gene):
         haps, stars = gene.haplotype_matrix()
         indices = [x for x in range(len(stars))]
@@ -186,7 +198,5 @@ class DiplotypeCaller(object):
                     misses.append([true_dips[x], pred_dips[x]])
                 
         return({"error rate":len(misses)/len(true_dips), "misses":misses, "true_dips":true_dips, "pred_dips":pred_dips})
-        
-        
 
         
