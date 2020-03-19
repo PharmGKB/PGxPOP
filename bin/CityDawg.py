@@ -48,8 +48,8 @@ class CityDawg(object):
     def process_gene(self, g):
         gene = self.get_gene(g)
         gt_matrices = self.get_gt_matrices(gene)
-        diplotypes, sample_variants = self.get_calls(gene, gt_matrices)
-        phenotypes = self.get_phenotypes(gene, diplotypes, sample_variants)
+        diplotypes, sample_variants, uncallable = self.get_calls(gene, gt_matrices)
+        phenotypes = self.get_phenotypes(gene, diplotypes, sample_variants, uncallable)
         return phenotypes
     
     def get_exception_file(self, g):
@@ -120,6 +120,8 @@ class CityDawg(object):
         diplotype_caller_start_time = timer()
 
         sample_variants = {}
+        uncallable_alleles = {}
+
         if ec_override:
             if self.debug:
                 print("Exception override, calling with ExceptionCaller")
@@ -135,10 +137,11 @@ class CityDawg(object):
                 for samp in range(gt_mat[0].shape[1]):
                     cd_call, uncallable = dipCal.call_diplotype([gt_mat[0][:, samp], gt_mat[1][:, samp]], uncalled[:,samp], phase_matrix[:,samp])
 
-#                     cd_call = self.clean_up_call(cd_call)
+                    #cd_call = self.clean_up_call(cd_call)
 
                     sample_calls[sample_ids[samp]] = cd_call
                     sample_variants.update(sample_vars)
+                    uncallable_alleles[sample_ids[samp]] = uncallable
 
         diplotype_caller_end_time = timer()
 
@@ -149,7 +152,7 @@ class CityDawg(object):
             for k, v in sample_calls.items():
                 print("%s: %s" % (k, v))
 
-        return sample_calls, sample_variants
+        return sample_calls, sample_variants, uncallable_alleles
 
     # This is hacky, but wobbles weren't working so I named them differently, like *2%1, *2%2, etc are all *2.
     # As a result of this a *2.1 will get called a *2+*2.1.  So I merge all identical calls here.  We can remove this
@@ -176,7 +179,7 @@ class CityDawg(object):
         #final_calls.sort()
         return f'{delim.join(final_calls)}'
 
-    def get_phenotypes(self, gene, diplotypes, sample_variants):
+    def get_phenotypes(self, gene, diplotypes, sample_variants, uncallable):
         g = gene.name
 
         # Load phenotype file into object
@@ -217,7 +220,8 @@ class CityDawg(object):
                 "hap_2_variants": sample_variants[sample][1],
                 "phenotype": phenotype,
                 "phenotype_presumptive": presumptive_phenotype,
-                "activity_score": activity_score
+                "activity_score": activity_score,
+                "uncallable": ";".join(x.split("%")[0] for x in uncallable[sample])
             })
 
         return results
@@ -226,7 +230,7 @@ class CityDawg(object):
     def print_results(self, results):
         f = open(self.output, "w")
         f.write("sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,hap_1_variants,hap_2_variants,"
-                "phenotype,hap_1_presumptive,hap_2_presumptive,phenotype_presumptive,activity_score\n")
+                "phenotype,hap_1_presumptive,hap_2_presumptive,phenotype_presumptive,activity_score,uncallable\n")
         for r in results:
             if self.debug:
                 print("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"], r["hap_2"],
@@ -242,7 +246,7 @@ class CityDawg(object):
             f.write(f"{r['sample']},{r['gene']},{r['diplotype']},{r['hap_1']},{r['hap_2']},{r['hap_1_function']},"
                     f"{r['hap_2_function']},{';'.join(r['hap_1_variants'])},{';'.join(r['hap_2_variants'])},"
                     f"{r['phenotype']},{r['hap_1_presumptive_function']},{r['hap_2_presumptive_function']},"
-                    f"{r['phenotype_presumptive']},{r['activity_score']}\n")
+                    f"{r['phenotype_presumptive']},{r['activity_score']},{r['uncallable']}\n")
             
 
 

@@ -23,6 +23,15 @@ class Gene(object):
         self.variants = self.get_variants()
         self.haplotypes = self.get_haplotypes()
 
+        #for k in self.variants.keys():
+        #    #self.variants[k].print_variant()
+        #    for a in self.variants[k].alt:
+        #        chr = self.variants[k].chromosome
+        #        pos = self.variants[k].position
+        #        ref = self.variants[k].ref
+        #        key = "%s_%s_%s_%s" % (chr, pos, ref, a)
+        #        print(f"{chr}\t{pos}\t{ref}\t{a}\t{key}")
+
         # functions needed
         # haplotype definition matrix
         #   This will return a binary matrix of all the alleles for each haplotype

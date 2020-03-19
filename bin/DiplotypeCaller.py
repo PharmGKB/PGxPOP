@@ -35,7 +35,8 @@ class DiplotypeCaller(object):
         
         # Need to add this into
         uncallable = [self.stars[x] for x in np.where(np.sum(np.multiply(self.hap_matrix, uncalled.transpose()), axis=1) > 0)[0]]
-        
+        uncallable = list(set(uncallable))
+
         top_dip_score = np.max(dip_scores)
 
         out_dips = set()
@@ -44,7 +45,7 @@ class DiplotypeCaller(object):
             strand1 = "or".join(self.process_for_overlaps(combs[0]))
             strand2 = "or".join(self.process_for_overlaps(combs[1]))
             if self.is_phased:
-                star_dip = "|".join([strand1,y])
+                star_dip = "|".join([strand1,strand2])
             else:
                 try:
                     star_dip = "/".join(sorted([strand1,strand2], key=lambda a: float(a[1:])))
@@ -160,13 +161,14 @@ class DiplotypeCaller(object):
                 if self.get_partial_matches:
                     partial_vars_hap = self.check_for_partial_haps([subset,hap_result[1]])
                 subset = [a.split(f"%")[0] for a in subset]
-                x = "+".join(sorted(subset, key=lambda a: float(a[1:])) + partial_vars_hap)
+                subset = list(set(subset))
+                x = "+".join(sorted(subset, key=lambda a: a[1:]) + partial_vars_hap)
                 outSet.add(x)
         else:
             if self.get_partial_matches:
                 partial_vars_hap = self.check_for_partial_haps([add_haps,hap_result[1]])
             subset = [a.split(f"%")[0] for a in add_haps]
-            x = "+".join(sorted(subset, key=lambda a: float(a[1:])) + partial_vars_hap)
+            x = "+".join(sorted(subset, key=lambda a: a[1:]) + partial_vars_hap)
             outSet.add(x)
         return(outSet)
     

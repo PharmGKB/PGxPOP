@@ -162,22 +162,40 @@
           "ivacaftor non-responsive",
           "ivacaftor responsive"
         ],
-        "phenotype": "Unknown"
+        "phenotype": "ivacaftor non-responsive"
       },
-
       {
         "diplotype": [
           "ivacaftor responsive",
           "ivacaftor responsive"
         ],
         "phenotype": "ivacaftor responsive"
+      },
+      {
+        "diplotype": [
+          "ivacaftor irrelevant",
+          "ivacaftor responsive"
+        ],
+        "phenotype": "ivacaftor responsive"
+      },
+      {
+        "diplotype": [
+          "ivacaftor irrelevant",
+          "ivacaftor non-responsive"
+        ],
+        "phenotype": "ivacaftor non-responsive"
+      },
+      {
+        "diplotype": [
+          "ivacaftor irrelevant",
+          "ivacaftor irrelevant"
+        ],
+        "phenotype": "ivacaftor irrelevant"
       }
-
-
     ],
     "gene": "CFTR",
     "haplotypes": {
-        "Reference": "ivacaftor non-responsive",
+        "Reference": "ivacaftor irrelevant",
         "F508del(CTT)": "ivacaftor non-responsive",
         "F508del(TCT)": "ivacaftor non-responsive",
         "2789+5G->A": "ivacaftor responsive",
@@ -732,16 +750,16 @@
       "*117": "Unknown function",
       "*118": "Unknown function",
       "*119": "Unknown function",
-      "*120": "Unknown function",
+      "*120": "No Function",
       "*121": "Unknown function",
       "*122": "Unknown function",
       "*123": "Unknown function",
-      "*124": "Unknown function",
+      "*124": "No Function",
       "*125": "Unknown function",
       "*126": "Unknown function",
       "*127": "Unknown function",
       "*128": "Unknown function",
-      "*129": "Unknown function",
+      "*129": "No Function",
       "*130": "Unknown function",
       "*131": "Unknown function",
       "*132": "Unknown function",
@@ -831,12 +849,12 @@
       "*7": "No Function",
       "*70": "Uncertain Function",
       "*71": "Uncertain Function",
-      "*72": "Decreased Function",
+      "*72": "Uncertain Function",
       "*73": "Unknown function",
       "*74": "Unknown function",
       "*75": "Uncertain Function",
       "*8": "No Function",
-      "*81": "Uncertain Function",
+      "*81": "No Function",
       "*82": "Unknown function",
       "*83": "Unknown function",
       "*84": "Decreased Function",
@@ -882,16 +900,16 @@
       "*117": null,
       "*118": null,
       "*119": null,
-      "*120": null,
+      "*120": 0,
       "*121": null,
       "*122": null,
       "*123": null,
-      "*124": null,
+      "*124": 0,
       "*125": null,
       "*126": null,
       "*127": null,
       "*128": null,
-      "*129": null,
+      "*129": 0,
       "*130": null,
       "*131": null,
       "*132": null,
@@ -981,12 +999,12 @@
       "*7": 0,
       "*70": null,
       "*71": null,
-      "*72": 0.5,
+      "*72": null,
       "*73": null,
       "*74": null,
       "*75": null,
       "*8": 0,
-      "*81": null,
+      "*81": 0,
       "*82": null,
       "*83": null,
       "*84": 0.5,

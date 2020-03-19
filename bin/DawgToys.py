@@ -534,4 +534,4 @@ def welcome_message():
     |________________________________________________________________________________|
     '''
 
-    print(message)
+    print(message, file=sys.stderr)
