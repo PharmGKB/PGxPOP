@@ -196,7 +196,7 @@
     },
     {
       "chromosome": "chr22",
-      "position": 42130655,
+      "position": 42130654,
       "rsid": "rs774671100",
       "chromosomeHgvsName": "g.42130655_42130656insA",
       "geneHgvsName": "g.4337_4338insT",
@@ -204,6 +204,7 @@
       "resourceNote": "137_138insT",
       "type": "INS",
       "referenceRepeat": null,
+      "synonyms": [42130655],
       "hg19": {
         "build": "hg19",
         "chromosome": "chr22",
@@ -762,7 +763,7 @@
     },
     {
       "chromosome": "chr22",
-      "position": 42128936,
+      "position": 42128927,
       "rsid": "rs72549356",
       "chromosomeHgvsName": "g.42128936_42128937insGGGGCGAAA",
       "geneHgvsName": "g.6064_6065insTTTCGCCCC/insTTTCGCCCCTTTCGCCCC",
@@ -770,6 +771,7 @@
       "resourceNote": "1864_1865ins(TTTCGCCCC)/1864_1865ins(TTTCGCCCCTTTCGCCCC)",
       "type": "INS",
       "referenceRepeat": null,
+      "synonyms": [42128936],
       "hg19": {
         "build": "hg19",
         "chromosome": "chr22",
@@ -1061,7 +1063,7 @@
     },
     {
       "chromosome": "chr22",
-      "position": 42128218,
+      "position": 42128211,
       "rsid": "rs72549352",
       "chromosomeHgvsName": "g.42128218_42128219insG",
       "geneHgvsName": "g.6780_6781insC",
@@ -1070,7 +1072,7 @@
       "type": "INS",
       "referenceRepeat": null,
       "synonyms": [
-        42128211
+        42128218
       ],
       "hg19": {
         "build": "hg19",
@@ -1083,16 +1085,16 @@
     },
     {
       "chromosome": "chr22",
-      "position": 42128201,
+      "position": 42128198,
       "rsid": "rs72549351",
-      "chromosomeHgvsName": "g.42128201delAGTC",
+      "chromosomeHgvsName": "g.42128198_42128199insTCAG",
       "geneHgvsName": "g.6788delGACT",
       "proteinNote": "Frameshift",
       "resourceNote": "2588delGACT",
-      "type": "DEL",
+      "type": "INS",
       "referenceRepeat": null,
       "synonyms": [
-        42128200
+        42128200, 42128201
       ],
       "hg19": {
         "build": "hg19",
@@ -1545,14 +1547,15 @@
     },
     {
       "chromosome": "chr22",
-      "position": 42127533,
+      "position": 42127530,
       "rsid": "rs72549346",
-      "chromosomeHgvsName": "g.42127533_42127534insAC",
+      "chromosomeHgvsName": "g.42127530_42127531insCA",
       "geneHgvsName": "g.7460_7461insGT",
       "proteinNote": "Frameshift",
       "resourceNote": "3260_3261insGT",
       "type": "INS",
       "referenceRepeat": null,
+      "synonyms": [42127533],
       "hg19": {
         "build": "hg19",
         "chromosome": "chr22",

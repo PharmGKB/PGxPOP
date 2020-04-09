@@ -162,7 +162,7 @@
           "ivacaftor non-responsive",
           "ivacaftor responsive"
         ],
-        "phenotype": "ivacaftor non-responsive"
+        "phenotype": "ivacaftor responsive"
       },
       {
         "diplotype": [
@@ -198,10 +198,10 @@
         "Reference": "ivacaftor irrelevant",
         "F508del(CTT)": "ivacaftor non-responsive",
         "F508del(TCT)": "ivacaftor non-responsive",
-        "2789+5G->A": "ivacaftor responsive",
+        "2789&5G->A": "ivacaftor responsive",
         "3272-26A->G": "ivacaftor responsive",
-        "3849+10kbC->T": "ivacaftor responsive",
-        "711+3A->G": "ivacaftor responsive",
+        "3849&10kbC->T": "ivacaftor responsive",
+        "711&3A->G": "ivacaftor responsive",
         "A1067T": "ivacaftor responsive",
         "A455E": "ivacaftor responsive",
         "D110E": "ivacaftor responsive",
@@ -321,7 +321,7 @@
       {
         "diplotype": [
           "Decreased Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
@@ -335,7 +335,7 @@
       {
         "diplotype": [
           "Increased Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
@@ -349,7 +349,7 @@
       {
         "diplotype": [
           "No Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
@@ -363,7 +363,7 @@
       {
         "diplotype": [
           "Normal Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
@@ -377,14 +377,14 @@
       {
         "diplotype": [
           "Uncertain Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
       {
         "diplotype": [
-          "Unknown function",
-          "Unknown function"
+          "Unknown Function",
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       }
@@ -413,9 +413,9 @@
       "*20": "Decreased Function",
       "*21": "Uncertain Function",
       "*22": "Increased Function",
-      "*23": "Unknown function",
+      "*23": "Unknown Function",
       "*24": "No Function",
-      "*25": "Unknown function",
+      "*25": "Unknown Function",
       "*26": "Decreased Function",
       "*27": "Uncertain Function",
       "*28": "No Function",
@@ -473,21 +473,21 @@
           "Decreased Function",
           "Decreased Function"
         ],
-        "phenotype": "Poor Metabolizer"
+        "phenotype": "Likely Intermediate Metabolizer"
       },
       {
         "diplotype": [
           "Decreased Function",
           "Increased Function"
         ],
-        "phenotype": "Intermediate Metabolizer"
+        "phenotype": "Likely Intermediate Metabolizer"
       },
       {
         "diplotype": [
           "Decreased Function",
           "Normal Function"
         ],
-        "phenotype": "Intermediate Metabolizer"
+        "phenotype": "Likely Intermediate Metabolizer"
       },
       {
         "diplotype": [
@@ -529,7 +529,7 @@
           "Decreased Function",
           "No Function"
         ],
-        "phenotype": "Poor Metabolizer"
+        "phenotype": "Likely Poor Metabolizer"
       },
       {
         "diplotype": [
@@ -657,7 +657,7 @@
       {
         "diplotype": [
           "Decreased Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
@@ -671,7 +671,7 @@
       {
         "diplotype": [
           "Increased Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
@@ -685,7 +685,7 @@
       {
         "diplotype": [
           "No Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
@@ -699,7 +699,7 @@
       {
         "diplotype": [
           "Normal Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
@@ -713,14 +713,14 @@
       {
         "diplotype": [
           "Uncertain Function",
-          "Unknown function"
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       },
       {
         "diplotype": [
-          "Unknown function",
-          "Unknown function"
+          "Unknown Function",
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       }
@@ -731,45 +731,45 @@
       "*10": "Decreased Function",
       "*100": "No Function",
       "*101": "No Function",
-      "*102": "Unknown function",
-      "*103": "Unknown function",
-      "*104": "Unknown function",
-      "*105": "Unknown function",
+      "*102": "Unknown Function",
+      "*103": "Unknown Function",
+      "*104": "Unknown Function",
+      "*105": "Unknown Function",
       "*106": "Uncertain Function",
-      "*107": "Unknown function",
-      "*108": "Unknown function",
-      "*109": "Unknown function",
+      "*107": "Unknown Function",
+      "*108": "Unknown Function",
+      "*109": "Unknown Function",
       "*11": "No Function",
-      "*110": "Unknown function",
-      "*111": "Unknown function",
-      "*112": "Unknown function",
-      "*113": "Unknown function",
+      "*110": "Unknown Function",
+      "*111": "Unknown Function",
+      "*112": "Unknown Function",
+      "*113": "Unknown Function",
       "*114": "No Function",
-      "*115": "Unknown function",
-      "*116": "Unknown function",
-      "*117": "Unknown function",
-      "*118": "Unknown function",
-      "*119": "Unknown function",
+      "*115": "Unknown Function",
+      "*116": "Unknown Function",
+      "*117": "Unknown Function",
+      "*118": "Unknown Function",
+      "*119": "Unknown Function",
       "*120": "No Function",
-      "*121": "Unknown function",
-      "*122": "Unknown function",
-      "*123": "Unknown function",
+      "*121": "Unknown Function",
+      "*122": "Unknown Function",
+      "*123": "Unknown Function",
       "*124": "No Function",
-      "*125": "Unknown function",
-      "*126": "Unknown function",
-      "*127": "Unknown function",
-      "*128": "Unknown function",
+      "*125": "Unknown Function",
+      "*126": "Unknown Function",
+      "*127": "Unknown Function",
+      "*128": "Unknown Function",
       "*129": "No Function",
-      "*130": "Unknown function",
-      "*131": "Unknown function",
-      "*132": "Unknown function",
-      "*133": "Unknown function",
-      "*134": "Unknown function",
-      "*135": "Unknown function",
-      "*136": "Unknown function",
-      "*137": "Unknown function",
-      "*138": "Unknown function",
-      "*139": "Unknown function",
+      "*130": "Unknown Function",
+      "*131": "Unknown Function",
+      "*132": "Unknown Function",
+      "*133": "Unknown Function",
+      "*134": "Unknown Function",
+      "*135": "Unknown Function",
+      "*136": "Unknown Function",
+      "*137": "Unknown Function",
+      "*138": "Unknown Function",
+      "*139": "Unknown Function",
       "*12": "No Function",
       "*13": "No Function",
       "*14": "Decreased Function",
@@ -834,7 +834,7 @@
       "*55": "Decreased Function",
       "*56": "No Function",
       "*57": "No Function",
-      "*58": "Unknown function",
+      "*58": "Unknown Function",
       "*59": "Decreased Function",
       "*6": "No Function",
       "*60": "No Function",
@@ -850,16 +850,16 @@
       "*70": "Uncertain Function",
       "*71": "Uncertain Function",
       "*72": "Uncertain Function",
-      "*73": "Unknown function",
-      "*74": "Unknown function",
+      "*73": "Unknown Function",
+      "*74": "Unknown Function",
       "*75": "Uncertain Function",
       "*8": "No Function",
       "*81": "No Function",
-      "*82": "Unknown function",
-      "*83": "Unknown function",
+      "*82": "Unknown Function",
+      "*83": "Unknown Function",
       "*84": "Decreased Function",
-      "*85": "Unknown function",
-      "*86": "Unknown function",
+      "*85": "Unknown Function",
+      "*86": "Unknown Function",
       "*87": "Uncertain Function",
       "*88": "Uncertain Function",
       "*89": "Uncertain Function",
@@ -1140,6 +1140,20 @@
           "Normal Function"
         ],
         "phenotype": "Indeterminate"
+      },
+      {
+        "diplotype": [
+          "Uncertain Function",
+          "No Function"
+        ],
+        "phenotype": "Indeterminate"
+      },
+      {
+        "diplotype": [
+          "Uncertain Function",
+          "Decreased Function"
+        ],
+        "phenotype": "Indeterminate"
       }
 
     ],
@@ -1201,7 +1215,7 @@
       "*54": "Uncertain Function",
       "*55": "Decreased Function",
       "*56": "Uncertain Function",
-      "*57": "Unknown function",
+      "*57": "Unknown Function",
       "*58": "Uncertain Function",
       "*59": "Uncertain Function",
       "*60": "Uncertain Function",
@@ -1578,14 +1592,14 @@
     "gene": "DPYD",
     "haplotypes": {
       "Reference":	"Normal Function",
-      "c.1905+1G>A":	"No Function",
+      "c.1905&1G>A":	"No Function",
       "c.1898delC":	"No Function",
       "c.295_298delTCAT":	"No Function",
       "c.703C>T":	"No Function",
       "c.2983G>T":	"No Function",
       "c.1156G>T":	"No Function",
       "c.1679T>G":	"No Function",
-      "c.1129-5923C>G,  c.1236G>A (HapB3)":	"Decreased Function",
+      "c.1129-5923C>G&c.1236G>A (HapB3)":	"Decreased Function",
       "c.2846A>T":	"Decreased Function",
       "c.557A>G":	"Decreased Function",
       "c.61C>T":	"No Function",
@@ -1606,18 +1620,18 @@
       "c.2872A>G":	"No Function",
       "c.2933A>G":	"No Function",
       "c.151-69G>A":	"Decreased Function",
-      "c.680+139G>A":	"Decreased Function"
+      "c.680&139G>A":	"Decreased Function"
     },
     "haplotype_as": {
       "Reference":	1,
-      "c.1905+1G>A":	0,
+      "c.1905&1G>A":	0,
       "c.1898delC":	0,
       "c.295_298delTCAT":	0,
       "c.703C>T":	0,
       "c.2983G>T":	0,
       "c.1156G>T":	0,
       "c.1679T>G":	0,
-      "c.1129-5923C>G,  c.1236G>A (HapB3)":	0.5,
+      "c.1129-5923C>G&c.1236G>A (HapB3)":	0.5,
       "c.2846A>T":	0.5,
       "c.557A>G":	0.5,
       "c.61C>T":	0,
@@ -1638,7 +1652,7 @@
       "c.2872A>G":	0,
       "c.2933A>G":	0,
       "c.151-69G>A":	0.5,
-      "c.680+139G>A":	0.5
+      "c.680&139G>A":	0.5
     }
   },
   {
@@ -1943,6 +1957,86 @@
       "*7": "Unknown or Uncertain Function",
       "*8": "Unknown or Uncertain Function",
       "*9": "Possible Decreased Function"
+    }
+  },   {
+    "diplotypes": [
+      {
+        "diplotype": [
+          "Decreased dose allele",
+          "Decreased dose allele"
+        ],
+        "phenotype": "Decreased dose phenotype"
+      },
+      {
+        "diplotype": [
+          "Decreased dose allele",
+          "Normal dose allele"
+        ],
+        "phenotype": "Decreased dose phenotype"
+      },
+      {
+        "diplotype": [
+          "Normal dose allele",
+          "Normal dose allele"
+        ],
+        "phenotype": "Normal dose phenotype"
+      }
+    ],
+    "gene": "VKORC1",
+    "haplotypes": {
+      "-1639A": "Decreased dose allele",
+      "-1639G": "Normal dose allele"
+    }
+  },  {
+    "diplotypes": [
+      {
+        "diplotype": [
+          "Normal Function",
+          "Normal Function"
+        ],
+        "phenotype": "Normal dose phenotype"
+      },
+      {
+        "diplotype": [
+          "Normal Function",
+          "Decreased Function"
+        ],
+        "phenotype": "Increased dose phenotype"
+      },
+      {
+        "diplotype": [
+          "Decreased Function",
+          "Decreased Function"
+        ],
+        "phenotype": "Increased dose phenotype"
+      },
+      {
+        "diplotype": [
+          "Unknown Function",
+          "Unknown Function"
+        ],
+        "phenotype": "Indeterminate"
+      },
+      {
+        "diplotype": [
+          "Unknown Function",
+          "Decreased Function"
+        ],
+        "phenotype": "Indeterminate"
+      },
+      {
+        "diplotype": [
+          "Unknown Function",
+          "Normal Function"
+        ],
+        "phenotype": "Indeterminate"
+      }
+    ],
+    "gene": "CYP4F2",
+    "haplotypes": {
+      "*1": "Normal Function",
+      "*2": "Unknown Function",
+      "*3": "Decreased Function"
     }
   }
 ]

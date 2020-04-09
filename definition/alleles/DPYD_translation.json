@@ -364,7 +364,7 @@
       "chromosomeHgvsName": "g.97450058C>T",
       "geneHgvsName": "g.476002G>A",
       "proteinNote": null,
-      "resourceNote": "c.1905+1G>A",
+      "resourceNote": "c.1905&1G>A",
       "type": "SNP",
       "referenceRepeat": null,
       "hg19": {
@@ -960,7 +960,7 @@
       "populationFrequency": {}
     },
     {
-      "name": "c.1129-5923C>G, c.1236G>A (HapB3)",
+      "name": "c.1129-5923C>G&c.1236G>A (HapB3)",
       "id": "CA100307.1",
       "alleles": [
         null,
@@ -1310,7 +1310,7 @@
       "populationFrequency": {}
     },
     {
-      "name": "c.1905+1G>A",
+      "name": "c.1905&1G>A",
       "id": "CA100266.1",
       "alleles": [
         null,

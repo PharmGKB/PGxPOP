@@ -712,23 +712,6 @@
         "position": 117234984,
         "synonyms": []
       }
-    },
-    {
-      "chromosome": "chr7",
-      "position": 117509123,
-      "rsid": "rs75961395",
-      "chromosomeHgvsName": "g.117509123G>A",
-      "geneHgvsName": "g.48340G>A",
-      "proteinNote": "G85E",
-      "resourceNote": "G85E",
-      "type": "SNP",
-      "referenceRepeat": null,
-      "hg19": {
-        "build": "hg19",
-        "chromosome": "chr7",
-        "position": 117149177,
-        "synonyms": []
-      }
     }
   ],
   "variantAlleles": [
@@ -895,10 +878,6 @@
     [
       "T",
       "G"
-    ],
-    [
-      "A",
-      "G"
     ]
   ],
   "namedAlleles": [
@@ -946,7 +925,6 @@
         "G",
         "G",
         "A",
-        "G",
         "G"
       ],
       "populationFrequency": {}
@@ -956,7 +934,6 @@
       "id": "CA100002.1",
       "alleles": [
         "delTCT",
-        null,
         null,
         null,
         null,
@@ -1044,13 +1021,12 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
     },
     {
-      "name": "2789+5G->A",
+      "name": "2789&5G->A",
       "id": "CA100020.1",
       "alleles": [
         null,
@@ -1067,7 +1043,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -1142,13 +1117,12 @@
         null,
         null,
         "G",
-        null,
         null
       ],
       "populationFrequency": {}
     },
     {
-      "name": "3849+10kbC- >T",
+      "name": "3849&10kbC- >T",
       "id": "CA100021.1",
       "alleles": [
         null,
@@ -1191,13 +1165,12 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
     },
     {
-      "name": "711+1G->T",
+      "name": "711&3A->G",
       "id": "CA100033.1",
       "alleles": [
         null,
@@ -1218,7 +1191,6 @@
         null,
         null,
         "T",
-        null,
         null,
         null,
         null,
@@ -1289,7 +1261,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -1315,7 +1286,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -1387,7 +1357,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -1419,7 +1388,6 @@
         null,
         null,
         "C",
-        null,
         null,
         null,
         null,
@@ -1485,7 +1453,6 @@
         "C",
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -1534,7 +1501,6 @@
         null,
         "A",
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -1571,7 +1537,6 @@
         null,
         null,
         "G",
-        null,
         null,
         null,
         null,
@@ -1632,7 +1597,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -1660,7 +1624,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -1730,8 +1693,7 @@
         null,
         null,
         null,
-        "T",
-        null
+        "T"
       ],
       "populationFrequency": {}
     },
@@ -1770,7 +1732,6 @@
         null,
         null,
         "G",
-        null,
         null,
         null,
         null,
@@ -1828,7 +1789,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -1877,7 +1837,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -1890,7 +1849,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -1975,7 +1933,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2024,7 +1981,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2036,7 +1992,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -2122,57 +2077,7 @@
         null,
         null,
         null,
-        null,
         null
-      ],
-      "populationFrequency": {}
-    },
-    {
-      "name": "G85E",
-      "id": "CA100023.1",
-      "alleles": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        "A"
       ],
       "populationFrequency": {}
     },
@@ -2212,7 +2117,6 @@
         null,
         null,
         "C",
-        null,
         null,
         null,
         null,
@@ -2269,7 +2173,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2298,7 +2201,6 @@
         null,
         null,
         "T",
-        null,
         null,
         null,
         null,
@@ -2367,7 +2269,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2412,7 +2313,6 @@
         null,
         null,
         "T",
-        null,
         null,
         null,
         null,
@@ -2465,7 +2365,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2487,7 +2386,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -2563,7 +2461,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2599,7 +2496,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -2661,7 +2557,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2678,7 +2573,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -2759,7 +2653,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2778,7 +2671,6 @@
         null,
         null,
         "A",
-        null,
         null,
         null,
         null,
@@ -2857,7 +2749,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2878,7 +2769,6 @@
         null,
         null,
         "G",
-        null,
         null,
         null,
         null,
@@ -2955,7 +2845,6 @@
         null,
         null,
         null,
-        null,
         null
       ],
       "populationFrequency": {}
@@ -2994,7 +2883,6 @@
         null,
         null,
         "T",
-        null,
         null,
         null,
         null,

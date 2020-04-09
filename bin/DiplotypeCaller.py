@@ -168,6 +168,7 @@ class DiplotypeCaller(object):
             if self.get_partial_matches:
                 partial_vars_hap = self.check_for_partial_haps([add_haps,hap_result[1]])
             subset = [a.split(f"%")[0] for a in add_haps]
+            subset = list(set(subset))
             x = "+".join(sorted(subset, key=lambda a: a[1:]) + partial_vars_hap)
             outSet.add(x)
         return(outSet)

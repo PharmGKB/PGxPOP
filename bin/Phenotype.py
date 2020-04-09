@@ -67,18 +67,45 @@ class Phenotype(object):
         if len(split_haps) == 1:
             return self.get_haplotype_function(gene_name, hap)
 
+        if gene_name == "CFTR":
+            return self.CFTR_presumptive(split_haps)
+
         minimum_function = "Not available"
 
         #print(split_haps)
 
+        min_functions = ["No Function", "Loss of function"]
+        if gene_name in ["UGT1A1", "SLCO1B1"]:
+            min_functions.append("Decreased Function")
+            #min_functions.append("Possible Decreased Function")
+            print("adding decreased")
+
         for h in split_haps:
             f = self.get_haplotype_function(gene_name, h)
-            #print(h, f)
-            if f in ["No Function", "Loss of function"]:
-                # This could be adjusted to account for a ranking.  Right now only checking for no function
+
+            # This could be adjusted to account for a ranking.  Right now only checking for no function
+            if f in min_functions:
                 minimum_function = f
 
         return minimum_function
+
+    def CFTR_presumptive(self, split_haps):
+        gene = self.get_gene("CFTR")
+
+        all_responsive = True
+
+        for h in split_haps:
+            f = self.get_haplotype_function("CFTR", h)
+            #print(h, f)
+            if f != "ivacaftor responsive":
+                all_responsive = False
+
+        if all_responsive is True:
+            return "ivacaftor responsive"
+        else:
+            return "Not available"
+
+
 
 
     def function_rank(self):

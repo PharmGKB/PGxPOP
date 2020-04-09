@@ -46,6 +46,8 @@ class CityDawg(object):
         self.print_results(all_results)
 
     def process_gene(self, g):
+        if self.debug:
+            print("Processing %s" % g)
         gene = self.get_gene(g)
         gt_matrices = self.get_gt_matrices(gene)
         diplotypes, sample_variants, uncallable = self.get_calls(gene, gt_matrices)
