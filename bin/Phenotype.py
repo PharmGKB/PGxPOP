@@ -78,7 +78,6 @@ class Phenotype(object):
         if gene_name in ["UGT1A1", "SLCO1B1"]:
             min_functions.append("Decreased Function")
             #min_functions.append("Possible Decreased Function")
-            print("adding decreased")
 
         for h in split_haps:
             f = self.get_haplotype_function(gene_name, h)
