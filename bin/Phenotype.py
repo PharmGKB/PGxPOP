@@ -91,15 +91,15 @@ class Phenotype(object):
     def CFTR_presumptive(self, split_haps):
         gene = self.get_gene("CFTR")
 
-        all_responsive = True
+        any_responsive = True
 
         for h in split_haps:
             f = self.get_haplotype_function("CFTR", h)
             #print(h, f)
-            if f != "ivacaftor responsive":
-                all_responsive = False
+            if f == "ivacaftor responsive":
+                any_responsive = False
 
-        if all_responsive is True:
+        if any_responsive is True:
             return "ivacaftor responsive"
         else:
             return "Not available"

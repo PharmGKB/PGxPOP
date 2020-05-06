@@ -857,7 +857,7 @@
       "*81": "No Function",
       "*82": "Unknown Function",
       "*83": "Unknown Function",
-      "*84": "Decreased Function",
+      "*84": "Unknown Function",
       "*85": "Unknown Function",
       "*86": "Unknown Function",
       "*87": "Uncertain Function",
@@ -1512,22 +1512,22 @@
       },
       {
         "diplotype": [
-          "Uncertain Function",
+          "Unknown Function",
           "Normal Function"
+        ],
+        "phenotype": "Indeterminate"
+      },
+            {
+        "diplotype": [
+          "Unknown Function",
+          "Decreased Function"
         ],
         "phenotype": "Indeterminate"
       },
       {
         "diplotype": [
-          "Uncertain Function",
-          "No Function"
-        ],
-        "phenotype": "Possible Intermediate Metabolizer"
-      },
-      {
-        "diplotype": [
-          "Uncertain Function",
-          "Uncertain Function"
+          "Unknown Function",
+          "Unknown Function"
         ],
         "phenotype": "Indeterminate"
       }
@@ -1541,7 +1541,7 @@
       "*37": "Decreased Function",
       "*6": "Decreased Function",
       "*60": "Normal Function",
-      "*80": "Decreased Function"
+      "*80": "Unknown Function"
     }
   },
   {
@@ -1965,21 +1965,21 @@
           "Decreased dose allele",
           "Decreased dose allele"
         ],
-        "phenotype": "Decreased dose phenotype"
+        "phenotype": "Decreased warfarin dose"
       },
       {
         "diplotype": [
           "Decreased dose allele",
           "Normal dose allele"
         ],
-        "phenotype": "Decreased dose phenotype"
+        "phenotype": "Possibly decreased warfarin dose"
       },
       {
         "diplotype": [
           "Normal dose allele",
           "Normal dose allele"
         ],
-        "phenotype": "Normal dose phenotype"
+        "phenotype": "Normal warfarin dose"
       }
     ],
     "gene": "VKORC1",

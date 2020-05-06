@@ -85,6 +85,7 @@ def parse_vcf_line(line):
                 print("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (chrom, self.pos, self.id, self.ref, self.alt,
                                                                   self.qual, self.filter, info_print_format,
                                                                   self.format, calls_print_format))
+
         def intake_info(self, info):
             fields = info.split(';')
             for f in fields:
@@ -461,7 +462,7 @@ def del_checker(original, query):
         #    continue
     return False, None
 
-def fetch_genotype_records(vcf, chromosome, position):
+def fetch_genotype_records(vcf, chromosome, position, ref=None, alt=None):
     tb = tabix.open(vcf)
     records = tb.query("%s" % chromosome, position - 1, position + 1)
     for r in records:
@@ -471,8 +472,161 @@ def fetch_genotype_records(vcf, chromosome, position):
         # If it is an indel, try to match but it might not
         if r[1] == str(position):
             data = parse_vcf_line(r)
+            # position didn't match
             return data
     return None
+
+
+def fetch_genotypes_2(vcf, variant, synonym=None):
+    tb = tabix.open(vcf)
+
+    # Check whether the chromosomes start with 'chr' or not
+    chr_represenation = chr_string(vcf)
+    if chr_represenation:
+        chr = variant.chrom
+    else:
+        chr = variant.clean_chromosome
+
+    # synonym is just an alternate position that the variant may be at.  This is common for INDELs.
+    if synonym is not None:
+        position = synonym
+
+    else:
+        position = variant.pos
+
+    records = tb.query("%s" % chr, position-1, position+1)
+    #records = tb.query("%s" % chr, position - 1, position + 1)
+
+    n_records = 0
+    for r in records:
+        n_records += 1
+
+    if n_records > 1:
+        strict = True
+    else:
+        strict = False
+
+    records = tb.query("%s" % chr, position - 1, position + 1)
+
+    for r in records:
+        #print("Record!")
+        # todo add some additional checks here
+        # Otherwise check if there is an rsid, if there is check that it matches the variant file
+        # If not just check the position and the alternate alleles
+        # If it is an indel, try to match but it might not
+
+        # Check that we fetched the right thing
+        valid = True
+
+        # gt_index will store the index of the matched alternate allele
+        gt_index = None
+
+        if r[0] != chr:
+            #print("Chromosome didn't match")
+            valid = False
+
+            if variant.id != r[2] and strict is True:
+                continue
+
+        if str(r[1]) != str(position):
+            valid = False
+            continue
+            #if variant.rsid != r[2] and strict is True:
+            #    continue
+
+        if r[3] != variant.ref:
+            #print("Ref didnt' match")
+            continue
+            #valid = False
+            #if variant.rsid != r[2] and strict is True:
+            #    continue
+
+        #if variant.position == 42130655:
+        #    print("*15!!!!")
+
+        any_alt = False
+        #print(r[4])
+
+        found_alts = r[4].split(",")
+
+        for alt in found_alts:
+            if alt in variant.alts():
+                #gt_index = variant.alt.index(alt)
+                gt_index = found_alts.index(alt)
+                #print("GT index: %s " % gt_index)
+                #print("Found alt %s in %s" % (alt, variant.alts()))
+                any_alt = True
+
+                if r[3] == variant.ref:
+                    valid = True
+
+
+
+
+        if any_alt is False:
+            #print("Alt didn't match")
+            #print(found_alts)
+            valid = False
+            continue
+
+
+
+        #if valid is False:
+        #    # Check if it's an INDEL
+        #    # todo put this in it's own function
+        #    for a in variant.alt:
+        #        # Check the case where the alt is a deletion
+        #        if a.startswith("del"):
+        #            # Check if any alt listed satisfies the deletion
+        #            satisfied, index = del_checker(a, r)
+        #            if satisfied is True:
+        #                valid = True
+        #                gt_index = index
+#
+        #        # Check the case where it is an insertion
+        #        elif len(a) > 1:
+        #            satisfied, index = ins_checker(a, r)
+        #            if satisfied is True:
+        #                valid = True
+        #                gt_index = index
+#
+        #    # I know this is duplicatd but it works.  The last one wasn't catching cases where a single nucleotide was
+        #    # added
+        #    if variant.is_indel:
+        #        for a in variant.alt:
+        #            satisfied, index = ins_checker(a, r)
+        #            if satisfied is True:
+        #                valid = True
+        #                gt_index = index
+#
+
+                # todo add other exceptions where necessary
+
+        if variant.id != "." and variant.id == r[2]:
+
+            # if the IDs match then nothing else matters
+            # This will especially catch INDELs with different conventions for ref and alt representation
+            #if valid == False:
+            valid = True
+
+        if valid is True:
+            #print("found")
+            data = parse_vcf_line(r)
+            # If there is only one alternate allele in the definition, set the index
+            if len(variant.alt) == 1:
+                data.gt_index = gt_index
+            return data
+
+    # Recursively try any synonyms - not actually recursive
+    if synonym is not None:
+        for pos in variant.synonyms:
+            syn_result = fetch_genotypes(vcf, variant, pos)
+            if syn_result is not None:
+                return syn_result
+
+
+    return None
+
 
 
 # Sometimes multiple nucleotides ban be found at a position and have the same function.  In this case

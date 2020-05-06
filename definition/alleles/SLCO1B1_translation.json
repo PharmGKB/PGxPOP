@@ -133,7 +133,7 @@
       "hg19": {
         "build": "hg19",
         "chromosome": "chr12",
-        "position": 21329761,
+        "position": 20000000,
         "synonyms": []
       }
     },
@@ -218,7 +218,7 @@
       "hg19": {
         "build": "hg19",
         "chromosome": "chr12",
-        "position": 21331599,
+        "position": 20000000,
         "synonyms": []
       }
     },
@@ -252,7 +252,7 @@
       "hg19": {
         "build": "hg19",
         "chromosome": "chr12",
-        "position": 21331625,
+        "position": 20000000,
         "synonyms": []
       }
     },
