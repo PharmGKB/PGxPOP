@@ -28,13 +28,9 @@ class Variant(object):
         self.build = build.lower()
         self.debug = debug
 
-        self._setup(data, alleles)
+        self._setup(data)
 
-    def _setup(self, data, alleles):
-
-        #todo
-        # The definition files don't explicitly say what the ref and alt alleles are.  It's in the chromosomeHgvsName
-        # but that is annoying to parse.
+    def _setup(self, data):
 
         self.chromosome = data['chromosome']
         self.clean_chromosome = clean_chr(self.chromosome)
@@ -65,10 +61,6 @@ class Variant(object):
                 self.position = data[self.build]['position']
                 self.synonyms = data[self.build]['synonyms']
 
-                #print("yooooooooo")
-                #exit()
-                # Sometimes the allele can flip between builds.  I only updated the handful where they were different
-
                 if "ref" in data[self.build].keys():
 
                     self.ref = data[self.build]['ref']
@@ -97,10 +89,6 @@ class Variant(object):
                 if self.ref != ref:
                     self.ref = ref
 
-                #if self.chromosomeHgvsName == 'g.94942309G>A;g.94942309G>T':
-
-                #    print(fields, ref, alt_set)
-
             return
 
         if self.type =="DEL":
@@ -117,9 +105,7 @@ class Variant(object):
             hgvs = self.chromosomeHgvsName.split(";")
             for i in hgvs:
                 i = i.strip()
-
                 alts = i.split('/')
-
                 for a in alts:
                     alt = a.split('ins')[1]
                     self.alt.append(alt)
@@ -130,8 +116,6 @@ class Variant(object):
         print("Allele parsing of %s not yet supported" % self.type)
         print(self.chromosomeHgvsName)
         exit()
-
-
 
     def liftover(self):
 

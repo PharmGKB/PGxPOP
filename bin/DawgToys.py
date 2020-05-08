@@ -266,6 +266,9 @@ def vcf_is_phased(vcf):
         print("Phasing status could not be determined.  VCF may be corrupted.")
         exit(1)
 
+'''
+Check if a single genotype call is phased.  e.g. 0/1 vs 0|1.
+'''
 def is_gt_phased(gt):
     if "/" in gt:
         return False
@@ -274,6 +277,9 @@ def is_gt_phased(gt):
     # otherwise I don't know, so we'll say false
     return False
 
+'''
+Determine if a VCF encodes chromosome names with "chr" preceding the chromosome number.
+'''
 def chr_string(vcf):
     with smart_open(vcf) as f:
         for line in f:
@@ -290,7 +296,10 @@ def chr_string(vcf):
                 f.close()
                 return False
 
-
+'''
+Query a VCF using tabix to extract the row for a particular variant.
+Performs lots of QC checks to make sure that the retrieved variant is the same as the one requested.
+'''
 def fetch_genotypes(vcf, variant, synonym=None):
     tb = tabix.open(vcf)
 
@@ -309,7 +318,6 @@ def fetch_genotypes(vcf, variant, synonym=None):
         position = variant.position
 
     records = tb.query("%s" % chr, position-1, position+1)
-    #records = tb.query("%s" % chr, position - 1, position + 1)
 
     n_records = 0
     for r in records:
@@ -323,11 +331,6 @@ def fetch_genotypes(vcf, variant, synonym=None):
     records = tb.query("%s" % chr, position - 1, position + 1)
 
     for r in records:
-        #print("Record!")
-        # todo add some additional checks here
-        # Otherwise check if there is an rsid, if there is check that it matches the variant file
-        # If not just check the position and the alternate alleles
-        # If it is an indel, try to match but it might not
 
         # Check that we fetched the right thing
         valid = True
@@ -335,51 +338,36 @@ def fetch_genotypes(vcf, variant, synonym=None):
         # gt_index will store the index of the matched alternate allele
         gt_index = None
 
+        # Check if the chromosome is the same
         if r[0] != chr:
-            #print("Chromosome didn't match")
             valid = False
 
             if variant.rsid != r[2] and strict is True:
                 continue
 
+        # Check if the position is the same
         if str(r[1]) != str(position):
             valid = False
-            #if variant.rsid != r[2] and strict is True:
-            #    continue
 
+        # Check if the reference variant is the same
         if r[3] != variant.ref:
-            #print("Ref didnt' match")
             valid = False
-            #if variant.rsid != r[2] and strict is True:
-            #    continue
 
-        #if variant.position == 42130655:
-        #    print("*15!!!!")
-
+        # Check whether the specified alternate allele is in the alts list
         any_alt = False
-        #print(r[4])
 
         found_alts = r[4].split(",")
 
         for alt in found_alts:
             if alt in variant.alt:
-                #gt_index = variant.alt.index(alt)
                 gt_index = found_alts.index(alt)
-                #print("GT index: %s " % gt_index)
                 any_alt = True
 
                 if r[3] == variant.ref:
                     valid = True
 
-
-        #if any_alt is False:
-        #    print("Alt didn't match")
-
-
-
         if valid is False:
             # Check if it's an INDEL
-            # todo put this in it's own function
             for a in variant.alt:
                 # Check the case where the alt is a deletion
                 if a.startswith("del"):
@@ -406,12 +394,9 @@ def fetch_genotypes(vcf, variant, synonym=None):
                         gt_index = index
 
 
-                # todo add other exceptions where necessary
-
         if variant.rsid == r[2]:
             # if the IDs match then nothing else matters
             # This will especially catch INDELs with different conventions for ref and alt representation
-            #if valid == False:
             valid = True
 
         if valid is True:
@@ -431,6 +416,9 @@ def fetch_genotypes(vcf, variant, synonym=None):
 
     return None
 
+'''
+Check that an insertion identified in a file is the same as one specified in the definition file.
+'''
 def ins_checker(original, query):
     # I'm not sure this will work for all insertion representations
     # Basically what I'm doing is adding the added nucleotides from the definition to the ref allele and checking
@@ -443,6 +431,9 @@ def ins_checker(original, query):
         index += 1
     return False, None
 
+'''
+Check that an deletion identified in a file is the same as one specified in the definition file.
+'''
 def del_checker(original, query):
     # This checks the difference between the ref and the alt and checks if that matches the deletion stated in the
     # definition file.
@@ -456,20 +447,9 @@ def del_checker(original, query):
                 return True, index
         index += 1
 
-        #r = difflib.ndiff(query[3], alt)
-        #for i in r:
-        #    print(i)
-        #try:
-        #    i, s, = difflib.ndiff(query[3], alt)
-        #    print(i, s)
-        #    if s == "- %s" % deleted_nts:
-        #        # Deletion resolved
-        #        return True
-        #except:
-        #    print("Failed")
-        #    continue
     return False, None
 
+# Deprecated function used for something else.  Will delete.
 def fetch_genotype_records(vcf, chromosome, position, ref=None, alt=None):
     tb = tabix.open(vcf)
     records = tb.query("%s" % chromosome, position - 1, position + 1)
@@ -484,7 +464,7 @@ def fetch_genotype_records(vcf, chromosome, position, ref=None, alt=None):
             return data
     return None
 
-
+# Deprecated function used for something else.  Will delete.
 def fetch_genotypes_2(vcf, variant, synonym=None):
     tb = tabix.open(vcf)
 
@@ -503,7 +483,6 @@ def fetch_genotypes_2(vcf, variant, synonym=None):
         position = variant.pos
 
     records = tb.query("%s" % chr, position-1, position+1)
-    #records = tb.query("%s" % chr, position - 1, position + 1)
 
     n_records = 0
     for r in records:
@@ -632,15 +611,15 @@ def fetch_genotypes_2(vcf, variant, synonym=None):
             if syn_result is not None:
                 return syn_result
 
-
     return None
 
+'''
+Sometimes multiple nucleotides ban be found at a position and have the same function.  In this case
+rather than representing them as multiple letters they can be collapsed into a single letter.  For example
+R is used to represent any purine, so the site could be an A or a G.  This function will map a nucleotide to
+it's IUPAC definition and return a list of nucleotides it could be.
+'''
 
-
-# Sometimes multiple nucleotides ban be found at a position and have the same function.  In this case
-# rather than representing them as multiple letters they can be collapsed into a single letter.  For example
-# R is used to represent any purine, so the site could be an A or a G.  This function will map a nucleotide to
-# it's IUPAC definition and return a list of nucleotides it could be.
 def iupac_nt(nt):
     nts = {
         "A": ["A"],
@@ -664,12 +643,11 @@ def iupac_nt(nt):
     if nt in nts.keys():
         return nts[nt]
 
-    #print("%s not found in nucleotide definition!" % nt)
     return [nt]
 
-
-
-
+'''
+Fetch the allele definition file for a particular gene
+'''
 def get_definition_file(g):
     definition_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../definition/alleles/")
     filename = "%s_translation.json" % g
@@ -677,23 +655,23 @@ def get_definition_file(g):
     return definition_file
 
 
+''''
+Print a nice welcome message.  Hello!
+'''
 def welcome_message():
     message = '''
-                                                                D\___/\  
-                                                                 (0_o)    
-                                                                  (V)    
-     _________________________________________________________oOo__U__oOo____________
-    |                      ___ _ _        ___                                        |
-    |        _       _    / __(_) |_ _  _|   \ __ ___ __ ____ _    _       _         | 
-    |       (_'-----'_)  | (__| |  _| || | |) / _` \ V  V / _` |  (_'-----'_)        |
-    |       (_.'""""._)   \___|_|\__|\_, |___/\__,_|\_/\_/\__, |  (_.'""""._)        |
-    |                                |__/                 |___/                      |
-    |                                                                                |
-    |               v0.0 (pre-pre Alpha) (seriously don't use this)                  |
-    |     Written by Adam Lavertu and Greg McInnes with help from PharmGKB.          |
-    |  We do not certify that the output from this program are correct in any way.   |
-    |                                                                                |
-    |________________________________________________________________________________|
+
+     ________________________________________
+    |      ___  ___     ___  ___  ___        |
+    |     | _ \/ __|_ _| _ \/\  \| _ \       | 
+    |     |  _/ (_ \ \ /  _/  \  |  _/       |
+    |     |_|  \___/_\_\_|  \__\/|_|         |
+    |                                        |
+    |                 v1.0                   |
+    |              Written by                |     
+    |     Adam Lavertu and Greg McInnes      |
+    |        with help from PharmGKB.        |
+    |________________________________________|
     '''
 
     print(message, file=sys.stderr)

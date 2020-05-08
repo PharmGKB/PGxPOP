@@ -1,3 +1,15 @@
+'''
+Greg McInes
+Altman Lab
+gmcinnes@stanford.edu
+'''
+
+'''
+This script creates matrices of variant calls from a VCF for a gene region.  The output is binary matrices where each
+ column is a variant that is included in the haplotype definition and each row is a sample.  Two matrices are output,
+ one for each strand.
+'''
+
 import numpy as np
 from DawgToys import parse_vcf_line, get_vcf_subject_ids, split_genotype, vcf_is_phased, fetch_genotypes, is_gt_phased
 
@@ -9,28 +21,27 @@ class GenotypeParser(object):
         self.gene = gene
         self.phase_matrix = None
         self.debug = debug
-        #self.is_phased = vcf_is_phased(vcf) # no need for this with the command line flag.
         self.is_phased = False
         self.sample_variants = {}
-        #self.uncalled = []
-        self.sample_no_calls = {}
         self.called = []
         self.variant_list = []
-        
+
+    '''
+    Find the index of a sample in the VCF
+    '''
     def get_sample_index(self, sample_id):
-        sample_index = [x for x,i in enumerate(self.vcf_header) if i == sample_id][0]
-        return(sample_index)
-        
+        sample_index = [x for x, i in enumerate(self.vcf_header) if i == sample_id][0]
+        return sample_index
+
+    '''
+    Create the matrices
+    '''
     def haplotype_matrices(self, batch_mode=False):
 
+        # Get the subjects from the file that we will be operating on
         subjects = get_vcf_subject_ids(self.vcf)
 
-        #
-        #self.uncalled = []
-        #self.called = []
-        #self.sample_variants = {}
-        #self.variant_list = []
-
+        # Define some defaults to output in the case where no variant is identified
         null_row = []
         null_phase_row = []
         for s in subjects:
@@ -38,6 +49,7 @@ class GenotypeParser(object):
             null_phase_row.append(1)
             self.sample_variants[s] = [[], []]
 
+        # Batch mode setup
         if batch_mode:
             samps_per_batch = int(np.floor(np.sqrt(len(subjects))))
             batches = [subjects[x:x+samps_per_batch] for x in range(0, len(subjects)-samps_per_batch)]
@@ -45,59 +57,60 @@ class GenotypeParser(object):
         else:
             batches = [subjects]
 
-        # For each variant in the gene
+        # Get all the variants that are defined for the gene we are working with
         variants = self.gene.variants
 
-
-
+        # All alleles identified
         # This will be a list of lists.  Where the inner lists represent the allele status for every variant in the
         # definition table.  Column represent subjects.  Same order as in the VCF.  Each added row should be of the
         # same length as the number of samples.
         # The left and right lists represent the left and right sides of the genotype
         all_alleles = ([], [])
 
-        # This will also be a list of lists, which will later be converted to a matrix
+        # Initiate variables to store indices for phasing and no calls
         phase_index = []
         no_call_index = []
 
-        # Extract the variant with tabix
+        # Batch processing
         for batch in batches:
 
+            # Iterate over all variants and process one by one
             for v in range(len(variants)):
                 variant = variants[v]
 
                 if self.debug:
                     variant.print_variant()
 
+                # Extract the variant with tabix
                 genotypes = fetch_genotypes(self.vcf, variant)
 
                 # if nothing found, make a row of all zeroes
                 # also save all the variants that were not callable
                 if genotypes is None:
-                    #self.uncalled.append((variant, v))
                     if self.debug:
                         print("Variant not found")
                     # add the same number of null rows as there are genotypes
                     for i in range(len(variant.alt)):
                         all_alleles[0].append(null_row)
                         all_alleles[1].append(null_row)
-
                         phase_index.append(null_phase_row)
                         no_call_index.append(null_phase_row)
-
                         new_key = "%s.g.%s%s>%s" % (variant.chromosome, variant.position, variant.ref, variant.alt[i])
                         self.variant_list.append(new_key)
-
                     continue
+
+                # We found something, so add the variant to the called list
                 self.called.append((variant,v))
-                # dictionary of alts to store genotypes in
+
+                # Create a dictionary of alts to store genotypes in
                 alt_alleles = {}
-                #print(variant.key)
                 n_alts = 0
+
+                # Since there can be multiallelic sites, we need to iterate over all possible alternates
+                # Create matrices for each alt found
                 for a in variant.alt:
                     alt_alleles[a] = [[], []]
                     new_key = "%s.g.%s%s>%s" % (variant.chromosome, variant.position, variant.ref, a)
-                    #print("ALT: %s" % a)
                     self.variant_list.append(new_key)
                     n_alts += 1
 
@@ -105,23 +118,17 @@ class GenotypeParser(object):
                 # For example most alternate alleles will get a value of 1 if they are the only alt.
                 alt_indices = {}
                 for a in variant.alt:
-                #for a in genotypes.alt:
-                    #print("Variant alt: %s" % a)
+
                     # Get the index of the alt in the listed genotypes.
-
-                    #print(genotypes.gt_index)
-
                     if genotypes.gt_index is not None:
                         alt_indices[a] = genotypes.gt_index + 1
 
                     elif a in genotypes.alts():
-                        #print("ALT: %s:" % a)
                         index = genotypes.alts().index(a)
                         alt_indices[a] = index + 1
 
                     else:
                         alt_indices[a] = None
-                    #print(alt_indices[a])
 
                 # Loop over every genotype in the row, 1 for each subject
                 row_phasing_data = []
@@ -133,11 +140,7 @@ class GenotypeParser(object):
 
                 for i, s in enumerate(batch):
                     # Get the genotype and split it into an array
-                    #print(genotypes.alts())
-                    #print(genotypes.calls[i])
-
                     gt = split_genotype(genotypes.calls[i])
-                    #print(gt)
 
                     # Update the no-call matrix.
                     if "." in gt:
@@ -160,9 +163,6 @@ class GenotypeParser(object):
                     # For each allele in the genotype (2) figure out if it is a ref call, or if it's an alt, which one.
                     #for g in range(len(gt)): # for some reason there are 0/0/0 genotypes in the pharmcat test files
                     for g in range(2):
-
-                        #print(g)
-                        #print(gt)
                         allele = gt[g]
 
                         if allele == '0':
@@ -172,20 +172,12 @@ class GenotypeParser(object):
                             # Determine which alterate allele
                             found = False
                             for alt in alt_indices:
-                                #print(alt)
                                 if str(alt_indices[alt]) == allele:
                                     if self.debug:
                                         print("Found alt call")
-                                        #print(s)
-                                        #print(gt)
-                                        #print(alt)
-                                        #exit()
 
                                     alt_alleles[alt][g].append(1)
                                     self.sample_variants[s][g].append(variant.key)
-                                    #print(self.sample_variants)
-                                    #exit()
-
 
                                     # Update the other alleles
                                     for other_alt in alt_indices:
@@ -198,18 +190,6 @@ class GenotypeParser(object):
                                 # checks when pulling the genotype.  Otherwise, we'll need to add more exceptions to catch it.
                                 # This is only true for INDELs.
 
-                                # This is resolved by including gt_index in the parser
-                                #if len(alt_alleles.keys()) == 1:
-                                #    pass
-                                    #alt_alleles[list(alt_alleles.keys())[0]][g].append(1)
-
-                                #else:
-                                #if self.debug:
-                                #    print("Didn't find alt call")
-                                #    print(alt_alleles.keys())
-                                #    print(gt)
-                                #    print(genotypes.ref, genotypes.alts())
-                                #    exit()
                                 # Allele does not exist in definitions.  Mark as 0.
                                 for a in alt_alleles.keys():
                                     alt_alleles[a][g].append(0)
@@ -220,9 +200,9 @@ class GenotypeParser(object):
 
                 for a in variant.alt:
 
+                    # Check that we ended up with the proper number of alleles in the matrix
                     if len(alt_alleles[a][0]) != len(batch) or len(alt_alleles[a][1]) != len(batch):
                         print("Incorrect number of alleles!")
-                        #print(alt_alleles)
                         print(len(alt_alleles[a][0]))
                         print(len(alt_alleles[a][1]))
                         print("Should be %s" % len(batch))
@@ -236,10 +216,13 @@ class GenotypeParser(object):
                     all_alleles[0].append(alt_alleles[a][0])
                     all_alleles[1].append(alt_alleles[a][1])
 
+            # Extract the final matrices
             left_hap = np.array(all_alleles[0])
             right_hap = np.array(all_alleles[1])
 
+            # Prepare the phase and no call matrices
             phase_matrix = np.array(phase_index)
             no_call_matrix = np.array(no_call_index)
 
+            # We yield all these outputs like this to enable parallelization
             yield((left_hap, right_hap), phase_matrix, self.sample_variants, self.variant_list, no_call_matrix)

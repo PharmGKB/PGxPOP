@@ -1,11 +1,17 @@
+"""
+Greg McInes
+Altman Lab
+gmcinnes@stanford.edu
+"""
+
 import json
 import os
 import sys
 
 '''
-Define the Gene object
+Define the Phenotype object
 
-This class will be initiated with a Gene definition json and contain functions related to gene specific tasks.
+This class will perform all functions related to retrieving phenotypes for gene diplotypes
 '''
 class Phenotype(object):
     def __init__(self, json_file=None, debug=False):
@@ -33,7 +39,6 @@ class Phenotype(object):
         for g in self.data:
             if g["gene"] == gene_name:
                 return g
-        #print("Gene not found in phenotypes! %s" % gene_name)
         return None
 
     def get_haplotype_function(self, gene_name, hap):
@@ -43,9 +48,7 @@ class Phenotype(object):
             return "Not available"
         if hap in gene["haplotypes"].keys():
             return gene["haplotypes"][hap]
-        #print("Haplotype %s not found in %s phenotypes!" % (hap, gene_name))
         return "Not available"
-        #exit(1)
 
     def get_presumptive_haplotype_function(self, gene_name, hap):
 
@@ -54,15 +57,7 @@ class Phenotype(object):
         if gene is None:
             return None
 
-        #if gene == "DPYD" and hap == "c.1905+1G>A":
-        #    return self.get_haplotype_function(gene_name, hap)
-
-        # todo list other known +'s
-
         split_haps = hap.split("+")
-
-        #print(split_haps)
-        #exit()
 
         if len(split_haps) == 1:
             return self.get_haplotype_function(gene_name, hap)
@@ -72,30 +67,23 @@ class Phenotype(object):
 
         minimum_function = "Not available"
 
-        #print(split_haps)
-
         min_functions = ["No Function", "Loss of function"]
         if gene_name in ["UGT1A1", "SLCO1B1"]:
             min_functions.append("Decreased Function")
-            #min_functions.append("Possible Decreased Function")
 
         for h in split_haps:
             f = self.get_haplotype_function(gene_name, h)
 
-            # This could be adjusted to account for a ranking.  Right now only checking for no function
             if f in min_functions:
                 minimum_function = f
 
         return minimum_function
 
     def CFTR_presumptive(self, split_haps):
-        gene = self.get_gene("CFTR")
-
         any_responsive = True
 
         for h in split_haps:
             f = self.get_haplotype_function("CFTR", h)
-            #print(h, f)
             if f == "ivacaftor responsive":
                 any_responsive = False
 
@@ -103,9 +91,6 @@ class Phenotype(object):
             return "ivacaftor responsive"
         else:
             return "Not available"
-
-
-
 
     def function_rank(self):
         functions = {
@@ -151,11 +136,7 @@ class Phenotype(object):
             if sorted(d['diplotype']) == hap_functions:
                 return d['phenotype']
         print('Unable to determine function of %s and %s for %s' % (hap1, hap2, gene_name), file=sys.stderr)
-        #print('%s: %s' % (hap1, hap1_function))
-        #print('%s: %s' % (hap2, hap2_function))
         return "Not available"
-        #exit(1)
-
 
     def haplotype_checker(self, gene_name, hap, presumptive=False):
         found_functions = set()
@@ -198,9 +179,3 @@ class Phenotype(object):
                 return gene['haplotype_as'][hap]
             if self.get_presumptive_haplotype_function(gene_name, hap) == "No Function":
                 return 0
-
-
-
-
-
-

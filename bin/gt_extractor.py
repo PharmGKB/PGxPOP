@@ -7,7 +7,7 @@ gmcinnes@stanford.edu
 
 import sys
 import argparse
-from DawgToys import fetch_genotype_records, get_vcf_subject_ids, parse_vcf_line, split_genotype
+from DawgToys import fetch_genotypes_2, fetch_genotype_records, get_vcf_subject_ids, parse_vcf_line, split_genotype
 
 class GTExtractor(object):
     def __init__(self, file, chromosome, position, subject=None, carriers_only=False, homs_only=False, debug=False,
@@ -47,47 +47,76 @@ class GTExtractor(object):
                     # if you want to pull something out of the INFO to include
                     extras = {
                         "AF": vcf.info['AF'],
-                        "Gene": vcf.info['Gene.refGene'],
-                        "Group": "deleterious"
+                        #"Gene": vcf.info['Gene.refGene'],
+                        "Group": "deleterious",
+                        "impact": vcf.info["impact"],
+                        "high_impact": vcf.info["highimpact"],
+                        "Gene": vcf.info["gene"]
+
                     }
 
-                    self.process_variant(chr, pos, subjects, ref=ref, alt=alt, extras=extras)
+                    self.process_variant(chr, pos, subjects, vcf_row=vcf, extras=extras)
         else:
             self.process_variant(self.chr, self.position, subjects)
 
 
-    def process_variant(self, chr, position, subjects, ref=None, alt=None, extras=None):
+    def process_variant(self, chr, position, subjects, ref=None, alt=None, extras=None, vcf_row=None):
         # Extract the variant data
-        variant = fetch_genotype_records(self.file, chr, position)
+
+        if vcf_row is not None:
+            #vcf_row.print_row(minimal=True)
+            variant = fetch_genotypes_2(self.file, vcf_row)
+        else:
+            variant = fetch_genotype_records(self.file, chr, position)
+
+        if variant is None or variant.alt == ".":
+            #print("no variant found")
+            return
+
+
+
+        #variant.print_row(minimal=True)
+
+        if vcf_row is not None:
+            if variant.ref != vcf_row.ref:
+                print("REF DIDN'T MATCH")
+                print(vcf_row.ref, variant.ref)
+                return
+            if vcf_row.alt not in variant.alts():
+                print("ALTS DIDN'T MATCH")
+                print(vcf_row.alt, variant.alts())
+                #ariant.print_row()
+                #exit()
+                return
 
         if variant is None:
-            print("Position not found in VCF: %s:%s" % (chr, position), file=sys.stderr)
+            #print("Position not found in VCF: %s:%s" % (chr, position), file=sys.stderr)
             return
             #exit(1)
 
-        # Parse the result
-        #vcf_line = parse_vcf_line(variant)
-
-        variant.print_row(minimal=True)
 
         alt_index = 1
-        if ref is not None:
-            if not variant.ref == ref:
+        if vcf_row is not None:
+            if not variant.ref == vcf_row.ref:
                 #print(f"Wrong reference! {ref}", file=sys.stderr)
                 return
-            if not alt in variant.alts():
+            if not vcf_row.alt in variant.alts():
                 #print("Wrong alt!", file=sys.stderr)
+                #print(vcf_row.alt, variant.alts())
                 return
             alts = variant.alts()
+            #print(alts)
             if len(alts) > 1:
                 for i in range(len(alts)):
-                    if alts[i] == alt:
+                    if alts[i] == vcf_row.alt:
+                        #print("Found alt!")
+                        #print(alts[i], vcf_row.alt)
                         alt_index = i + 1
 
 
+        #print(alt_index)
 
-
-        # Get the result
+        # Get the resultw
 
         # If a subject is provided, just print that one
         if self.subject is not None:
@@ -110,7 +139,7 @@ class GTExtractor(object):
             #    print("%s: %s" % (subjects[i], variant.calls[i]))
 
             gt = variant.calls[i].split(":")[0]
-            ac = sum(int(x) for x in split_genotype(variant.calls[i]))
+            ac = sum(int(x) for x in split_genotype(variant.calls[i])) / alt_index
 
 
             if extras:
@@ -118,7 +147,7 @@ class GTExtractor(object):
                 for k in extras.keys():
                     values.append(extras[k])
 
-                print("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (subjects[i], chr, position, ref, alt, gt, ac, "\t".join(values)))
+                print("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (subjects[i], chr, position, vcf_row.ref, vcf_row.alt, gt, ac, "\t".join(values)))
             else:
                 print("%s\t%s\t%s\t%s\t%s" % (subjects[i], chr, position, gt, ac))
 

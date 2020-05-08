@@ -20,7 +20,18 @@ from DiplotypeCaller import *
 from ExceptionCaller import ExceptionCaller
 from Phenotype import Phenotype
 
-class CityDawg(object):
+'''
+Main class for calling PGxPOP
+Inputs
+ - vcf: Path to VCF file
+ - gene: Gene name to run on.  If None, all genes will be run.
+ - phased: Whether the data is phased
+ - build: the genome build used (hg19 and grch38 supported)
+ - output: path to output file
+ - debug: print lots of debugging info
+ - batch_mode: a paralleled version that may not work
+'''
+class PGxPOP(object):
     def __init__(self, vcf, gene, phased=False, build='grch38', output=None,
                  debug=False, batch_mode=False):
         self.vcf = vcf
@@ -32,7 +43,6 @@ class CityDawg(object):
         self.output = output
 
     def run(self):
-
         # Get the genes we want to run on
         genes = self.get_genes()
 
@@ -48,12 +58,20 @@ class CityDawg(object):
     def process_gene(self, g):
         if self.debug:
             print("Processing %s" % g)
+        # Get the gene object containing all the star allele information
         gene = self.get_gene(g)
+        # Get matrices of genotype calls for each sample in the VCF
         gt_matrices = self.get_gt_matrices(gene)
+        # Call diplotypes from gene matrices
         diplotypes, sample_variants, uncallable = self.get_calls(gene, gt_matrices)
+        # Map diplotypes to phenotypes
         phenotypes = self.get_phenotypes(gene, diplotypes, sample_variants, uncallable)
         return phenotypes
-    
+
+    '''
+    This function is currently deprecated.  It is possible to create an exceptions file that will override the
+    diplotype calls and look for a single variant to determine phenotype.
+    '''
     def get_exception_file(self, g):
         definition_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../definition/alleles/")
         filename = "%s_exceptions.json" % g
@@ -63,6 +81,9 @@ class CityDawg(object):
         else:
             return(False)
 
+    '''
+    Check if the requested gene is supported.  If no gene is provided, return all supported genes.
+    '''
     def get_genes(self):
         genes = ['CFTR', 'CYP2C9', 'CYP2D6', 'CYP4F2', 'IFNL3', 'TPMT', 'VKORC1',
                  'CYP2C19', 'CYP3A5',  'DPYD', 'SLCO1B1', 'UGT1A1', 'CYP2B6', 'NUDT15']
@@ -78,12 +99,18 @@ class CityDawg(object):
 
         return [self.gene]
 
+    '''
+    Create a gene object containing star allele variant data
+    '''
     def get_gene(self, g):
         # Get the definition file
         gene_definition = get_definition_file(g)
         gene = Gene.Gene(gene_definition, build=self.build, debug=self.debug)
         return gene
 
+    '''
+    Fetch genotype matrices from the VCF for a given gene.
+    '''
     def get_gt_matrices(self, gene):
         if self.debug:
             print("Extracting genotype matrices")
@@ -95,11 +122,13 @@ class CityDawg(object):
 
         if self.debug:
             print("Genotype extraction finished")
-            #print("Genotype matrix shapes: %s, %s" % (gt_matrices[0].shape, gt_matrices[1].shape))
             print("Execution time: %s" % timedelta(seconds=extraction_end_time - extraction_start_time))
 
         return gt_matrices
 
+    '''
+    Determine diplotypes for each sample in the gt_matrices.
+    '''
     def get_calls(self, gene, gt_matrices):
 
         g = gene.name
@@ -156,31 +185,11 @@ class CityDawg(object):
 
         return sample_calls, sample_variants, uncallable_alleles
 
-    # This is hacky, but wobbles weren't working so I named them differently, like *2%1, *2%2, etc are all *2.
-    # As a result of this a *2.1 will get called a *2+*2.1.  So I merge all identical calls here.  We can remove this
-    # but I just want to get calls for Katrin that she won't complain about.
-    def clean_up_call(self, call):
-
-        if "|" in call:
-            calls = call.split("|")
-            delim = "|"
-        elif "/" in call:
-            calls = call.split("/")
-            delim = "/"
-        else:
-            return call
-        final_calls = []
-        for c in calls:
-            subs = c.split("+")
-            core_star = []
-            for s in subs:
-                core = s.split('%')[0]
-                if not core in core_star:
-                    core_star.append(core)
-            final_calls.append("+".join(core_star))
-        #final_calls.sort()
-        return f'{delim.join(final_calls)}'
-
+    '''
+    Map diplotypes to phenotypes
+    This function will create the final result dictionary that will be parsed for the output.  So extra variables
+    are passed in that we want to appear in the output.
+    '''
     def get_phenotypes(self, gene, diplotypes, sample_variants, uncallable):
         g = gene.name
 
@@ -228,7 +237,9 @@ class CityDawg(object):
 
         return results
 
-
+    '''
+    Print the results to the specified file
+    '''
     def print_results(self, results):
         f = open(self.output, "w")
         f.write("sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,hap_1_variants,hap_2_variants,"
@@ -238,12 +249,6 @@ class CityDawg(object):
                 print("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"], r["hap_2"],
                                                 r["hap_1_function"], r["hap_2_function"], ";".join(r["hap_1_variants"]),
                                                          ";".join(r["hap_2_variants"]), r["phenotype"]))
-            #f.write("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"],
-            #                                             r["hap_2"], r["hap_1_function"], r["hap_2_function"],
-            #                                             ";".join(r["hap_1_variants"]), ";".join(r["hap_2_variants"]),
-            #                                             r["phenotype"]))
-
-
 
             f.write(f"{r['sample']},{r['gene']},{r['diplotype']},{r['hap_1']},{r['hap_2']},{r['hap_1_function']},"
                     f"{r['hap_2_function']},{';'.join(r['hap_1_variants'])},{';'.join(r['hap_2_variants'])},"
@@ -261,16 +266,18 @@ def parse_command_line():
         description = 'CityDawg determines star allele haplotypes for samples in a VCF file and outputs predicted '
                       'pharmacogenetic phenotypes.')
     parser.add_argument("-f", "--vcf", help="Input VCF")
-    parser.add_argument("-g", "--gene", default='all', help="Gene to run.  Select from [].  Run all by default.")
+    parser.add_argument("-g", "--gene", default='all', help="Gene to run.  Select from list.  Run all by default.\n"
+                                                            "CFTR, CYP2C9, CYP2D6, CYP4F2, IFNL3, TPMT, VKORC1, "
+                                                            "CYP2C19, CYP3A5, DPYD, SLCO1B1, UGT1A1, CYP2B6, NUDT15")
     parser.add_argument("--phased", action='store_true', default=False, help="Data is phased.  Will try to determine phasing status "
                                                               "from VCF by default.")
-    parser.add_argument("--build", default='grch38', help="Select build genome reference.  By default CityDawg assumes "
-                                                            "GRCh38.")
+    parser.add_argument("--build", default='grch38', help="Select build genome reference.  By default PGxPOP assumes "
+                                                            "grch38. Supported: grch38, hg19, hg18, hg17, etc.")
     parser.add_argument("-d", "--debug", action='store_true', default=False,
                                 help="Output debugging messages.  May be very verbose.")
     parser.add_argument("-b", "--batch", action='store_true', default=False,
                         help="Fragment into batched sample runs. Suggested for runs with more than 10k samples.")
-    parser.add_argument("-o", "--output", default="citydawg_results.txt", help="Output file")
+    parser.add_argument("-o", "--output", default="pgxpop_results.txt", help="Output file")
     options = parser.parse_args()
     return options
 
@@ -280,8 +287,8 @@ Main
 """
 if __name__ == "__main__":
     options = parse_command_line()
-    cd = CityDawg(vcf=options.vcf, gene=options.gene, phased=options.phased, build=options.build, debug=options.debug,
-             batch_mode=options.batch, output=options.output)
+    cd = PGxPOP(vcf=options.vcf, gene=options.gene, phased=options.phased, build=options.build, debug=options.debug,
+                batch_mode=options.batch, output=options.output)
 
     cd.run()
 

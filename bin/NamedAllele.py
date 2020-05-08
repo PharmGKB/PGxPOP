@@ -1,4 +1,13 @@
+'''
+Greg McInes
+Altman Lab
+gmcinnes@stanford.edu
+'''
 
+'''
+This object contains the data for star alleles.  It contains lists for the alleles found as well as a function
+to convert the alleles to a binary representation of their variants.
+'''
 
 class NamedAllele(object):
     def __init__(self, data, variants, index=0, debug=False):
@@ -20,7 +29,6 @@ class NamedAllele(object):
     def _setup(self, data):
         self.name = data["name"]
         self.id = data["id"]
-        #self.function = data["function"]
         self.alleles = data["alleles"]
         self.populationFrequency = data["populationFrequency"]
 
@@ -30,7 +38,6 @@ class NamedAllele(object):
         self.binary_alleles = []
         self.key_list = []
 
-
         # We'll create a binary matrix by iterating over the variants
         # Variants with multiple alternates will get multiple columns
         for v in range(len(self.variants)):
@@ -38,18 +45,6 @@ class NamedAllele(object):
             variant = self.variants[v]
             ref = variant.ref
             alts = variant.alt
-            flipped = variant.flipped
-
-            #if flipped is True:
-            #    #if self.debug:
-            #    #    print("Checking flipped allele")
-            #    temp = ref
-            #    ref = alts[0]
-            #    alts = [temp]
-
-            #variant.print_variant()
-
-
 
             # If there are multiple alts iterate over them and check if the listed allele matches the alt
             for a in alts:
@@ -88,12 +83,10 @@ class NamedAllele(object):
                         print(alts)
                         print(self.alleles[v])
                         print("Current alt: %s" % a)
-                    #exit()
                     self.binary_alleles.append(0)
 
                 # Add a variant key of the alt for every column added
                 self.key_list.append("%s_%s" % (v, a))
-
 
     def print_haplotype(self):
         print("%s %s %s" % (self.name, self.id, self.function))

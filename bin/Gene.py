@@ -1,3 +1,9 @@
+'''
+Greg McInes
+Altman Lab
+gmcinnes@stanford.edu
+'''
+
 import json
 from Variant import Variant
 from NamedAllele import NamedAllele
@@ -23,21 +29,6 @@ class Gene(object):
         self.variants = self.get_variants()
         self.haplotypes = self.get_haplotypes()
 
-        #for k in self.variants.keys():
-        #    #self.variants[k].print_variant()
-        #    for a in self.variants[k].alt:
-        #        chr = self.variants[k].chromosome
-        #        pos = self.variants[k].position
-        #        ref = self.variants[k].ref
-        #        key = "%s_%s_%s_%s" % (chr, pos, ref, a)
-        #        print(f"{chr}\t{pos}\t{ref}\t{a}\t{key}")
-
-        # functions needed
-        # haplotype definition matrix
-        #   This will return a binary matrix of all the alleles for each haplotype
-        #
-        # Return a list of variants and positions
-
     def _load_json(self, json_file):
         with open(json_file) as f:
             self.data = json.load(f)
@@ -56,7 +47,6 @@ class Gene(object):
         hap_matrix = np.array(all_hap_alleles)
         return(hap_matrix, star_index)
 
-
     def get_variants(self):
         if self.debug:
             print("Formatting variants")
@@ -68,7 +58,6 @@ class Gene(object):
 
         index = 0
         for v in variants:
-            #new_variant = Variant(v, alleles=alleles[index], index=index, build=self.build, debug=self.debug)
             new_variant = Variant(v, alleles=[], index=index, build=self.build, debug=self.debug)
             if self.debug:
                 new_variant.print_variant()
@@ -103,5 +92,3 @@ class Gene(object):
             index += 1
 
         return formatted_haplotypes
-
-
