@@ -1,7 +1,7 @@
 """
 Greg McInnes and Adam Lavertu
 Altman Lab
-gmcinnes@stanford.edu
+gmcinnes@stanford.edu, alavertu@stanford.edu
 """
 
 import os

@@ -3,6 +3,14 @@ import tabix
 import os
 import sys
 
+"""
+Get sites that are included in more than one haplotype definition
+
+Inputs: 
+    haplotye_matrix: numpy matrix, containing one haplotype per row
+Returns:
+    competitive_haplotypes: Dictionary of each star allele and the haplotypes that it shares variants with
+"""
 def get_competitive_haplotype_indices(haplotype_matrix):
     dual_sites = np.where(np.sum(haplotype_matrix, axis=0) > 1)[0]
     competitive_haplotypes = dict()

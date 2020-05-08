@@ -1,3 +1,5 @@
+# I DON'T THINK WE NEED THIS ANYMORE, AND IT CAN BE REMOVED ENTIRELY
+
 import numpy as np
 import json
 
