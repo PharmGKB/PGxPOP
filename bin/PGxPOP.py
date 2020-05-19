@@ -287,6 +287,9 @@ Main
 """
 if __name__ == "__main__":
     options = parse_command_line()
+    if options.vcf is None:
+        print('ERROR: Please specify a vcf path\nFor help run: python PGxPOP.py -h')
+        exit()
     cd = PGxPOP(vcf=options.vcf, gene=options.gene, phased=options.phased, build=options.build, debug=options.debug,
                 batch_mode=options.batch, output=options.output)
 
