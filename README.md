@@ -12,8 +12,8 @@ Uses PGx allele definitions as developed by the original [PharmCAT](https://gith
 
 First, clone this repository to your local directory.
 
-> git clone https://github.com/PharmGKB/PGxPOP.git
-> cd PGxPOP 
+> git clone https://github.com/PharmGKB/PGxPOP.git  
+> cd PGxPOP  
 > pip install -r requirements.txt
 
 Once all the necessary requirement files have been installed, run using the following command:
