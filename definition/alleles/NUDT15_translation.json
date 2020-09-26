@@ -93,7 +93,7 @@
       "resourceNote": "55_56insGAGTCG",
       "type": "INS",
       "referenceRepeat": null,
-      "synonyms": 48037801,
+      "synonyms": [48037801],
       "hg19": {
         "build": "hg19",
         "chromosome": "chr13",

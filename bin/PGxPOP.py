@@ -19,6 +19,7 @@ from GenotypeParser import GenotypeParser
 from DiplotypeCaller import *
 from ExceptionCaller import ExceptionCaller
 from Phenotype import Phenotype
+from RareVariantCaller import RareVariantCaller
 
 '''
 Main class for calling PGxPOP
@@ -33,7 +34,7 @@ Inputs
 '''
 class PGxPOP(object):
     def __init__(self, vcf, gene, phased=False, build='grch38', output=None,
-                 debug=False, batch_mode=False):
+                 debug=False, batch_mode=False, extra_variants=False):
         self.vcf = vcf
         self.gene = gene
         self.phased = phased
@@ -41,6 +42,7 @@ class PGxPOP(object):
         self.debug = debug
         self.batch_mode = batch_mode
         self.output = output
+        self.extra_variants = extra_variants
 
     def run(self):
         # Get the genes we want to run on
@@ -64,8 +66,15 @@ class PGxPOP(object):
         gt_matrices = self.get_gt_matrices(gene)
         # Call diplotypes from gene matrices
         diplotypes, sample_variants, uncallable = self.get_calls(gene, gt_matrices)
+        # Fetch coding variants outside of star alleles
+        if self.extra_variants:
+            rv_caller = RareVariantCaller(vcf=self.vcf, gene=gene, build=self.build, debug=self.debug)
+            extra_variants = rv_caller.run()
+        else:
+            extra_variants = None
         # Map diplotypes to phenotypes
-        phenotypes = self.get_phenotypes(gene, diplotypes, sample_variants, uncallable)
+        phenotypes = self.get_phenotypes(gene, diplotypes, sample_variants, uncallable, extra_variants)
+
         return phenotypes
 
     '''
@@ -190,7 +199,7 @@ class PGxPOP(object):
     This function will create the final result dictionary that will be parsed for the output.  So extra variables
     are passed in that we want to appear in the output.
     '''
-    def get_phenotypes(self, gene, diplotypes, sample_variants, uncallable):
+    def get_phenotypes(self, gene, diplotypes, sample_variants, uncallable, extra_variants=None):
         g = gene.name
 
         # Load phenotype file into object
@@ -232,7 +241,9 @@ class PGxPOP(object):
                 "phenotype": phenotype,
                 "phenotype_presumptive": presumptive_phenotype,
                 "activity_score": activity_score,
-                "uncallable": ";".join(x.split("%")[0] for x in uncallable[sample])
+                "uncallable": ";".join(x.split("%")[0] for x in uncallable[sample]),
+                "extra_variants": None if extra_variants is None else ";".join(
+                    x.split("%")[0] for x in extra_variants[sample])
             })
 
         return results
@@ -243,7 +254,7 @@ class PGxPOP(object):
     def print_results(self, results):
         f = open(self.output, "w")
         f.write("sample_id,gene,diplotype,hap_1,hap_2,hap_1_function,hap_2_function,hap_1_variants,hap_2_variants,"
-                "phenotype,hap_1_presumptive,hap_2_presumptive,phenotype_presumptive,activity_score,uncallable\n")
+                "phenotype,hap_1_presumptive,hap_2_presumptive,phenotype_presumptive,activity_score,uncallable,extra_variants\n")
         for r in results:
             if self.debug:
                 print("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (r["sample"], r["gene"], r["diplotype"], r["hap_1"], r["hap_2"],
@@ -253,7 +264,7 @@ class PGxPOP(object):
             f.write(f"{r['sample']},{r['gene']},{r['diplotype']},{r['hap_1']},{r['hap_2']},{r['hap_1_function']},"
                     f"{r['hap_2_function']},{';'.join(r['hap_1_variants'])},{';'.join(r['hap_2_variants'])},"
                     f"{r['phenotype']},{r['hap_1_presumptive_function']},{r['hap_2_presumptive_function']},"
-                    f"{r['phenotype_presumptive']},{r['activity_score']},{r['uncallable']}\n")
+                    f"{r['phenotype_presumptive']},{r['activity_score']},{r['uncallable']},,{r['extra_variants']}\n")
             
 
 
@@ -273,6 +284,7 @@ def parse_command_line():
                                                               "from VCF by default.")
     parser.add_argument("--build", default='grch38', help="Select build genome reference.  By default PGxPOP assumes "
                                                             "grch38. Supported: grch38, hg19, hg18, hg17, etc.")
+    parser.add_argument("--extra_variants", action='store_true', default=False, help="Check for rare variants in coding regions")
     parser.add_argument("-d", "--debug", action='store_true', default=False,
                                 help="Output debugging messages.  May be very verbose.")
     parser.add_argument("-b", "--batch", action='store_true', default=False,
@@ -291,7 +303,7 @@ if __name__ == "__main__":
         print('ERROR: Please specify a vcf path\nFor help run: python PGxPOP.py -h')
         exit()
     cd = PGxPOP(vcf=options.vcf, gene=options.gene, phased=options.phased, build=options.build, debug=options.debug,
-                batch_mode=options.batch, output=options.output)
+                batch_mode=options.batch, output=options.output, extra_variants=options.extra_variants)
 
     cd.run()
 

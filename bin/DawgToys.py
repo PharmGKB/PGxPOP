@@ -654,6 +654,19 @@ def get_definition_file(g):
     definition_file = os.path.join(definition_dir, filename)
     return definition_file
 
+'''
+Split a genotype from a VCF into a list
+'''
+def gt_splitter(gt):
+    gt = gt.split(':')[0]
+    if "/" in gt:
+        alleles = gt.split("/")
+    elif "|" in gt:
+        alleles = gt.split("|")
+    else:
+        alleles = None
+    return alleles
+
 
 ''''
 Print a nice welcome message.  Hello!
