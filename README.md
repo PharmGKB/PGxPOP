@@ -13,6 +13,8 @@ Uses PGx allele definitions as developed by the original [PharmCAT](https://gith
 
 ## Installation:
 
+PGxPOP requires Python 3.6 or greater
+
 First, clone this repository to your local directory.
 
 > git clone https://github.com/PharmGKB/PGxPOP.git  
