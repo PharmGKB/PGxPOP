@@ -685,6 +685,9 @@ def welcome_message():
     |     Adam Lavertu and Greg McInnes      |
     |        with help from PharmGKB.        |
     |________________________________________|
+    
+Copyright (C) 2020 Stanford University.
+Distributed under the Mozilla Public License 2.0 open source license.
     '''
 
     print(message, file=sys.stderr)
