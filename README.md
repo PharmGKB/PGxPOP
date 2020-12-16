@@ -2,7 +2,7 @@
 ## A population-scale pharmacogenetic allele and phenotype caller  
 ### Greg McInnes and Adam Lavertu  
 
-If you find our code useful, please cite [our paper](https://www.biorxiv.org/content/10.1101/2020.05.30.125583v2).
+If you find our code useful, please cite [our paper](https://doi.org/10.1002/cpt.2122).
 
 Pharmacogenetics at scale: An analysis of the UK Biobank<br />
 Greg McInnes, Adam Lavertu, Katrin Sangkuhl, Teri E. Klein, Michelle Whirl-Carrillo, Russ B. Altman<br />
