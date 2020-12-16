@@ -6,7 +6,7 @@ If you find our code useful, please cite [our paper](https://www.biorxiv.org/con
 
 Pharmacogenetics at scale: An analysis of the UK Biobank<br />
 Greg McInnes, Adam Lavertu, Katrin Sangkuhl, Teri E. Klein, Michelle Whirl-Carrillo, Russ B. Altman<br />
-bioRxiv 2020.05.30.125583; doi: https://doi.org/10.1101/2020.05.30.125583<br />
+Clinical Pharmacology and Therapeutics 2020/11/25; doi: https://doi.org/10.1002/cpt.2122<br />
 
 PGxPOP is a population-scale PGx allele caller designed to handle 100,000s of samples. Input is a phased VCF file, that has been indexed with [tabix](http://www.htslib.org/doc/tabix.html). 
 Uses PGx allele definitions as developed by the original [PharmCAT](https://github.com/PharmGKB/PharmCAT) effort.
