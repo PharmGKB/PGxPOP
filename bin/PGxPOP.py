@@ -264,7 +264,7 @@ class PGxPOP(object):
             f.write(f"{r['sample']},{r['gene']},{r['diplotype']},{r['hap_1']},{r['hap_2']},{r['hap_1_function']},"
                     f"{r['hap_2_function']},{';'.join(r['hap_1_variants'])},{';'.join(r['hap_2_variants'])},"
                     f"{r['phenotype']},{r['hap_1_presumptive_function']},{r['hap_2_presumptive_function']},"
-                    f"{r['phenotype_presumptive']},{r['activity_score']},{r['uncallable']},,{r['extra_variants']}\n")
+                    f"{r['phenotype_presumptive']},{r['activity_score']},{r['uncallable']},{r['extra_variants']}\n")
             
 
 
