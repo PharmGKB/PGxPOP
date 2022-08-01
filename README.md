@@ -1,3 +1,8 @@
+:warning: :warning: :warning:  
+__This project is no longer under active maintenance. The allele definitions have not been updated since April 2020 which means allele calls may not match current definitions. See [PharmVar](https://www.pharmvar.org) for more information about allele definitions.__  
+:warning: :warning: :warning:  
+---
+
 ![PGX_POP_logo](logo/PGxPop_logo.png)
 ## A population-scale pharmacogenetic allele and phenotype caller  
 ### Greg McInnes and Adam Lavertu  
