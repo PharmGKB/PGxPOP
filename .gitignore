@@ -4,3 +4,4 @@ notebooks/*
 *.err
 *.out
 .conda
+.idea/
