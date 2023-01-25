@@ -3,3 +3,5 @@ notebooks/*
 *.sbatch
 *.err
 *.out
+.conda
+.idea/
